@@ -40,7 +40,4 @@ app.post("/createRoom", (req, res) => postService.createRoom(req, res))
 app.post("/loadRooms", (req, res) => postService.loadRooms(req, res))
 app.post("/getUser", (req, res) => postService.getUser(req, res))
 
-app.use(function(req, res){
-    res.status(404);
-    GetService.defaultHandler(req, res)
-})
+app.use((req, res) => GetService.defaultHandler(req, res))
