@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: "Microsoft Tai Le", serif;
+    background: url("../../resources/background.jpg");
+}
+
+#popup {
+    width: 300px;
+    height: 100px;
+    background-color: rgba(255, 66, 66, 0.8);
+    border-radius: 20px;
+    border: 3px solid black;
+    position: absolute;
+    top: -150px;
+    right: 15px;
+    text-align: center;
+    z-index: 2;
+}
+
+.show {
+    animation-name: show-popup;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.hide {
+    animation-name: close-popup;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+#popup-text {
+    text-align: center;
+    margin: 0;
+    position: relative;
+    top: 10px;
+    font-size: 20px;
+    user-select: none;
+}
+
+@keyframes show-popup {
+    0% {
+        right: 15px;
+        top: -150px;
+    }
+    100% {
+        right: 15px;
+        top: 15px;
+    }
+}
+
+@keyframes close-popup {
+    0% {
+        right: 15px;
+        top: 15px;
+    }
+    33% {
+        right: -350px;
+        top: 15px;
+    }
+    66% {
+        right:-350px;
+        top: -100px;
+    }
+    100% {
+        right: 15px;
+        top: -150px;
+    }
+}
