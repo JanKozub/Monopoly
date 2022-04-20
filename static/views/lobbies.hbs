@@ -1,9 +1,16 @@
 <link rel="stylesheet" href="./styles/lobbies-styles.css">
 <div class="container">
     <div id="add-lobby">
-        <label for="room-name-input"></label><input id="room-name-input" placeholder="Nazwa nowego pokoju">
+        <label for="room-name-input"></label><input id="room-name-input" placeholder="Nazwa pokoju">
         <label for="room-password-input"></label><input id="room-password-input" type="password" placeholder="Hasło pokoju">
-        <div id="add-button"><p id="plus">+</p></div>
+        <select id="room-users-select">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+        </select>
+        <div id="add-button"><p id="plus">Utwórz</p></div>
     </div>
     <div id="rooms-list"></div>
 </div>

@@ -36,7 +36,11 @@ class PostService {
         const user = {
             nick: req.body.nick,
             password: req.body.password,
-            id: Utils.generateId()
+            id: Utils.generateId(),
+            gamesPlayed: 0,
+            moneySum: 0,
+            placesBoughtSum: 0,
+            averageRoll: 0
         }
 
         if (await this.databaseService.isUserInDatabaseByNick(user.nick)) {

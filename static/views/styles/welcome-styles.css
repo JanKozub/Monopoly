@@ -13,7 +13,7 @@
     border: 3px solid black;
     border-radius: 15px;
     position: absolute;
-    top: calc(50% - 150px);
+    top: 35%;
     left: calc(50% - 150px);
     opacity: 0.8;
 }
