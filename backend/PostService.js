@@ -38,6 +38,7 @@ class PostService {
             password: req.body.password,
             id: Utils.generateId(),
             gamesPlayed: 0,
+            gamesWon: 0,
             moneySum: 0,
             placesBoughtSum: 0,
             averageRoll: 0
@@ -69,6 +70,12 @@ class PostService {
     getUser(req, res) {
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify(req.session.user))
+    }
+
+    logout(req, res) {
+        req.session.user = undefined;
+        res.setHeader("content-type", "text/plain")
+        res.send(JSON.stringify({response: "success"}))
     }
 }
 

@@ -10,11 +10,6 @@
     opacity: 0.8;
 }
 
-#user-stats {
-    left: unset;
-    right: 5%;
-}
-
 #add-lobby {
     width: 100%;
     height: 60px;
@@ -122,12 +117,4 @@ select {
     top: 8px;
     font-size: 23px;
     user-select: none;
-}
-
-#welcome-msg {
-    text-align: center;
-    font-size: 40px;
-    margin: 0;
-    position: relative;
-    top: 20px;
 }

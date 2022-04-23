@@ -1,4 +1,5 @@
 document.getElementById('add-button').onclick = onAdd;
+document.getElementById('log-out').onclick = onLogOut;
 
 loadStats();
 
@@ -14,6 +15,11 @@ function loadStats() {
             console.log(obj)
 
             document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
+            document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
+            document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum;
+            document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum;
+            document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon;
+            document.getElementById('avg-roll').innerText = 'Średnie losowanie: ' + obj.averageRoll;
         }
     });
 }
@@ -96,4 +102,19 @@ function renderRooms(rooms) {
 
         lobbyList.append(row)
     }
+}
+
+function onLogOut() {
+    $.ajax({
+        url: '/logout',
+        type: 'POST',
+        data: "ok",
+        success: function (data) {
+            const obj = JSON.parse(data)
+            console.log(obj)
+            if (obj.response === 'success') {
+                window.location.href = '/'
+            }
+        }
+    });
 }

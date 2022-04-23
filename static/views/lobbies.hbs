@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="./styles/lobbies-styles.css">
+<link rel="stylesheet" href="styles/lobbies-styles-left.css">
+<link rel="stylesheet" href="styles/lobbies-styles-right.css">
 <div class="container">
     <div id="add-lobby">
         <div id="add-lobby-components">
@@ -22,7 +23,21 @@
 
 <div class="container" id="user-stats">
     <p id="welcome-msg"></p>
-    <h2>Twoje statystyki:</h2>
+    <h2 id="your-stats">Twoje statystyki:</h2>
+    <div class="stats-container">
+        <h3 id="games-played"></h3>
+        <h3 id="money-sum"></h3>
+        <h3 id="bought-sum"></h3>
+    </div>
+    <div id="right" class="stats-container">
+        <h3 id="games-won"></h3>
+        <h3 id="avg-roll"></h3>
+        <h3 id="">nwm co tu:</h3>
+    </div>
+
+    <h2 id="your-stats">Wybierz avatar:</h2>
+
+    <button id="log-out">Wyloguj</button>
 </div>
 
 <script src="./script/lobbies-script.js"></script>
