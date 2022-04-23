@@ -37,6 +37,7 @@ class PostService {
             nick: req.body.nick,
             password: req.body.password,
             id: Utils.generateId(),
+            avatar:0,
             gamesPlayed: 0,
             gamesWon: 0,
             moneySum: 0,
@@ -56,7 +57,6 @@ class PostService {
     async createRoom(req, res) {
         res.setHeader("content-type", "text/plain")
 
-
         const response = this.roomManager.addRoom(new Room(req.body.name, req.body.password, req.session.user.nick, req.body.size))
 
         res.send(JSON.stringify({response: response, rooms: this.roomManager.getRooms()}))
@@ -70,6 +70,13 @@ class PostService {
     getUser(req, res) {
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify(req.session.user))
+    }
+
+    changeAvatar(req, res) {
+        const prev = req.session.user.avatar;
+        req.session.user.avatar = req.body.avatar
+        res.setHeader("content-type", "text/plain")
+        res.send(JSON.stringify({prev: prev, next: req.body.avatar}))
     }
 
     logout(req, res) {

@@ -39,6 +39,7 @@ app.post("/register", (req, res) => postService.onRegister(req, res))
 app.post("/createRoom", (req, res) => postService.createRoom(req, res))
 app.post("/loadRooms", (req, res) => postService.loadRooms(req, res))
 app.post("/getUser", (req, res) => postService.getUser(req, res))
+app.post("/changeAvatar", (req, res) => postService.changeAvatar(req, res))
 app.post("/logout", (req, res) => postService.logout(req, res))
 
 app.use((req, res) => GetService.defaultHandler(req, res))

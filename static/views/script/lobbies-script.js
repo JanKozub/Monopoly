@@ -1,5 +1,10 @@
 document.getElementById('add-button').onclick = onAdd;
 document.getElementById('log-out').onclick = onLogOut;
+document.getElementById('avatar-0').onclick = () => changeAvatar(0);
+document.getElementById('avatar-1').onclick = () => changeAvatar(1);
+document.getElementById('avatar-2').onclick = () => changeAvatar(2);
+
+document.getElementById('avatar-3').onclick = () => changeAvatar(3);
 
 loadStats();
 
@@ -12,7 +17,6 @@ function loadStats() {
         data: {},
         success: function (data) {
             const obj = JSON.parse(data)
-            console.log(obj)
 
             document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
             document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
@@ -20,6 +24,7 @@ function loadStats() {
             document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum;
             document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon;
             document.getElementById('avg-roll').innerText = 'Średnie losowanie: ' + obj.averageRoll;
+            document.getElementById('avatar-' + obj.avatar).style.filter = 'brightness(70%)'
         }
     });
 }
@@ -31,7 +36,6 @@ function loadRooms() {
         data: {},
         success: function (data) {
             const obj = JSON.parse(data)
-            console.log(obj)
             renderRooms(obj.rooms)
         }
     });
@@ -49,7 +53,6 @@ function onAdd() {
             data: {name: name.value, password: password.value, size: size.value},
             success: function (data) {
                 const obj = JSON.parse(data)
-                console.log(obj)
                 if (obj.response === 'success') {
                     name.value = '';
                     password.value = '';
@@ -111,10 +114,23 @@ function onLogOut() {
         data: "ok",
         success: function (data) {
             const obj = JSON.parse(data)
-            console.log(obj)
             if (obj.response === 'success') {
                 window.location.href = '/'
             }
+        }
+    });
+}
+
+function changeAvatar(n) {
+    $.ajax({
+        url: '/changeAvatar',
+        type: 'POST',
+        data: {avatar: n},
+        success: function (data) {
+            const obj = JSON.parse(data)
+
+            document.getElementById('avatar-' + obj.prev).style.filter = 'brightness(100%)';
+            document.getElementById('avatar-' + obj.next).style.filter = 'brightness(70%)';
         }
     });
 }

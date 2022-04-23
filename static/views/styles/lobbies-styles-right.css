@@ -30,11 +30,11 @@ h3 {
 }
 
 #log-out {
-    width: 204px;
+    width: 50%;
     height: 50px;
     position: relative;
     top: 50px;
-    left: calc(50% - 102px);
+    left: 25%;
     background-color: red;
     border-radius: 10px;
     font-size: 29px;
@@ -42,4 +42,34 @@ h3 {
     color: white;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.8);
     cursor: pointer;
+}
+
+#log-out:hover {
+    background-color: #a60000;
+    transition: all 50ms ease;
+}
+
+.avatar {
+    width: calc(25% - 11px);
+    border-radius: 5px;
+    border: 3px solid black;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-filter: brightness(100%);
+}
+
+.avatar:hover {
+    -webkit-filter: brightness(70%) !important;
+    transition: all 100ms ease !important;
+}
+
+#avatars {
+    width: 80%;
+    position: relative;
+    top: 20px;
+    left: 10%;
 }

@@ -23,10 +23,6 @@ class RoomManager {
         }
         return null;
     }
-
-    deleteRoom() {
-
-    }
 }
 
 module.exports = RoomManager
