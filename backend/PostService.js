@@ -55,7 +55,8 @@ class PostService {
     async createRoom(req, res) {
         res.setHeader("content-type", "text/plain")
 
-        const response = this.roomManager.addRoom(new Room(req.body.name, req.body.password, req.session.user.nick))
+
+        const response = this.roomManager.addRoom(new Room(req.body.name, req.body.password, req.session.user.nick, req.body.size))
 
         res.send(JSON.stringify({response: response, rooms: this.roomManager.getRooms()}))
     }

@@ -34,17 +34,20 @@ function loadRooms() {
 function onAdd() {
     let name = document.getElementById('room-name-input');
     let password = document.getElementById('room-password-input');
+    let size = document.getElementById('room-users-select');
+
     if (name.value !== '' && password.value !== '') {
         $.ajax({
             url: '/createRoom',
             type: 'POST',
-            data: {name: name.value, password: password.value},
+            data: {name: name.value, password: password.value, size: size.value},
             success: function (data) {
                 const obj = JSON.parse(data)
                 console.log(obj)
                 if (obj.response === 'success') {
                     name.value = '';
                     password.value = '';
+                    size.value = 2;
                     renderRooms(obj.rooms)
                 } else if (obj.response === 'name exists') {
                     showPopup('Pokój z taką nazwą już istnieje', 'error', 5000);
@@ -79,7 +82,7 @@ function renderRooms(rooms) {
         users.className = 'row-p'
         users.style.top = '-42px'
         users.style.left = '400px'
-        users.innerText = 'Gracze: ' + room.users.length + '/4';
+        users.innerText = 'Gracze: ' + room.users.length + '/' + room.size;
         row.append(users)
 
         let joinButton = document.createElement('div')
