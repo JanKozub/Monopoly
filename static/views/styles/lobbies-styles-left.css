@@ -14,26 +14,20 @@
     width: 100%;
     height: 60px;
     border-bottom: 3px solid black;
-    overflow-y: hidden;
-}
-
-#add-lobby-components {
-    width: 816px;
-    height: 60px;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 #add-button {
-    width: 108px;
+    width: calc(20% - 14px);
     height: 48px;
     background-color: limegreen;
-    position: relative;
-    top: 5px;
-    left: 25px;
+    padding: 0;
+    margin: 5px 0 0 5px;
     border-radius: 10px;
     font-size: 26px;
     cursor: pointer;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
 }
 
 #add-button:hover {
@@ -42,10 +36,10 @@
 }
 
 input {
-    width: 280px;
+    width: calc(35% - 14px);
     height: 44px;
-    position: relative;
-    top: 5px;
+    padding: 0;
+    margin: 5px 0 0 6px;
     border-radius: 10px;
     text-align: center;
     font-size: 25px;
@@ -60,11 +54,10 @@ input {
 }
 
 select {
-    width: 10%;
+    width: calc(10% - 14px);
     height: 50px;
-    position: relative;
-    top: 5px;
-    left: 20px;
+    padding: 0;
+    margin: 5px 0 0 6px;
     border-radius: 10px;
     border: 2px solid rgb(59, 59, 59);
     text-align: center;
