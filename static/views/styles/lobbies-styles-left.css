@@ -74,27 +74,23 @@ select {
 .row {
     height: 60px;
     border-bottom: 3px solid black;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .row-p {
     width: max-content;
     font-size: 23px;
-    margin: 0;
-    position: relative;
-    top: 17px;
-    left: 10px;
+    /*margin: 5px 0 0 0;*/
+    display: inline-block;
 }
 
 .join-button {
     width: 100px;
     height: 40px;
     background-color: limegreen;
-    position: relative;
-    top: -77px;
-    left: 704px;
     border-radius: 10px;
     cursor: pointer;
+    display: inline-block;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
 }
 

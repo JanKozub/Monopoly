@@ -3,7 +3,6 @@ document.getElementById('log-out').onclick = onLogOut;
 document.getElementById('avatar-0').onclick = () => changeAvatar(0);
 document.getElementById('avatar-1').onclick = () => changeAvatar(1);
 document.getElementById('avatar-2').onclick = () => changeAvatar(2);
-
 document.getElementById('avatar-3').onclick = () => changeAvatar(3);
 
 loadStats();
@@ -17,6 +16,7 @@ function loadStats() {
         data: {},
         success: function (data) {
             const obj = JSON.parse(data)
+
 
             document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
             document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
@@ -82,15 +82,11 @@ function renderRooms(rooms) {
 
         let leader = document.createElement('p');
         leader.className = 'row-p'
-        leader.style.top = '-12px'
-        leader.style.left = '250px'
         leader.innerText = 'Lider: ' + room.leader;
         row.append(leader)
 
         let users = document.createElement('p');
         users.className = 'row-p'
-        users.style.top = '-42px'
-        users.style.left = '400px'
         users.innerText = 'Gracze: ' + room.users.length + '/' + room.size;
         row.append(users)
 
