@@ -1,16 +1,13 @@
 const Utils = require("./Utils.js");
 const Room = require("./rooms/Room.js")
-const RoomManager = require("./rooms/RoomManager.js")
-
 
 class PostService {
-
     databaseService;
     roomManager;
 
-    constructor(databaseService) {
+    constructor(databaseService, roomManager) {
         this.databaseService = databaseService;
-        this.roomManager = new RoomManager();
+        this.roomManager = roomManager;
     }
 
     async onLogin(req, res) {
@@ -37,7 +34,8 @@ class PostService {
             nick: req.body.nick,
             password: req.body.password,
             id: Utils.generateId(),
-            avatar:0,
+            roomId: undefined,
+            avatar: 0,
             gamesPlayed: 0,
             gamesWon: 0,
             moneySum: 0,
@@ -85,14 +83,25 @@ class PostService {
         res.send(JSON.stringify({response: "success"}))
     }
 
-    getRoomById(req, res) {
+    joinToRoom(req, res) {
         const id = req.body.id;
+        const room = this.roomManager.joinToRoom(id, req.session.user);
+        let response;
+        if (room !== null) {
+            req.session.user.roomId = id;
+            response = {
+                response: "success",
+                room: room
+            }
+        } else {
+            response = {
+                response: "room not found",
+                room: undefined
+            }
+        }
 
         res.setHeader("content-type", "text/plain")
-        res.send(JSON.stringify({
-            response: "success",
-            room: this.roomManager.getRoomById(id)
-        }))
+        res.send(JSON.stringify(response))
     }
 }
 

@@ -7,7 +7,11 @@ const hbs = require('express-handlebars');
 const GetService = require('./backend/GetService.js');
 const PostService = require('./backend/PostService.js');
 const DatabaseService = require("./backend/database/DatabaseService");
-const postService = new PostService(new DatabaseService());
+const RoomManager = require("./backend/rooms/RoomManager.js")
+
+const roomManager = new RoomManager();
+const postService = new PostService(new DatabaseService(), roomManager);
+const getService = new GetService(roomManager);
 
 let app = express();
 
@@ -31,9 +35,9 @@ app.listen(3000, () => {
     console.log("start serwera na porcie " + 3000)
 })
 
-app.get('/', (req, res) => GetService.defaultHandler(req, res));
-app.get('/rooms', (req, res) => GetService.defaultHandler(req, res));
-app.get('/room', (req, res) => GetService.roomHandler(req, res));
+app.get('/', (req, res) => getService.defaultHandler(req, res));
+app.get('/rooms', (req, res) => getService.defaultHandler(req, res));
+app.get('/room', (req, res) => getService.roomHandler(req, res));
 
 app.post("/login", (req, res) => postService.onLogin(req, res))
 app.post("/register", (req, res) => postService.onRegister(req, res))
@@ -42,6 +46,7 @@ app.post("/loadRooms", (req, res) => postService.loadRooms(req, res))
 app.post("/getUser", (req, res) => postService.getUser(req, res))
 app.post("/changeAvatar", (req, res) => postService.changeAvatar(req, res))
 app.post("/logout", (req, res) => postService.logout(req, res))
-app.post("/getRoomById", (req, res) => postService.getRoomById(req, res))
+app.post("/joinToRoom", (req, res) => postService.joinToRoom(req, res))
+app.post("/getUsersInRoom", (req, res) => postService.joinToRoom(req, res))
 
 app.use((req, res) => GetService.defaultHandler(req, res))

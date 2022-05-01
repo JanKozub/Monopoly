@@ -1,18 +1,35 @@
 class GetService {
-    static defaultHandler(req, res) {
+
+    roomManager;
+
+    constructor(roomManager) {
+        this.roomManager = roomManager;
+    }
+
+    defaultHandler(req, res) {
         console.log('opened ' + req.url)
 
-        if (req.session.user) {
+        const user = req.session.user;
+
+        if (user) {
+            if (user.roomId !== undefined) {
+                this.roomManager.logOutRoom(user.roomId, user);
+            }
             res.render('rooms.hbs');
         } else {
             res.render('welcome.hbs');
         }
     }
 
-    static roomHandler(req, res) {
+    roomHandler(req, res) {
         console.log('opened ' + req.url)
 
-        if (req.session.user) {
+        const user = req.session.user;
+
+        if (user) {
+            if (user.roomId !== undefined) {
+                this.roomManager.logOutRoom(user.roomId, user);
+            }
             res.render('room.hbs');
         } else {
             res.render('welcome.hbs');

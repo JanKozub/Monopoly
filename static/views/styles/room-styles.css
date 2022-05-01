@@ -37,12 +37,12 @@ p {
 
 #players {
     top: 20px;
-    left: 37%;
+    left: 260px;
 }
 
 #leader {
     top: 60px;
-    left: 37%;
+    left: 260px;
 }
 
 #start-button {
@@ -83,4 +83,51 @@ p {
 #exit-button:hover {
     background-color: #a60000;
     transition: all 50ms ease;
+}
+
+#users {
+    width: 100%;
+    height: calc(100% - 100px);
+}
+
+.u-row {
+    height: 100px;
+    position: relative;
+    user-select: none;
+    margin: 0;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.25);
+}
+
+.u-row-img {
+    height: 80px;
+    border-radius: 10px;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.9);
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-filter: brightness(100%);
+}
+
+.u-row-nick {
+    font-size: 35px;
+    position: absolute;
+    top: 31px;
+    left: 200px;
+}
+
+.u-row-type {
+    width: 50px;
+    position: absolute;
+    top: 25px;
+    left: 120px;
+}
+
+.u-row-not-ready {
+    font-size: 40px;
+    position: absolute;
+    top: 21px;
+    right: 20px;
 }
