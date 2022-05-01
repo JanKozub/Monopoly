@@ -72,26 +72,49 @@ select {
 }
 
 .row {
+    position: relative;
     height: 60px;
     border-bottom: 3px solid black;
     overflow: hidden;
+    font-size: 23px;
 }
 
-.row-p {
+.row-p-name {
     width: max-content;
-    font-size: 23px;
-    /*margin: 5px 0 0 0;*/
-    display: inline-block;
+    position: absolute;
+    margin: 0;
+    top: 18px;
+    left: 8px;
+}
+
+.row-p-leader {
+    width: max-content;
+    position: absolute;
+    margin: 0;
+    top: 18px;
+    left: 240px;
+}
+
+.row-p-players {
+    width: max-content;
+    position: absolute;
+    margin: 0;
+    top: 18px;
+    left: 400px;
 }
 
 .join-button {
-    width: 100px;
+    width: calc(20% - 14px);
     height: 40px;
     background-color: limegreen;
     border-radius: 10px;
     cursor: pointer;
     display: inline-block;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    position: absolute;
+    right: 12px;
+    top: 9px;
 }
 
 .join-button:hover {

@@ -50,7 +50,7 @@ h3 {
 }
 
 .avatar {
-    width: calc(25% - 11px);
+    width: calc(33% - 11px);
     border-radius: 5px;
     border: 3px solid black;
     cursor: pointer;
@@ -68,8 +68,8 @@ h3 {
 }
 
 #avatars {
-    width: 80%;
+    width: 60%;
     position: relative;
     top: 20px;
-    left: 10%;
+    left: 20%;
 }

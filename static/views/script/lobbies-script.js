@@ -76,17 +76,17 @@ function renderRooms(rooms) {
         row.className = 'row'
 
         let name = document.createElement('p');
-        name.className = 'row-p'
+        name.className = 'row-p-name'
         name.innerText = 'Nazwa: ' + room.name;
         row.append(name)
 
         let leader = document.createElement('p');
-        leader.className = 'row-p'
+        leader.className = 'row-p-leader'
         leader.innerText = 'Lider: ' + room.leader;
         row.append(leader)
 
         let users = document.createElement('p');
-        users.className = 'row-p'
+        users.className = 'row-p-players'
         users.innerText = 'Gracze: ' + room.users.length + '/' + room.size;
         row.append(users)
 
