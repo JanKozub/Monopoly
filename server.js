@@ -33,6 +33,7 @@ app.listen(3000, () => {
 
 app.get('/', (req, res) => GetService.defaultHandler(req, res));
 app.get('/rooms', (req, res) => GetService.defaultHandler(req, res));
+app.get('/room', (req, res) => GetService.roomHandler(req, res));
 
 app.post("/login", (req, res) => postService.onLogin(req, res))
 app.post("/register", (req, res) => postService.onRegister(req, res))

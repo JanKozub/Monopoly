@@ -77,6 +77,14 @@ select {
     border-bottom: 3px solid black;
     overflow: hidden;
     font-size: 23px;
+    user-select: none;
+}
+
+.row-container {
+    width: 75%;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
 }
 
 .row-p-name {

@@ -9,24 +9,27 @@
     margin: 0;
     position: relative;
     top: 20px;
+    user-select: none;
 }
 
 h2 {
     text-align: center;
     position: relative;
     top: 20px;
-}
-
-.stats-container {
-    width: calc(50% - 3px);
-    height: 100px;
-    display: inline-block;
+    user-select: none;
 }
 
 h3 {
     position: relative;
     top: 10px;
     text-align: center;
+    user-select: none;
+}
+
+.stats-container {
+    width: calc(50% - 3px);
+    height: 100px;
+    display: inline-block;
 }
 
 #log-out {

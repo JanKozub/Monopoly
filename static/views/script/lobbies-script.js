@@ -75,23 +75,30 @@ function renderRooms(rooms) {
         let row = document.createElement('div');
         row.className = 'row'
 
+        let container = document.createElement('div');
+        container.className = 'row-container'
+
         let name = document.createElement('p');
         name.className = 'row-p-name'
         name.innerText = 'Nazwa: ' + room.name;
-        row.append(name)
+        container.append(name)
 
         let leader = document.createElement('p');
         leader.className = 'row-p-leader'
         leader.innerText = 'Lider: ' + room.leader;
-        row.append(leader)
+        container.append(leader)
 
         let users = document.createElement('p');
         users.className = 'row-p-players'
         users.innerText = 'Gracze: ' + room.users.length + '/' + room.size;
-        row.append(users)
+        container.append(users)
+        row.append(container);
 
         let joinButton = document.createElement('div')
         joinButton.className = 'join-button';
+        joinButton.onclick = () => {
+            window.location.href = '/room';
+        }
         let buttonText = document.createElement('p')
         buttonText.className = 'join-button-text';
         buttonText.innerText = 'Wejdź!'
