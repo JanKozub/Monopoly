@@ -3,6 +3,10 @@ let room = undefined;
 window.onload = () => {
     id = window.location.href.split('=')[1];
     getRoomById(id);
+
+    document.getElementById('exit-button').onclick = () => {
+        window.location.href = '/rooms'
+    }
 }
 
 function getRoomById() {
