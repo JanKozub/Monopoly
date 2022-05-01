@@ -17,7 +17,6 @@ function loadStats() {
         success: function (data) {
             const obj = JSON.parse(data)
 
-
             document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
             document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
             document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum;
@@ -57,6 +56,7 @@ function onAdd() {
                     name.value = '';
                     password.value = '';
                     size.value = 2;
+                    console.log(obj.rooms)
                     renderRooms(obj.rooms)
                 } else if (obj.response === 'name exists') {
                     showPopup('Pokój z taką nazwą już istnieje', 'error', 5000);
@@ -97,7 +97,7 @@ function renderRooms(rooms) {
         let joinButton = document.createElement('div')
         joinButton.className = 'join-button';
         joinButton.onclick = () => {
-            window.location.href = '/room';
+            window.location.href = '/room?id=' + room.id;
         }
         let buttonText = document.createElement('p')
         buttonText.className = 'join-button-text';

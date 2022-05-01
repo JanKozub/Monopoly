@@ -84,6 +84,16 @@ class PostService {
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify({response: "success"}))
     }
+
+    getRoomById(req, res) {
+        const id = req.body.id;
+
+        res.setHeader("content-type", "text/plain")
+        res.send(JSON.stringify({
+            response: "success",
+            room: this.roomManager.getRoomById(id)
+        }))
+    }
 }
 
 module.exports = PostService;

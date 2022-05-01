@@ -3,7 +3,7 @@ class GetService {
         console.log('opened ' + req.url)
 
         if (req.session.user) {
-            res.render('lobbies.hbs');
+            res.render('rooms.hbs');
         } else {
             res.render('welcome.hbs');
         }
