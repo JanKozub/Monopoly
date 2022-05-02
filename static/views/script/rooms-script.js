@@ -1,4 +1,10 @@
 window.onload = async () => {
+    const type = window.location.href.split('?')[1]
+
+    if (type === 'roomClosed') {
+        showPopup('Pokój został zamknięty\nz powodu w wyjścia lidera', 'error', 3000).then();
+    }
+
     document.getElementById('add-button').onclick = onAdd;
     document.getElementById('log-out').onclick = onLogOut;
     document.getElementById('avatar-0').onclick = () => changeAvatar(0);
@@ -9,12 +15,12 @@ window.onload = async () => {
     loadStats().then(() => {
     });
 
-    const rooms = await Net.getPostData('/loadRooms', {});
+    const rooms = await Net.sendPostData('/loadRooms', {});
     renderRooms(rooms.rooms)
 }
 
 async function loadStats() {
-    const obj = await Net.getPostData('/getUser', {});
+    const obj = await Net.sendPostData('/getUser', {});
 
     document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
     document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
@@ -31,19 +37,16 @@ async function onAdd() {
     let size = document.getElementById('room-users-select');
 
     if (name.value !== '' && password.value !== '') {
-        const obj = await Net.getPostData('/createRoom',
+        const obj = await Net.sendPostData('/createRoom',
             {name: name.value, password: password.value, size: size.value});
 
         if (obj.response === 'success') {
-            name.value = '';
-            password.value = '';
-            size.value = 2;
-            renderRooms(obj.rooms)
+            window.location.href = '/room?id=' + obj.createdRoom.id
         } else if (obj.response === 'name exists') {
-            showPopup('Pokój z taką nazwą już istnieje', 'error', 5000);
+            showPopup('Pokój z taką nazwą już istnieje', 'error', 5000).then();
         }
     } else {
-        showPopup('Pola z nazwą i hasłem nie mogą być puste!', 'error', 5000);
+        showPopup('Pola z nazwą i hasłem nie mogą być puste!', 'error', 5000).then();
     }
 }
 
@@ -90,14 +93,14 @@ function renderRooms(rooms) {
 }
 
 async function onLogOut() {
-    const obj = await Net.getPostData('/logout', {});
+    const obj = await Net.sendPostData('/logout', {});
 
     if (obj.response === 'success')
         window.location.href = '/'
 }
 
 async function changeAvatar(n) {
-    const obj = await Net.getPostData('/changeAvatar', {avatar: n});
+    const obj = await Net.sendPostData('/changeAvatar', {avatar: n});
     document.getElementById('avatar-' + obj.prev).style.filter = 'brightness(100%)';
     document.getElementById('avatar-' + obj.next).style.filter = 'brightness(70%)';
 }

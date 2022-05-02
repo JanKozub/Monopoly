@@ -4,19 +4,21 @@ let currentUser = undefined;
 
 window.onload = async () => {
     id = window.location.href.split('=')[1];
-    let data = await Net.getPostData('/joinToRoom', {id: id});
+    let data = await Net.sendPostData('/joinToRoom', {id: id});
+    if (data.response === 'room not found') {
+        roomClosed()
+    } else {
+        room = data.room
+        currentUser = data.user
 
-    room = data.room
-    currentUser = data.user
+        document.getElementById('exit-button').onclick = () => window.location.href = '/rooms'
+        document.getElementById('start-button').onclick = setReady;
 
-    renderTopBar();
-    renderPlayers();
+        renderTopBar();
+        renderPlayers();
 
-    document.getElementById('exit-button').onclick = () => {
-        window.location.href = '/rooms'
+        setInterval(() => updateUsersInRoom(), 500);
     }
-
-    setInterval(() => updateUsersInRoom(), 500);
 }
 
 function renderTopBar() {
@@ -26,12 +28,16 @@ function renderTopBar() {
     document.getElementById('leader').innerText = "Lider: " + room.leader;
 
     if (currentUser.nick === room.leader) {
-        document.getElementById('start-button').innerText = 'Rozpocznij grę!'
+        const button = document.getElementById('start-button')
+        button.innerText = 'Rozpocznij grę!';
+        button.onclick = startGame;
     }
 }
 
 async function updateUsersInRoom() {
-    const data = await Net.getPostData('/getUsersInRoom', {id: id});
+    const data = await Net.sendPostData('/getUsersInRoom', {id: id});
+    if (data.response === 'room not found')
+        roomClosed()
 
     room = data.room
     document.getElementById('users').innerHTML = ''
@@ -78,4 +84,21 @@ function renderPlayers() {
 
         document.getElementById('users').append(row);
     }
+}
+
+function startGame() {
+    if (room.users.length === parseInt(room.size)) {
+        console.log('starting game...')
+    } else {
+        showPopup('Niewystarczająca ilość graczy!', 'inform', 3000).then();
+    }
+}
+
+async function setReady() {
+    this.disabled = true;
+    room = await Net.sendPostData('/getReady', {id: id});
+}
+
+function roomClosed() {
+    window.location.href = '/rooms?roomClosed';
 }

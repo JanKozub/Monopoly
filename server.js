@@ -48,5 +48,6 @@ app.post("/changeAvatar", (req, res) => postService.changeAvatar(req, res))
 app.post("/logout", (req, res) => postService.logout(req, res))
 app.post("/joinToRoom", (req, res) => postService.joinToRoom(req, res))
 app.post("/getUsersInRoom", (req, res) => postService.joinToRoom(req, res))
+app.post("/getReady", (req, res) => postService.getReady(req, res))
 
-app.use((req, res) => GetService.defaultHandler(req, res))
+app.use((req, res) => getService.defaultHandler(req, res))

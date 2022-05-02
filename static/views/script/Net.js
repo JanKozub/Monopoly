@@ -1,5 +1,5 @@
 class Net {
-    static getPostData(url, data) {
+    static sendPostData(url, data) {
         return new Promise((resolve) => {
             $.ajax({
                 url: url,

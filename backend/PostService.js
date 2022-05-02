@@ -52,19 +52,6 @@ class PostService {
         }
     }
 
-    async createRoom(req, res) {
-        res.setHeader("content-type", "text/plain")
-
-        const response = this.roomManager.addRoom(new Room(req.body.name, req.body.password, req.session.user.nick, req.body.size))
-
-        res.send(JSON.stringify({response: response, rooms: this.roomManager.getRooms()}))
-    }
-
-    loadRooms(req, res) {
-        res.setHeader("content-type", "text/plain")
-        res.send(JSON.stringify({rooms: this.roomManager.getRooms()}))
-    }
-
     getUser(req, res) {
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify(req.session.user))
@@ -83,6 +70,23 @@ class PostService {
         res.send(JSON.stringify({response: "success"}))
     }
 
+    async createRoom(req, res) {
+        res.setHeader("content-type", "text/plain")
+
+        const response = this.roomManager.addRoom(new Room(req.body.name, req.body.password, req.session.user.nick, req.body.size))
+
+        res.send(JSON.stringify({
+            response: response,
+            createdRoom: this.roomManager.getRoomByName(req.body.name),
+            rooms: this.roomManager.getRooms()
+        }))
+    }
+
+    loadRooms(req, res) {
+        res.setHeader("content-type", "text/plain")
+        res.send(JSON.stringify({rooms: this.roomManager.getRooms()}))
+    }
+
     joinToRoom(req, res) {
         const id = req.body.id;
         const room = this.roomManager.joinToRoom(id, req.session.user);
@@ -99,6 +103,27 @@ class PostService {
                 response: "room not found",
                 room: undefined,
                 user: req.session.user
+            }
+        }
+
+        res.setHeader("content-type", "text/plain")
+        res.send(JSON.stringify(response))
+    }
+
+    getReady(req, res) {
+        const id = req.body.id;
+        const room = this.roomManager.getReady(id, req.session.user);
+        let response;
+        if (room !== null) {
+            req.session.user.roomId = id;
+            response = {
+                response: "success",
+                room: room
+            }
+        } else {
+            response = {
+                response: "room not found",
+                room: undefined
             }
         }
 
