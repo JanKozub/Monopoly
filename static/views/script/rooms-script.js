@@ -1,68 +1,47 @@
-document.getElementById('add-button').onclick = onAdd;
-document.getElementById('log-out').onclick = onLogOut;
-document.getElementById('avatar-0').onclick = () => changeAvatar(0);
-document.getElementById('avatar-1').onclick = () => changeAvatar(1);
-document.getElementById('avatar-2').onclick = () => changeAvatar(2);
-document.getElementById('avatar-3').onclick = () => changeAvatar(3);
+window.onload = async () => {
+    document.getElementById('add-button').onclick = onAdd;
+    document.getElementById('log-out').onclick = onLogOut;
+    document.getElementById('avatar-0').onclick = () => changeAvatar(0);
+    document.getElementById('avatar-1').onclick = () => changeAvatar(1);
+    document.getElementById('avatar-2').onclick = () => changeAvatar(2);
+    document.getElementById('avatar-3').onclick = () => changeAvatar(3);
 
-loadStats();
-
-loadRooms();
-
-function loadStats() {
-    $.ajax({
-        url: '/getUser',
-        type: 'POST',
-        data: {},
-        success: function (data) {
-            const obj = JSON.parse(data)
-
-            document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
-            document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
-            document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum;
-            document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum;
-            document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon;
-            document.getElementById('avg-roll').innerText = 'Średnie losowanie: ' + obj.averageRoll;
-            document.getElementById('avatar-' + obj.avatar).style.filter = 'brightness(70%)'
-        }
+    loadStats().then(() => {
     });
+
+    const rooms = await Net.getPostData('/loadRooms', {});
+    renderRooms(rooms.rooms)
 }
 
-function loadRooms() {
-    $.ajax({
-        url: '/loadRooms',
-        type: 'POST',
-        data: {},
-        success: function (data) {
-            const obj = JSON.parse(data)
-            renderRooms(obj.rooms)
-        }
-    });
+async function loadStats() {
+    const obj = await Net.getPostData('/getUser', {});
+
+    document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
+    document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
+    document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum;
+    document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum;
+    document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon;
+    document.getElementById('avg-roll').innerText = 'Średnie losowanie: ' + obj.averageRoll;
+    document.getElementById('avatar-' + obj.avatar).style.filter = 'brightness(70%)'
 }
 
-function onAdd() {
+async function onAdd() {
     let name = document.getElementById('room-name-input');
     let password = document.getElementById('room-password-input');
     let size = document.getElementById('room-users-select');
 
     if (name.value !== '' && password.value !== '') {
-        $.ajax({
-            url: '/createRoom',
-            type: 'POST',
-            data: {name: name.value, password: password.value, size: size.value},
-            success: function (data) {
-                const obj = JSON.parse(data)
-                if (obj.response === 'success') {
-                    name.value = '';
-                    password.value = '';
-                    size.value = 2;
-                    console.log(obj.rooms)
-                    renderRooms(obj.rooms)
-                } else if (obj.response === 'name exists') {
-                    showPopup('Pokój z taką nazwą już istnieje', 'error', 5000);
-                }
-            }
-        });
+        const obj = await Net.getPostData('/createRoom',
+            {name: name.value, password: password.value, size: size.value});
+
+        if (obj.response === 'success') {
+            name.value = '';
+            password.value = '';
+            size.value = 2;
+            renderRooms(obj.rooms)
+        } else if (obj.response === 'name exists') {
+            showPopup('Pokój z taką nazwą już istnieje', 'error', 5000);
+        }
     } else {
         showPopup('Pola z nazwą i hasłem nie mogą być puste!', 'error', 5000);
     }
@@ -110,30 +89,15 @@ function renderRooms(rooms) {
     }
 }
 
-function onLogOut() {
-    $.ajax({
-        url: '/logout',
-        type: 'POST',
-        data: "ok",
-        success: function (data) {
-            const obj = JSON.parse(data)
-            if (obj.response === 'success') {
-                window.location.href = '/'
-            }
-        }
-    });
+async function onLogOut() {
+    const obj = await Net.getPostData('/logout', {});
+
+    if (obj.response === 'success')
+        window.location.href = '/'
 }
 
-function changeAvatar(n) {
-    $.ajax({
-        url: '/changeAvatar',
-        type: 'POST',
-        data: {avatar: n},
-        success: function (data) {
-            const obj = JSON.parse(data)
-
-            document.getElementById('avatar-' + obj.prev).style.filter = 'brightness(100%)';
-            document.getElementById('avatar-' + obj.next).style.filter = 'brightness(70%)';
-        }
-    });
+async function changeAvatar(n) {
+    const obj = await Net.getPostData('/changeAvatar', {avatar: n});
+    document.getElementById('avatar-' + obj.prev).style.filter = 'brightness(100%)';
+    document.getElementById('avatar-' + obj.next).style.filter = 'brightness(70%)';
 }

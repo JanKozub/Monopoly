@@ -91,12 +91,14 @@ class PostService {
             req.session.user.roomId = id;
             response = {
                 response: "success",
-                room: room
+                room: room,
+                user: req.session.user
             }
         } else {
             response = {
                 response: "room not found",
-                room: undefined
+                room: undefined,
+                user: req.session.user
             }
         }
 
