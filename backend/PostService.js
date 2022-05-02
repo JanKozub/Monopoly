@@ -110,6 +110,30 @@ class PostService {
         res.send(JSON.stringify(response))
     }
 
+    getRoom(req, res) {
+        const id = req.body.id;
+        const room = this.roomManager.getRoomById(id);
+        let response;
+
+        if (!this.roomManager.isUserInRoom(id, req.session.user)) {
+            response = {
+                response: "user kicked",
+                room: room,
+                user: req.session.user
+            }
+        } else {
+            req.session.user.roomId = id;
+            response = {
+                response: "success",
+                room: room,
+                user: req.session.user
+            }
+        }
+
+        res.setHeader("content-type", "text/plain")
+        res.send(JSON.stringify(response))
+    }
+
     getReady(req, res) {
         const id = req.body.id;
         const room = this.roomManager.getReady(id, req.session.user);
@@ -129,6 +153,13 @@ class PostService {
 
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify(response))
+    }
+
+    kickUser(req, res) {
+        this.roomManager.kickUser(req.body.id, req.body.userId);
+
+        res.setHeader("content-type", "text/plain")
+        res.send(JSON.stringify({response: "success"}))
     }
 }
 

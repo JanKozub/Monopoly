@@ -3,6 +3,8 @@ window.onload = async () => {
 
     if (type === 'roomClosed') {
         showPopup('Pokój został zamknięty\nz powodu w wyjścia lidera', 'error', 3000).then();
+    } else if (type === 'userKicked') {
+        showPopup('Zostałeś wyrzucony', 'error', 3000).then();
     }
 
     document.getElementById('add-button').onclick = onAdd;

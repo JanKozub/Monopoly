@@ -24,6 +24,15 @@ class RoomManager {
         return null;
     }
 
+    getRoomById(id) {
+        for (let i = 0; i < this.rooms.length; i++) {
+            if (this.rooms[i].id === id) {
+                return this.rooms[i];
+            }
+        }
+        return null;
+    }
+
     joinToRoom(id, user) {
         for (let i = 0; i < this.rooms.length; i++) {
             if (this.rooms[i].id === id) {
@@ -79,6 +88,16 @@ class RoomManager {
                         return r.leader !== user.nick;
                     });
                 }
+            }
+        }
+    }
+
+    kickUser(id, userId) {
+        for (let i = 0; i < this.rooms.length; i++) {
+            if (this.rooms[i].id === id) {
+                this.rooms[i].users = this.rooms[i].users.filter(function (u) {
+                    return u.user.id !== userId;
+                });
             }
         }
     }

@@ -38,6 +38,8 @@ async function updateUsersInRoom() {
     const data = await Net.sendPostData('/getUsersInRoom', {id: id});
     if (data.response === 'room not found')
         roomClosed()
+    else if (data.response === 'user kicked')
+        userKicked();
 
     room = data.room
     document.getElementById('users').innerHTML = ''
@@ -66,15 +68,23 @@ function renderPlayers() {
         img.src = 'resources/avatar-' + user.user.avatar + '.jpg'
         row.append(img)
 
+        const type = document.createElement('img');
+        type.className = 'u-row-type';
+        type.src = user.user.nick === room.leader ? "resources/crown.png" : "resources/user.png";
+        row.append(type);
+
         const nick = document.createElement('p');
         nick.className = 'u-row-nick';
         nick.innerText = user.user.nick;
         row.append(nick);
 
-        const type = document.createElement('img');
-        type.className = 'u-row-type';
-        type.src = user.user.nick === room.leader ? "resources/crown.png" : "resources/user.png";
-        row.append(type);
+        if (user.user.nick !== room.leader && currentUser.nick === room.leader) {
+            const kickButton = document.createElement('button');
+            kickButton.className = 'kick-button';
+            kickButton.innerText = 'Wyrzuć';
+            kickButton.onclick = () => kick(user.user.id);
+            row.append(kickButton)
+        }
 
         const status = document.createElement('div');
         status.className = 'u-row-ready';
@@ -101,4 +111,12 @@ async function setReady() {
 
 function roomClosed() {
     window.location.href = '/rooms?roomClosed';
+}
+
+function kick(userId) {
+    Net.sendPostData('/kickUser', {id: id, userId: userId});
+}
+
+function userKicked() {
+    window.location.href = '/rooms?userKicked';
 }

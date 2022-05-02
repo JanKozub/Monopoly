@@ -131,3 +131,23 @@ p {
     top: 21px;
     right: 20px;
 }
+
+.kick-button {
+    width: 120px;
+    height: 50px;
+    position: absolute;
+    top: 25px;
+    right: 80px;
+    background-color: red;
+    border-radius: 10px;
+    font-size: 29px;
+    text-align: center;
+    color: white;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}
+
+.kick-button:hover {
+    background-color: #a60000;
+    transition: all 50ms ease;
+}
