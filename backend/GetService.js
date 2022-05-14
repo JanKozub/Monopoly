@@ -1,5 +1,4 @@
 class GetService {
-
     roomManager;
 
     constructor(roomManager) {
@@ -32,6 +31,7 @@ class GetService {
             }
             res.render('room.hbs');
         } else {
+            console.log('user not logged in - rendering welcome')
             res.render('welcome.hbs');
         }
     }

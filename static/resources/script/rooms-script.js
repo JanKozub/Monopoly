@@ -9,13 +9,10 @@ window.onload = async () => {
 
     document.getElementById('add-button').onclick = onAdd;
     document.getElementById('log-out').onclick = onLogOut;
-    document.getElementById('avatar-0').onclick = () => changeAvatar(0);
-    document.getElementById('avatar-1').onclick = () => changeAvatar(1);
-    document.getElementById('avatar-2').onclick = () => changeAvatar(2);
-    document.getElementById('avatar-3').onclick = () => changeAvatar(3);
+    for (let i = 0; i < 6; i++)
+        document.getElementById('avatar-' + i).onclick = () => changeAvatar(i);
 
-    loadStats().then(() => {
-    });
+    loadStats().then();
 
     const rooms = await Net.sendPostData('/loadRooms', {});
     renderRooms(rooms.rooms)

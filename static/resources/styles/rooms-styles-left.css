@@ -77,7 +77,6 @@ select {
     border-bottom: 3px solid black;
     overflow: hidden;
     font-size: 23px;
-    user-select: none;
 }
 
 .row-container {
@@ -136,5 +135,4 @@ select {
     position: relative;
     top: 8px;
     font-size: 23px;
-    user-select: none;
 }

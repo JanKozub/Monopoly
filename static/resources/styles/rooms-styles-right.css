@@ -9,21 +9,18 @@
     margin: 0;
     position: relative;
     top: 20px;
-    user-select: none;
 }
 
 h2 {
     text-align: center;
     position: relative;
     top: 20px;
-    user-select: none;
 }
 
 h3 {
     position: relative;
     top: 10px;
     text-align: center;
-    user-select: none;
 }
 
 .stats-container {
@@ -57,11 +54,6 @@ h3 {
     border-radius: 5px;
     border: 3px solid black;
     cursor: pointer;
-    -webkit-user-drag: none;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     -webkit-filter: brightness(100%);
 }
 

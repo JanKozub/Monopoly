@@ -2,7 +2,12 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: "Microsoft Tai Le", serif;
-    background: url("../../resources/background.jpg");
+    background: url("../common/background.jpg");
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 #popup {
@@ -36,7 +41,6 @@ body {
     position: relative;
     top: 10px;
     font-size: 20px;
-    user-select: none;
 }
 
 @keyframes show-popup {
@@ -60,7 +64,7 @@ body {
         top: 15px;
     }
     66% {
-        right:-350px;
+        right: -350px;
         top: -100px;
     }
     100% {

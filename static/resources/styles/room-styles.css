@@ -18,7 +18,6 @@
 
 p {
     margin: 0;
-    user-select: none;
     position: absolute;
     width: max-content;
     font-size: 17px;
@@ -93,7 +92,6 @@ p {
 .u-row {
     height: 100px;
     position: relative;
-    user-select: none;
     margin: 0;
     border-bottom: 3px solid rgba(0, 0, 0, 0.25);
 }
@@ -105,9 +103,7 @@ p {
     top: 8px;
     left: 10px;
     border: 2px solid rgba(0, 0, 0, 0.9);
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    pointer-events: none;
     -webkit-filter: brightness(100%);
 }
 
@@ -123,6 +119,7 @@ p {
     position: absolute;
     top: 25px;
     left: 120px;
+    pointer-events: none;
 }
 
 .u-row-ready {
@@ -145,6 +142,7 @@ p {
     color: white;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.8);
     cursor: pointer;
+    pointer-events: none;
 }
 
 .kick-button:hover {

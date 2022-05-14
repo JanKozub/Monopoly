@@ -34,7 +34,7 @@ class PostService {
             nick: req.body.nick,
             password: req.body.password,
             id: Utils.generateId(),
-            roomId: undefined,
+            roomId: 0,
             avatar: 0,
             gamesPlayed: 0,
             gamesWon: 0,
@@ -73,11 +73,12 @@ class PostService {
     async createRoom(req, res) {
         res.setHeader("content-type", "text/plain")
 
-        const response = this.roomManager.addRoom(new Room(req.body.name, req.body.password, req.session.user.nick, req.body.size))
+        const room = new Room(req.body.name, req.body.password, req.session.user.nick, req.body.size);
+        const response = this.roomManager.addRoom(room);
 
         res.send(JSON.stringify({
             response: response,
-            createdRoom: this.roomManager.getRoomByName(req.body.name),
+            createdRoom: room,
             rooms: this.roomManager.getRooms()
         }))
     }
@@ -90,6 +91,7 @@ class PostService {
     joinToRoom(req, res) {
         const id = req.body.id;
         const room = this.roomManager.joinToRoom(id, req.session.user);
+
         let response;
         if (room !== null) {
             req.session.user.roomId = id;

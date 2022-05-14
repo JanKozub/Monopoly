@@ -65,12 +65,12 @@ function renderPlayers() {
 
         const img = document.createElement('img');
         img.className = 'u-row-img'
-        img.src = 'resources/avatar-' + user.user.avatar + '.jpg'
+        img.src = '../resources/avatars/avatar-' + user.user.avatar + '.jpg'
         row.append(img)
 
         const type = document.createElement('img');
         type.className = 'u-row-type';
-        type.src = user.user.nick === room.leader ? "resources/crown.png" : "resources/user.png";
+        type.src = user.user.nick === room.leader ? "../resources/room/crown.png" : "../resources/room/user.png";
         row.append(type);
 
         const nick = document.createElement('p');
@@ -105,7 +105,6 @@ function startGame() {
 }
 
 async function setReady() {
-    this.disabled = true;
     room = await Net.sendPostData('/getReady', {id: id});
 }
 
@@ -114,7 +113,7 @@ function roomClosed() {
 }
 
 function kick(userId) {
-    Net.sendPostData('/kickUser', {id: id, userId: userId});
+    Net.sendPostData('/kickUser', {id: id, userId: userId}).then();
 }
 
 function userKicked() {
