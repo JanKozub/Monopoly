@@ -1,7 +1,4 @@
 class Utils {
-    constructor() {
-    }
-
     static generateId() {
         let result = '';
         let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

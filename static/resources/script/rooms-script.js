@@ -23,10 +23,11 @@ async function loadStats() {
 
     document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
     document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
-    document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum;
+    document.getElementById('win-proc').innerText = 'Gry wygrane(%): ' + getWinProc(parseInt(obj.gamesWon), parseInt(obj.gamesPlayed));
     document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum;
     document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon;
     document.getElementById('avg-roll').innerText = 'Średnie losowanie: ' + obj.averageRoll;
+    document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum;
     document.getElementById('avatar-' + obj.avatar).style.filter = 'brightness(70%)'
 }
 
@@ -102,4 +103,12 @@ async function changeAvatar(n) {
     const obj = await Net.sendPostData('/changeAvatar', {avatar: n});
     document.getElementById('avatar-' + obj.prev).style.filter = 'brightness(100%)';
     document.getElementById('avatar-' + obj.next).style.filter = 'brightness(70%)';
+}
+
+function getWinProc(won, overall) {
+    if (overall > 0 && won < overall) {
+        return Math.floor((won / overall) * 100) + '%';
+    } else {
+        return '0%';
+    }
 }

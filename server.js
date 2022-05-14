@@ -16,8 +16,6 @@ const getService = new GetService(roomManager);
 let app = express();
 
 app.use(express.static('static'))
-app.use(express.static('static/views'))
-app.use(express.static('static/resources'))
 
 app.use(favicon(__dirname + '/static/resources/common/icon.ico'));
 app.use(bodyParser.json());
