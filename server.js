@@ -17,7 +17,7 @@ let app = express();
 
 app.use(express.static('static'))
 
-app.use(favicon(__dirname + '/static/resources/common/icon.ico'));
+app.use(favicon(__dirname + '/gui/resources/common/icon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
@@ -26,7 +26,7 @@ app.use(session({
     secret: "420",
 }));
 
-app.set('views', path.join(__dirname, 'static/views'));
+app.set('views', path.join(__dirname, 'gui/views'));
 app.engine('hbs', hbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
