@@ -1,7 +1,7 @@
 import {Players} from "./components/players/Players.js";
-import {RayCaster} from "./Raycaster.js";
+import {RayCaster} from "./components/Raycaster.js";
 import {Flags} from "./libs/Flags.js";
-import {Board} from "./Board.js";
+import {Board} from "./components/Board.js";
 import {Light, ShadowPlane} from "./libs/Shadow.js";
 import {Buttons} from "./components/buttons/Buttons.js";
 import {Cubes} from "./components/cubes/Cubes.js";
