@@ -1,0 +1,69 @@
+#logo {
+    position: absolute;
+    top: 5%;
+    left: 27.5%;
+    width: 50%;
+    height: auto;
+}
+
+#login-box {
+    width: 300px;
+    height: 350px;
+    background: white;
+    border: 3px solid black;
+    border-radius: 15px;
+    position: absolute;
+    top: 35%;
+    left: calc(50% - 150px);
+    opacity: 0.8;
+}
+
+input {
+    width: 200px;
+    height: 50px;
+    position: relative;
+    left: 46px;
+    top: -10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 25px;
+    text-align: center;
+}
+
+#passwd {
+    top: 0;
+}
+
+#login-label {
+    width: 300px;
+    text-align: center;
+}
+
+.button {
+    width: 204px;
+    height: 50px;
+    position: relative;
+    left: 47px;
+    top: -19px;
+    background-color: red;
+    border-radius: 10px;
+    font-size: 29px;
+    text-align: center;
+    color: white;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #a60000;
+    transition: all 50ms ease;
+}
+
+#register-button {
+    top: -36px;
+}
+
+#button-text {
+    position: relative;
+    top: 7px;
+}

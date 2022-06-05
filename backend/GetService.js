@@ -35,6 +35,16 @@ class GetService {
             res.render('welcome.hbs');
         }
     }
+
+    gameHandler(req, res) {
+        const user = req.session.user;
+        if (user) {
+            res.render('game.hbs');
+        } else {
+            console.log('user not logged in - rendering welcome')
+            res.render('welcome.hbs');
+        }
+    }
 }
 
 module.exports = GetService;
