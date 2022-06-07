@@ -62,6 +62,7 @@ app.post("/getUsersInRoom", (req, res) => postService.getRoom(req, res))
 app.post("/getReady", (req, res) => postService.getReady(req, res))
 app.post("/kickUser", (req, res) => postService.kickUser(req, res))
 app.post("/startNewGame", (req, res) => postService.startNewGame(req, res))
+app.post("/isGameStarted", (req, res) => postService.isGameStarted(req, res))
 
 //game
 app.post("/init", (req, res) => gamePostService.initGame(req, res))

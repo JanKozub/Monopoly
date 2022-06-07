@@ -1,3 +1,5 @@
+let interval = undefined;
+
 window.onload = async () => {
     const type = window.location.href.split('?')[1]
 
@@ -14,8 +16,10 @@ window.onload = async () => {
 
     loadStats().then();
 
-    const rooms = await Net.sendPostData('/loadRooms', {});
-    renderRooms(rooms.rooms)
+    interval = setInterval(async () => {
+        const rooms = await Net.sendPostData('/loadRooms', {});
+        renderRooms(rooms.rooms)
+    }, 500);
 }
 
 async function loadStats() {
@@ -41,6 +45,7 @@ async function onAdd() {
             {name: name.value, password: password.value, size: size.value});
 
         if (obj.response === 'success') {
+            clearInterval(interval);
             window.location.href = '/room?id=' + obj.createdRoom.id
         } else if (obj.response === 'name exists') {
             showPopup('Pokój z taką nazwą już istnieje', 'error', 5000).then();

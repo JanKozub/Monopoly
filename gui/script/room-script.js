@@ -101,14 +101,22 @@ function startGame() {
     console.log('starting game...')
     let id = window.location.href.split('=')[1]
     Net.sendPostData('/startNewGame', {id: id}).then()
-    window.location.href = '/game?id=' + window.location.href.split('=')[1];
+    window.location.href = '/game?id=' + id;
     // } else {
     //     showPopup('Niewystarczająca ilość graczy!', 'inform', 3000).then();
     // }
 }
 
 async function setReady() {
-    room = await Net.sendPostData('/getReady', {id: id});
+    await Net.sendPostData('/getReady', {id: id});
+    let inter = setInterval(async () => {
+        let status = await Net.sendPostData('/isGameStarted', {id: id})
+
+        if (status.response) {
+            clearInterval(inter);
+            window.location.href = '/game?id=' + id;
+        }
+    }, 1000);
 }
 
 function roomClosed() {

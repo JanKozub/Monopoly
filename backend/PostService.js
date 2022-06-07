@@ -173,6 +173,16 @@ class PostService {
         req.session.gameId = id;
         res.send(JSON.stringify({response: "ok"}))
     }
+
+    isGameStarted(req, res) {
+        let game = this.gamesManager.getGameById(req.body.id);
+        if (game !== null) {
+            req.session.gameId = game.id;
+            res.send(JSON.stringify({response: true}));
+        } else {
+            res.send(JSON.stringify({response: false}));
+        }
+    }
 }
 
 module.exports = PostService;

@@ -142,7 +142,7 @@ p {
     color: white;
     box-shadow: 2px 2px rgba(0, 0, 0, 0.8);
     cursor: pointer;
-    pointer-events: none;
+    z-index: 10000;
 }
 
 .kick-button:hover {

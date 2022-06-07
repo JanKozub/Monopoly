@@ -16,7 +16,11 @@ class GamePostService {
 
     initGame(req, res) {
         let game = this.gamesManager.getGameById(req.body.id)
-        res.send(JSON.stringify(game.playerList))
+        if (game !== null) {
+            res.send(JSON.stringify(game.playerList))
+        } else {
+            res.send(JSON.stringify({response: "game not found"}))
+        }
     }
 
     cubeScore(req, res) {
@@ -36,7 +40,7 @@ class GamePostService {
     update(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
         let data;
-        if (game !== null){
+        if (game !== null) {
             data = {
                 playerList: game.playerList,
                 tura: game.tura,
@@ -53,11 +57,13 @@ class GamePostService {
     nextTura(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
 
-        game.tura = game.tura + 1;
-        if (game.tura > game.playerList.length - 1) {
-            game.tura = 0;
+        if (game !== null) {
+            game.tura = game.tura + 1;
+            if (game.tura > game.playerList.length - 1) {
+                game.tura = 0;
+            }
+            this.gamesManager.updateGameWithId(game);
         }
-        this.gamesManager.updateGameWithId(game);
         res.send(JSON.stringify("a"))
     }
 
