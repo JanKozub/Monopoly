@@ -43,6 +43,7 @@ class GamesManager {
                 return this.games[i];
             }
         }
+        return null;
     }
 
     updateGameWithId(game) {

@@ -35,12 +35,17 @@ class GamePostService {
 
     update(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
-        let data = {
-            playerList: game.playerList,
-            tura: game.tura,
-            cubes: game.actual_cubes,
-            fields: this.fields,
-            lastAction: game.lastAction
+        let data;
+        if (game !== null){
+            data = {
+                playerList: game.playerList,
+                tura: game.tura,
+                cubes: game.actual_cubes,
+                fields: this.fields,
+                lastAction: game.lastAction
+            }
+        } else {
+            data = {response: 'id not found'}
         }
         res.send(JSON.stringify(data))
     }

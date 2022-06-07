@@ -4,12 +4,9 @@ export class Player extends THREE.Mesh {
         this.material = new THREE.MeshPhysicalMaterial({
             roughness: 0.7,
             color: color,
-            transmission: 1,
-            thickness: 1,
             depthWrite: true,
             depthTest: true,
             emissive: emissive,
-            shininess: 1,
         });
         const loader = new THREE.STLLoader()
         loader.load(

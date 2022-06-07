@@ -19,7 +19,6 @@ export class GameNet {
         this.player_id = 0; //POBRANIE ID Z MENU
         this.tura = 0;
         this.actual_cubes = [2, 2]
-        this.playercount = 1;
         this.contentUpdate = setInterval(this.update, 200);
         this.turaSeconds = 30;
     }
@@ -37,7 +36,6 @@ export class GameNet {
             player_id: this.player_id,
             cube_scores: [a, b]
         })
-        console.log(data)
         await GameNet.sendFetch(data, "/cubeScore")
     }
 
@@ -90,8 +88,7 @@ export class GameNet {
     }
 
     comparePosition = (data) => {
-        for (let id = 0; id < this.playercount; id++) {
-            console.log(this.inMove)
+        for (let id = 0; id < this.playerList.length; id++) {
             if (this.playerList[id].position !== data.playerList[id].position && !this.inMove.includes(id)) { //pozycja gracza na serwerze inna niż u gracza
                 this.inMove.push(id);
                 let count = data.playerList[id].position - this.playerList[id].position;

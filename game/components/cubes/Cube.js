@@ -1,20 +1,16 @@
 import {CubeDot} from "./CubeDot.js";
 
 export class Cube extends THREE.Mesh {
-    constructor(size, id) {
+    constructor(size) {
         super()
         this.geometry = this.RoundEdgedBox(size, size, size, 3, 3, 3, 3, 3);
         this.material = new THREE.MeshPhysicalMaterial({
             roughness: 0.7,
-            transmission: 1,
-            thickness: 1,
             depthWrite: true,
             depthTest: true,
             emissive: 0x202020,
-            shininess: 10,
         });
         this.name = "cube";
-        this.CubeID = id;
         this.genDots(size);
         this.castShadow = true;
     }
