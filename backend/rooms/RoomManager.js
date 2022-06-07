@@ -101,6 +101,19 @@ class RoomManager {
             }
         }
     }
+
+    isAvatarInRoom(id, avatar) {
+        for (let i = 0; i < this.rooms.length; i++) {
+            if (this.rooms[i].id === id) {
+                for (let k = 0; k < this.rooms[i].users.length; k++) {
+                    if (parseInt(this.rooms[i].users[k].user.avatar) === parseInt(avatar)) {
+                        return true
+                    }
+                }
+                return false;
+            }
+        }
+    }
 }
 
 module.exports = RoomManager

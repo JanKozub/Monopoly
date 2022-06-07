@@ -1,6 +1,5 @@
 const Utils = require("./Utils.js");
 const Room = require("./rooms/Room.js")
-const GamesManager = require("./GamesManager.js")
 
 class PostService {
     databaseService;
@@ -65,6 +64,11 @@ class PostService {
         req.session.user.avatar = req.body.avatar
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify({prev: prev, next: req.body.avatar}))
+    }
+
+    isAvatarInRoom(req, res) {
+        let status = this.roomManager.isAvatarInRoom(req.body.id, req.session.user.avatar);
+        res.send(JSON.stringify({response: status}))
     }
 
     logout(req, res) {

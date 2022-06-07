@@ -83,8 +83,14 @@ function renderRooms(rooms) {
 
         let joinButton = document.createElement('div')
         joinButton.className = 'join-button';
-        joinButton.onclick = () => {
-            window.location.href = '/room?id=' + room.id;
+        joinButton.onclick = async () => {
+            let temp = await Net.sendPostData('/isAvatarInRoom', {id: room.id})
+            console.log(temp)
+            if (!temp.response) {
+                window.location.href = '/room?id=' + room.id;
+            } else {
+                showPopup('Ten avatar jest już w lobby', 'error', 3000).then();
+            }
         }
         let buttonText = document.createElement('p')
         buttonText.className = 'join-button-text';
