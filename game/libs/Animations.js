@@ -43,7 +43,7 @@ export class Animations {
             .to({x: -10 + offsetX, z: -10 + offsetZ}, 1500 + offsetTime) // do jakiej pozycji, w jakim czasie
             .easing(TWEEN.Easing.Linear.None) // typ easingu (zmiana w czasie)
             .onComplete(() => {
-                this.gameNet.inMove = false
+                this.gameNet.inMove = []
             }) // funkcja po zakończeniu animacji
             .start()
     };
@@ -57,13 +57,13 @@ export class Animations {
         });
     }
 
-    jumpXtimes (target, x, back_y, id) {
+    jumpXtimes(target, x, back_y, id) {
         let cnt = 0;
-        jump(this.playerAppearance, this.game);
+        jump(this.playerList, this.playerAppearance, this.game, this.gameNet);
 
         function jump(playerList, playerAppearance, game, gameNet) {
             let corners = [0, 10, 20, 30]
-            let pos = this.playerlist[target.PlayerID].position;
+            let pos = playerList[target.PlayerID].position;
             let dir = {};
 
             let buttons = game.buttons.getChildren();
@@ -131,18 +131,3 @@ export class Animations {
         return deg * Math.PI / 180;
     };
 }
-
-//ANIMATION OF GROWING HOUSES
-
-// let cube_values = []
-// revealValues = (val) => {
-//     cube_values.push(val);
-//     if (cube_values.length == 2) {
-//         if (id != null) {
-//             //
-//         }
-//
-//         cube_values = []
-//     }
-// }
-//

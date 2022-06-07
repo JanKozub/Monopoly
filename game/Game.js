@@ -11,6 +11,7 @@ export class Game {
     ui = undefined;
     flags = new Flags();
     fields;
+    players;
 
     constructor(playerList, playerAppearance) {
         this.scene = new THREE.Scene();
@@ -54,8 +55,8 @@ export class Game {
         this.highlight();
 
         //PLAYERS
-        let players = new Players(playerList, playerAppearance);
-        this.scene.add(players)
+        this.players = new Players(playerList, playerAppearance);
+        this.scene.add(this.players)
 
         this.render()
         this.scene.add(this.camera)

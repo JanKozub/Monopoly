@@ -2,6 +2,7 @@ import {GameNet} from "./GameNet.js";
 import {Game} from "./Game.js";
 import {Ui} from "./Ui.js";
 import {Animations} from "./libs/Animations.js";
+import {StepEngine} from "./libs/stepengine.js";
 
 let game;
 let ui;
@@ -30,6 +31,7 @@ window.onload = async () => {
     game.setUi(ui);
     net.setUi(ui);
     game.setFields(await net.getFields());
+    net.setStepEngine(new StepEngine(ui, net, playerList, game.fields));
     game.resize(window.innerWidth, window.innerHeight);
 }
 window.onresize = () => {

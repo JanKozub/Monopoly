@@ -1,33 +1,35 @@
-import {StepEngine} from "./libs/stepengine.js";
-
 export class GameNet {
     playerList;
     cubesInMove;
-    inMove;
+    inMove = [];
     game;
     ui;
     lastAction;
     animations;
     stepEngine;
     contentUpdate;
+    actual_cubes;
 
     constructor(game, playerList, animations) {
         this.playerList = playerList;
         this.game = game;
         this.animations = animations;
         this.animations.setGameNet(this);
-        this.stepEngine = new StepEngine();
 
         this.player_id = 0; //POBRANIE ID Z MENU
         this.tura = 0;
         this.actual_cubes = [2, 2]
-        this.playercount = 2;
+        this.playercount = 1;
         this.contentUpdate = setInterval(this.update, 200);
         this.turaSeconds = 30;
     }
 
     setUi(ui) {
         this.ui = ui;
+    }
+
+    setStepEngine(stepEngine) {
+        this.stepEngine = stepEngine;
     }
 
     sendCubeScore = async (a, b) => { //PRZESŁANIE DO SERWERA WYLOSOWANYCH OCZEK KOSTEK
@@ -89,6 +91,7 @@ export class GameNet {
 
     comparePosition = (data) => {
         for (let id = 0; id < this.playercount; id++) {
+            console.log(this.inMove)
             if (this.playerList[id].position !== data.playerList[id].position && !this.inMove.includes(id)) { //pozycja gracza na serwerze inna niż u gracza
                 this.inMove.push(id);
                 let count = data.playerList[id].position - this.playerList[id].position;
@@ -96,7 +99,7 @@ export class GameNet {
                     count += 40
                 }
                 setTimeout(() => {
-                    this.animations.jumpToPoint(id, count)
+                    this.animations.jumpToPoint(id, count, this.game.players)
                     this.stepEngine.step(this.player_id, this.tura, data.playerList[id].position - 1, id)
                 }, 1500);
             }

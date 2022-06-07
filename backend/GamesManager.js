@@ -31,8 +31,8 @@ class GamesManager {
             id: id,
             players: temp,
             playerList: temp2,
-            lastAction: undefined,
-            actual_cubes: undefined,
+            lastAction: "",
+            actual_cubes: [2, 2],
             tura: 0
         })
     }

@@ -53,6 +53,7 @@ export class StepEngine {
             fieldIdx: fieldIdx,
             player_id: player_id
         })
+        console.log(this.gameNet)
         await this.gameNet.sendFetch(data, "/action")
     }
 
