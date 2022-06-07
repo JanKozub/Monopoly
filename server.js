@@ -4,13 +4,22 @@ const bodyParser = require("body-parser")
 const session = require('express-session');
 const favicon = require('serve-favicon');
 const hbs = require('express-handlebars');
+
 const GetService = require('./backend/GetService.js');
 const PostService = require('./backend/PostService.js');
+const GamePostService = require('./backend/GamePostService.js');
+
 const DatabaseService = require("./backend/database/DatabaseService");
-const RoomManager = require("./backend/rooms/RoomManager.js")
+const GameDBService = require("./backend/database/GameDBService.js");
+
+const RoomManager = require("./backend/rooms/RoomManager.js");
+const GamesManager = require("./backend/GamesManager.js");
+
 
 const roomManager = new RoomManager();
-const postService = new PostService(new DatabaseService(), roomManager);
+const gamesManager = new GamesManager();
+const postService = new PostService(new DatabaseService(), roomManager, gamesManager);
+const gamePostService = new GamePostService(new GameDBService(), gamesManager);
 const getService = new GetService(roomManager);
 
 let app = express();
@@ -52,5 +61,16 @@ app.post("/joinToRoom", (req, res) => postService.joinToRoom(req, res))
 app.post("/getUsersInRoom", (req, res) => postService.getRoom(req, res))
 app.post("/getReady", (req, res) => postService.getReady(req, res))
 app.post("/kickUser", (req, res) => postService.kickUser(req, res))
+app.post("/startNewGame", (req, res) => postService.startNewGame(req, res))
+
+//game
+app.post("/init", (req, res) => gamePostService.initGame(req, res))
+app.post("/getFields", (req, res) => gamePostService.getFields(req, res))
+app.post("/cubeScore", (req, res) => gamePostService.cubeScore(req, res))
+app.post("/update", (req, res) => gamePostService.update(req, res))
+app.post("/nexttura", (req, res) => gamePostService.nextTura(req, res))
+app.post("/setcubes", (req, res) => gamePostService.setCubes(res, res))
+app.post("/setposition", (req, res) => gamePostService.setPosition(req, res))
+app.post("/action", (req, res) => gamePostService.action(req, res))
 
 app.use((req, res) => getService.defaultHandler(req, res))

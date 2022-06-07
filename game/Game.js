@@ -12,9 +12,7 @@ export class Game {
     flags = new Flags();
     fields;
 
-    constructor(playerList, playerAppearance, fields) {
-        this.fields = fields;
-
+    constructor(playerList, playerAppearance) {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 500);
         this.renderer = new THREE.WebGLRenderer();
@@ -80,6 +78,10 @@ export class Game {
 
     setUi(ui) {
         this.ui = ui;
+    }
+
+    setFields(fields) {
+        this.fields = fields;
     }
 
     resize = function (Width, Height) {

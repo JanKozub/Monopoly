@@ -1,13 +1,16 @@
 const Utils = require("./Utils.js");
 const Room = require("./rooms/Room.js")
+const GamesManager = require("./GamesManager.js")
 
 class PostService {
     databaseService;
     roomManager;
+    gamesManager;
 
-    constructor(databaseService, roomManager) {
+    constructor(databaseService, roomManager, gamesManager) {
         this.databaseService = databaseService;
         this.roomManager = roomManager;
+        this.gamesManager = gamesManager;
     }
 
     async onLogin(req, res) {
@@ -70,7 +73,7 @@ class PostService {
         res.send(JSON.stringify({response: "success"}))
     }
 
-    async createRoom(req, res) {
+    createRoom(req, res) {
         res.setHeader("content-type", "text/plain")
 
         const room = new Room(req.body.name, req.body.password, req.session.user.nick, req.body.size);
@@ -162,6 +165,13 @@ class PostService {
 
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify({response: "success"}))
+    }
+
+    startNewGame(req, res) {
+        let id = req.body.id;
+        this.gamesManager.addNewGame(id, this.roomManager.getRoomById(id).users);
+        req.session.gameId = id;
+        res.send(JSON.stringify({response: "ok"}))
     }
 }
 

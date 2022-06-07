@@ -97,12 +97,14 @@ function renderPlayers() {
 }
 
 function startGame() {
-    if (room.users.length === parseInt(room.size)) {
-        console.log('starting game...')
-        window.location.href = '/game';
-    } else {
-        showPopup('Niewystarczająca ilość graczy!', 'inform', 3000).then();
-    }
+    // if (room.users.length === parseInt(room.size)) {
+    console.log('starting game...')
+    let id = window.location.href.split('=')[1]
+    Net.sendPostData('/startNewGame', {id: id}).then()
+    window.location.href = '/game?id=' + window.location.href.split('=')[1];
+    // } else {
+    //     showPopup('Niewystarczająca ilość graczy!', 'inform', 3000).then();
+    // }
 }
 
 async function setReady() {
