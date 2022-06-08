@@ -10,7 +10,7 @@ export class Player extends THREE.Mesh {
         });
         const loader = new THREE.STLLoader()
         loader.load(
-            '../models/' + skin + '.stl',
+            '../models/pawn-' + skin + '.stl',
             (geometry) => {
                 this.geometry = geometry;
             }

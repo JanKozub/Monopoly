@@ -1,7 +1,5 @@
 - Kiedy wszyscy nie sa gotowi to nie zaczyna gry
 - ecrypt hasla
-- minimalna wertykalna pozycja jest w polowie pod katem 30st
-- ogarnąć przechodzenie tury między graczami (jakiś log czy coś), przycisk znikał jeśli nie twoja tura
 - dodać jakiś system łączenia pól w kolor żeby się dało stawiać domek tylko jeśli jesteś właścicielem wszystkich z danego koloru
 - renderowanie domków w odpowiednim miejscu
 - wymyślić karty i dodać ich obsługę na serwerze, wystarczy 20 tekstów

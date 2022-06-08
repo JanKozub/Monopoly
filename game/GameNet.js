@@ -16,7 +16,7 @@ export class GameNet {
         this.animations = animations;
         this.animations.setGameNet(this);
 
-        this.player_id = 0; //POBRANIE ID Z MENU
+        this.player_id = game.myId;
         this.tura = 0;
         this.actual_cubes = [2, 2]
         this.contentUpdate = setInterval(this.update, 200);

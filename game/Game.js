@@ -7,8 +7,6 @@ import { Buttons } from "./components/buttons/Buttons.js";
 import { Cubes } from "./components/cubes/Cubes.js";
 import { Houses } from "./components/houses/Houses.js";
 
-import { Animations } from "./libs/Animations.js";
-
 export class Game {
     cameraTar = { x: 0, y: 220, z: 0 }
     ui = undefined;
@@ -132,17 +130,20 @@ export class Game {
             }
         }
     }
+
     setCam = (x, y, z) => {
         this.cameraTar = { x: x, y: y, z: z }
 
         this.ui.updateSliders(this.camera.position.x, this.camera.position.y, this.camera.position.z)
     }
+
     setBirdView = () => {
         this.camera.position.set(0, 220, 0);
         this.camera.lookAt(this.scene.position);
         this.cameraTar = { x: 0, y: 220, z: 0 }
         this.ui.updateSliders(0, 220, 0)
     }
+
     rotCam = (deg) => {
         let rad = deg * (Math.PI / 180)
         this.camera.position.z = Math.cos(rad) * 220
@@ -152,6 +153,7 @@ export class Game {
         this.cameraTar.x = Math.sin(rad) * 220
         this.cameraTar.z = Math.cos(rad) * 220
     }
+
     camHeight = (val) => {
         this.camera.position.y = val;
         this.camera.lookAt(this.scene.position);
@@ -190,6 +192,4 @@ export class Game {
             this.camera.lookAt(this.scene.position);
         }
     }
-
-
 }
