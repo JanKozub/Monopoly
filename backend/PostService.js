@@ -59,11 +59,16 @@ class PostService {
         res.send(JSON.stringify(req.session.user))
     }
 
-    changeAvatar(req, res) {
-        const prev = req.session.user.avatar;
-        req.session.user.avatar = req.body.avatar
-        res.setHeader("content-type", "text/plain")
-        res.send(JSON.stringify({prev: prev, next: req.body.avatar}))
+    async changeAvatar(req, res) {
+        if (req.session.user !== undefined) {
+            const prev = req.session.user.avatar;
+            req.session.user.avatar = req.body.avatar;
+            await this.databaseService.updateAvatar(req.session.user.id, req.body.avatar);
+            res.setHeader("content-type", "text/plain")
+            res.send(JSON.stringify({prev: prev, next: req.body.avatar}))
+        } else {
+            res.send('error')
+        }
     }
 
     isAvatarInRoom(req, res) {

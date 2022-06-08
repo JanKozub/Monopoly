@@ -1,8 +1,5 @@
-{"nick":"abc","password":"123","id":"QIqWnf6tybKfVJdw","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"I2gAps9NS3GDjvMq"}
-{"nick":"cde","password":"123","id":"zAkgXIeGQONiJvIR","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"YObBCtjAqCdzjYnL"}
-{"nick":"aaa","password":"123","id":"TdRuA6v1y6dUbCM5","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"YV6aIzNRb2Vpal5R"}
-{"nick":"adbl","password":"123","id":"CGER84y4Q7zZ65F0","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"bhCJz2j8tJvds487"}
-{"nick":"def","password":"123","id":"eSMgoZWtzA3NhBip","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"frkmncSiEj2Afids"}
-{"nick":"dupa","password":"test","id":"xZKHMaOI9XhVIn5V","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"kUlcpeRk79mEHkYG"}
-{"nick":"jpk","password":"test","id":"B82G1Ngu2DKDMuyl","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"tnUoL4O8VfF9exdH"}
-{"nick":"cde2","password":"123","id":"Up0BSob1whxLDh9R","roomId":0,"avatar":0,"gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"vqz1k3ymPdB0E54X"}
+{"nick":"jpk","password":"test","id":"wYYeV7KMHJnuJGCc","roomId":0,"avatar":"3","gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"dTsrFVWK6Pvf9Wre"}
+{"nick":"jpk","password":"test","id":"wYYeV7KMHJnuJGCc","roomId":0,"avatar":"1","gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"dTsrFVWK6Pvf9Wre"}
+{"nick":"jpk","password":"test","id":"wYYeV7KMHJnuJGCc","roomId":0,"avatar":"2","gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"dTsrFVWK6Pvf9Wre"}
+{"nick":"jpk","password":"test","id":"wYYeV7KMHJnuJGCc","roomId":0,"avatar":"5","gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"dTsrFVWK6Pvf9Wre"}
+{"nick":"jpk","password":"test","id":"wYYeV7KMHJnuJGCc","roomId":0,"avatar":"0","gamesPlayed":0,"gamesWon":0,"moneySum":0,"placesBoughtSum":0,"averageRoll":0,"_id":"dTsrFVWK6Pvf9Wre"}

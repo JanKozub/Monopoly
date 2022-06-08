@@ -196,12 +196,14 @@ export class Ui {
     genAvatarlist = () => {
         let heightMultiplier = 0;
         this.playerList.forEach(element => {
+            if (element.id !== this.game.myId) {
                 heightMultiplier++;
                 let img = document.createElement("img");
                 img.id = element.skin + "-avatar";
                 img.className = "avatar-box";
                 img.src = "./avatars/avatar-" + element.skin + ".jpg";
                 document.getElementById("avatarlist").appendChild(img)
+            }
         });
         document.getElementById("avatarlist").style.height = (75 * heightMultiplier) + "px";
     }
