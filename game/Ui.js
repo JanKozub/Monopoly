@@ -9,6 +9,7 @@ export class Ui {
         this.playerList = playerList;
         this.createCameraMenu();
         this.hamburgerMenu();
+        this.genAvatarlist();
     }
 
     createCameraMenu = () => {
@@ -188,6 +189,20 @@ export class Ui {
         } else {
             document.getElementById("buy").innerText = "TAK"
         }
+    }
+    genAvatarlist = () => {
+        let heightMultiplier = 0;
+        this.playerList.forEach(element => {
+            if (element.position != -1) {
+                heightMultiplier++;
+                let img = document.createElement("img");
+                img.id = element.skin + "-avatar";
+                img.className = "avatar-box";
+                img.src = "../" + element.skin + ".png";
+                document.getElementById("avatarlist").appendChild(img)
+            }
+        });
+        document.getElementById("avatarlist").style.height = 75 * heightMultiplier + "px";
     }
 
     getRandomInt = (min, max) => {

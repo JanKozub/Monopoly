@@ -39,7 +39,11 @@ export class GameNet {
         await GameNet.sendFetch(data, "/cubeScore")
     }
 
-    throwCubes = (a, b) => {
+    throwCubes = async (a, b) => {
+
+        let house = await this.game.houses.genHouse(2, 5); //testowo, generuje hotel na polu 5
+        this.animations.raiseFromBottom(house);
+
         let cubes3D = this.game.cubes.getChildren();
         this.cubesInMove = true;
         this.animations.animToIndex(cubes3D[0], a - 1, 0, 0, 0).then();
@@ -51,6 +55,7 @@ export class GameNet {
             this.turaTime = setInterval(() => {
                 if (this.turaSeconds > 0) {
                     this.turaSeconds--;
+                    console.log(this.turaSeconds)
                 } else {
                     clearInterval(this.turaTime);
                     this.nexttura().then();
@@ -89,12 +94,14 @@ export class GameNet {
 
     comparePosition = (data) => {
         for (let id = 0; id < this.playerList.length; id++) {
-            if (this.playerList[id].position !== data.playerList[id].position && !this.inMove.includes(id)) { //pozycja gracza na serwerze inna niż u gracza
+            if (this.playerList[id].position != data.playerList[id].position && !this.inMove.includes(id)) { //pozycja gracza na serwerze inna niż u gracza
                 this.inMove.push(id);
+
                 let count = data.playerList[id].position - this.playerList[id].position;
                 if (count < 0) {
                     count += 40
                 }
+                console.log(count)
                 setTimeout(() => {
                     this.animations.jumpToPoint(id, count, this.game.players)
                     this.stepEngine.step(this.player_id, this.tura, data.playerList[id].position - 1, id)
@@ -151,7 +158,7 @@ export class GameNet {
     static sendFetch = async (data, url) => {
         return new Promise(resolve => {
             const options = {
-                method: "POST", body: data, headers: {'Content-Type': 'application/json'}
+                method: "POST", body: data, headers: { 'Content-Type': 'application/json' }
             };
             fetch(url, options) //fetch engine
                 .then(response => response.json())

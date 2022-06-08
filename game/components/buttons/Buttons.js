@@ -1,4 +1,4 @@
-import {Button} from "./Button.js";
+import { Button } from "./Button.js";
 
 export class Buttons extends THREE.Mesh {
     constructor() {
@@ -50,7 +50,7 @@ export class Buttons extends THREE.Mesh {
 
     genCorners = () => {
         let x = 0;
-        let pos = [{x: 112, y: 112}, {x: -112, y: 112}, {x: -112, y: -112}, {x: 112, y: -112}]
+        let pos = [{ x: 112, y: 112 }, { x: -112, y: 112 }, { x: -112, y: -112 }, { x: 112, y: -112 }]
         while (x < 4) {
             let button = new Button(34, 34, x * 10)
             button.position.set(pos[x].x, 1, pos[x].y)
@@ -79,11 +79,13 @@ export class Buttons extends THREE.Mesh {
         return this.children;
     }
 
-    findByID = (id) => {
-        this.children.forEach(element => {
-            if (element.fieldID === id) {
-                return element;
-            }
-        });
+    findByID = async (id) => {
+        return new Promise(resolve => {
+            this.children.forEach(element => {
+                if (element.fieldID === id) {
+                    resolve(element);
+                }
+            });
+        })
     }
 }

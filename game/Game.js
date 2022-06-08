@@ -1,13 +1,16 @@
-import {Players} from "./components/players/Players.js";
-import {RayCaster} from "./components/Raycaster.js";
-import {Flags} from "./libs/Flags.js";
-import {Board} from "./components/Board.js";
-import {Light, ShadowPlane} from "./libs/Shadow.js";
-import {Buttons} from "./components/buttons/Buttons.js";
-import {Cubes} from "./components/cubes/Cubes.js";
+import { Players } from "./components/players/Players.js";
+import { RayCaster } from "./components/Raycaster.js";
+import { Flags } from "./libs/Flags.js";
+import { Board } from "./components/Board.js";
+import { Light, ShadowPlane } from "./libs/Shadow.js";
+import { Buttons } from "./components/buttons/Buttons.js";
+import { Cubes } from "./components/cubes/Cubes.js";
+import { Houses } from "./components/houses/Houses.js";
+
+import { Animations } from "./libs/Animations.js";
 
 export class Game {
-    cameraTar = {x: 0, y: 220, z: 0}
+    cameraTar = { x: 0, y: 220, z: 0 }
     ui = undefined;
     flags = new Flags();
     fields;
@@ -51,6 +54,10 @@ export class Game {
         //CUBES
         this.cubes = new Cubes(20);
         this.scene.add(this.cubes);
+
+        //HOUSES
+        this.houses = new Houses(this.buttons);
+        this.scene.add(this.houses);
 
         this.highlight();
 
@@ -104,10 +111,8 @@ export class Game {
                 window.onclick = () => {
                     if (this.mouseOnBoard) {
                         let id = intersects[0].object.fieldID;
-
                         this.flags.hamburgerFlag = true;
                         this.ui.showInfoBox(id);
-
                     }
                 }
 
@@ -126,14 +131,14 @@ export class Game {
         }
     }
     setCam = (x, y, z) => {
-        this.cameraTar = {x: x, y: y, z: z}
+        this.cameraTar = { x: x, y: y, z: z }
 
         this.ui.updateSliders(this.camera.position.x, this.camera.position.y, this.camera.position.z)
     }
     setBirdView = () => {
         this.camera.position.set(0, 220, 0);
         this.camera.lookAt(this.scene.position);
-        this.cameraTar = {x: 0, y: 220, z: 0}
+        this.cameraTar = { x: 0, y: 220, z: 0 }
         this.ui.updateSliders(0, 220, 0)
     }
     rotCam = (deg) => {

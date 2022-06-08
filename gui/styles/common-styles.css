@@ -48,6 +48,7 @@ body {
         right: 15px;
         top: -150px;
     }
+
     100% {
         right: 15px;
         top: 15px;
@@ -59,16 +60,20 @@ body {
         right: 15px;
         top: 15px;
     }
+
     33% {
         right: -350px;
         top: 15px;
     }
+
     66% {
         right: -350px;
         top: -100px;
     }
+
     100% {
         right: 15px;
         top: -150px;
     }
 }
+
