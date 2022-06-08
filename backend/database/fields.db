@@ -1,24 +1,24 @@
 {"id":14,"name":"POLE","owner":"brak","shops":[],"price":160,"action":"none","value":0,"_id":"0MvAjG8dihu0YqHP"}
 {"id":21,"name":"POLE","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"16ut5du0ANoCsEwN"}
 {"id":35,"name":"POLE","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"4CLlQT5Pno1fgs09"}
-{"id":20,"name":"ParkingprzyDomuPomocy.","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"5VK8ogXOfjr0hh8M"}
+{"id":20,"name":"Parking przy Domu Pomocy.","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"5VK8ogXOfjr0hh8M"}
 {"id":38,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"take","value":100,"_id":"6Gc64cup2Yer8rU0"}
 {"id":25,"name":"POLE","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"82Ryqq1m3LjvciqC"}
 {"id":31,"name":"POLE","owner":"brak","shops":[],"price":300,"action":"none","value":0,"_id":"8ODeXelmsNcodLGk"}
 {"id":36,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"card","value":0,"_id":"8Vpba8puGUkNI7cc"}
-{"id":4,"name":"Budżetdlasamorządu","owner":"brak","shops":[],"price":0,"action":"take","value":200,"_id":"9zBDi8rX1qAvdmn5"}
+{"id":4,"name":"Budżet dla samorządu","owner":"brak","shops":[],"price":0,"action":"take","value":200,"_id":"9zBDi8rX1qAvdmn5"}
 {"id":13,"name":"POLE","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"BVbBxyideISeP67o"}
 {"id":29,"name":"POLE","owner":"brak","shops":[],"price":280,"action":"none","value":0,"_id":"DkiqNoGtB4ewcmtZ"}
-{"id":5,"name":"Toaletanapracowniach","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"GXXw1csAPCVSYUWi"}
+{"id":5,"name":"Toaleta na pracowniach","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"GXXw1csAPCVSYUWi"}
 {"id":19,"name":"POLE","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"HtL8t3uboKDfeT0S"}
 {"id":3,"name":"POLE","owner":"brak","shops":[],"price":60,"action":"none","value":0,"_id":"K33ijdZYj0uff1We"}
 {"id":2,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"add","value":100,"_id":"K9ApNvxw5boNwMXc"}
-{"id":10,"name":"SpacerniakZSŁ.Dlaodwiedzających.","owner":"brak","shops":[],"price":0,"action":"add","value":200,"_id":"LnXk3zbjleX3MFJb"}
+{"id":10,"name":"Spacerniak ZSŁ. Dla odwiedzających.","owner":"brak","shops":[],"price":0,"action":"add","value":200,"_id":"LnXk3zbjleX3MFJb"}
 {"id":7,"name":"Szansa","owner":"brak","shops":[],"price":0,"action":"card","value":0,"_id":"MkPQzJllThCdkIRz"}
 {"id":17,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"Py0MI1lsq3jg57A4"}
 {"id":11,"name":"POLE","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"Qc8fTAeDhh0uOMar"}
 {"id":8,"name":"POLE","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"TgNjtxcgsT4kpSsF"}
-{"id":1,"name":"POLE","owner":"brak","shops":[{"name":"budkazkebabem"},{"name":"automat"}],"price":60,"action":"none","value":0,"_id":"U1AgdzfAifKEiU6u"}
+{"id":1,"name":"POLE","owner":"brak","shops":[{"name":"budka z kebabem"},{"name":"automat"}],"price":60,"action":"none","value":0,"_id":"U1AgdzfAifKEiU6u"}
 {"id":6,"name":"POLE","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"Ua3cwkHk0N4yvc0K"}
 {"id":12,"name":"POLE","owner":"brak","shops":[],"price":150,"action":"none","value":0,"_id":"W0wwiwoMwTV4cCSQ"}
 {"id":23,"name":"POLE","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"XHZlmZVpojTCTvoD"}

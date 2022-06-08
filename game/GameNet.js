@@ -87,20 +87,19 @@ export class GameNet {
     compareCubes = (data) => {
         if (this.actual_cubes[0] !== data.cubes[0] || this.actual_cubes[1] !== data.cubes[1]) { //kostki na serwerze inne niż u gracza
             this.actual_cubes = [data.cubes[0], data.cubes[1]]
-            this.throwCubes(data.cubes[0], data.cubes[1])
+            this.throwCubes(data.cubes[0], data.cubes[1]).then()
         }
     }
 
     comparePosition = (data) => {
         for (let id = 0; id < this.playerList.length; id++) {
-            if (this.playerList[id].position != data.playerList[id].position && !this.inMove.includes(id)) { //pozycja gracza na serwerze inna niż u gracza
+            if (this.playerList[id].position !== data.playerList[id].position && !this.inMove.includes(id)) { //pozycja gracza na serwerze inna niż u gracza
                 this.inMove.push(id);
 
                 let count = data.playerList[id].position - this.playerList[id].position;
                 if (count < 0) {
                     count += 40
                 }
-                console.log(count)
                 setTimeout(() => {
                     this.animations.jumpToPoint(id, count, this.game.players)
                     this.stepEngine.step(this.player_id, this.tura, data.playerList[id].position - 1, id)
@@ -120,6 +119,7 @@ export class GameNet {
     showLatestNews = (data) => { //sprawdza czy najnowszy news się zmienił i wyświetla jego treść jeśli tak
         if (this.lastAction !== data.lastAction) {
             this.lastAction = data.lastAction;
+            showPopup(data.lastAction, 'inform', 3000).then();
         }
     }
 
@@ -157,7 +157,7 @@ export class GameNet {
     static sendFetch = async (data, url) => {
         return new Promise(resolve => {
             const options = {
-                method: "POST", body: data, headers: { 'Content-Type': 'application/json' }
+                method: "POST", body: data, headers: {'Content-Type': 'application/json'}
             };
             fetch(url, options) //fetch engine
                 .then(response => response.json())

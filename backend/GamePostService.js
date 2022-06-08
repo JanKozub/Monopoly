@@ -100,7 +100,7 @@ class GamePostService {
                 }
                 break;
             case "take": //gracz wywołał akcję TAKE
-                game.playerList[req.body.player_id].cash -= fields[req.body.fieldIdx].value;
+                game.playerList[req.body.player_id].cash -= this.fields[req.body.fieldIdx].value;
                 game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") stracił " + this.fields[req.body.fieldIdx].value + "$";
                 break;
             case "card": //gracz wywołał akcję CARD

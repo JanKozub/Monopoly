@@ -1,4 +1,3 @@
-- Kiedy wszyscy nie sa gotowi to nie zaczyna gry
 - ecrypt hasla
 - dodać jakiś system łączenia pól w kolor żeby się dało stawiać domek tylko jeśli jesteś właścicielem wszystkich z danego koloru
 - renderowanie domków w odpowiednim miejscu
@@ -7,6 +6,11 @@
 - stworzyć mnożnik ceny w zależności od ilości domków
 - stworzyć przegrywanie jeśli kasa się zeruje, przekreślić avatat na liście i uniemożliwić ruch
 - zrobić więzienie żeby wstrzymywało kolejkę dla typa i go pomijalo
-- komunikaty wyjeżdżające o tym co ktoś zrobił, to już jest tylko jako console log i trzeba zrobić w okienko
 - pozycjonowanie w lewym gornym / slider ma zle zakresy
 - zablokowanie kostki po jednym rzucie
+- dodac nazwy graczy
+
+
+===Na sam koniec===
+- Kiedy wszyscy nie sa gotowi to nie zaczyna gry
+- Sprawdzanie hasla do lobby
