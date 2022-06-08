@@ -122,6 +122,20 @@ class GamePostService {
         this.gamesManager.updateGameWithId(game);
         res.send(JSON.stringify("a"))
     }
+
+    getPlayerId(req, res) {
+        let game = this.gamesManager.getGameById(req.body.gameId);
+
+        let id = 0;
+
+        for (let i = 0; i < game.playerList.length; i++) {
+            if (game.playerList[i].nick === req.session.user.nick){
+                id = game.playerList[i].id;
+            }
+        }
+
+        res.send(JSON.stringify({id: id}))
+    }
 }
 
 module.exports = GamePostService;

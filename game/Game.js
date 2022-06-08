@@ -15,8 +15,10 @@ export class Game {
     flags = new Flags();
     fields;
     players;
+    myId;
 
-    constructor(playerList, playerAppearance) {
+    constructor(playerList, playerAppearance, myId) {
+        this.myId = myId;
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 500);
         this.renderer = new THREE.WebGLRenderer();

@@ -22,8 +22,9 @@ let fields;
 window.onload = async () => {
     let id = window.location.href.split('=')[1];
     let playerList = await GameNet.sendFetch(JSON.stringify({ id: id }), "/init")
+    let myId = await GameNet.sendFetch(JSON.stringify({gameId: id}), '/getPlayerId')
 
-    game = new Game(playerList, playerAppearance, fields);
+    game = new Game(playerList, playerAppearance, myId.id);
     let animations = new Animations(playerList, playerAppearance, game);
     net = new GameNet(game, playerList, animations);
     ui = new Ui(game, net, playerList);

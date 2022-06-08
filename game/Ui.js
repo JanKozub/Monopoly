@@ -10,6 +10,8 @@ export class Ui {
         this.createCameraMenu();
         this.hamburgerMenu();
         this.genAvatarlist();
+
+        this.setAvatarImage();
     }
 
     createCameraMenu = () => {
@@ -141,10 +143,10 @@ export class Ui {
                             td.innerText = this.game.fields[field].name;
                             break;
                         case "1":
-                            td.innerText = String(this.game.fields[field].shops);
+                            td.innerText = this.game.fields[field].shops;
                             break;
                         case "2":
-                            td.innerText = String(this.game.fields[field].value);
+                            td.innerText = this.game.fields[field].value;
                             break;
                     }
                     tr.appendChild(td);
@@ -179,7 +181,7 @@ export class Ui {
     }
 
     updateCash = (player_id) => {
-        document.getElementById("hud").innerText = "Kredyty: " + String(this.playerList[player_id].cash) + "$"
+        document.getElementById("hud").innerText = "Kredyty: " + this.playerList[player_id].cash + "$"
     }
 
     buybuttonStatus = (x) => {
@@ -190,19 +192,18 @@ export class Ui {
             document.getElementById("buy").innerText = "TAK"
         }
     }
+
     genAvatarlist = () => {
         let heightMultiplier = 0;
         this.playerList.forEach(element => {
-            if (element.position != -1) {
                 heightMultiplier++;
                 let img = document.createElement("img");
                 img.id = element.skin + "-avatar";
                 img.className = "avatar-box";
-                img.src = "../" + element.skin + ".png";
+                img.src = "./avatars/avatar-" + element.skin + ".jpg";
                 document.getElementById("avatarlist").appendChild(img)
-            }
         });
-        document.getElementById("avatarlist").style.height = 75 * heightMultiplier + "px";
+        document.getElementById("avatarlist").style.height = (75 * heightMultiplier) + "px";
     }
 
     getRandomInt = (min, max) => {
@@ -210,4 +211,8 @@ export class Ui {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min;
     };
+
+    setAvatarImage() {
+        document.getElementById('avatar-image').src = './avatars/avatar-' + this.game.myId + '.jpg';
+    }
 }

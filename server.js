@@ -74,5 +74,6 @@ app.post("/nexttura", (req, res) => gamePostService.nextTura(req, res))
 app.post("/setcubes", (req, res) => gamePostService.setCubes(res, res))
 app.post("/setposition", (req, res) => gamePostService.setPosition(req, res))
 app.post("/action", (req, res) => gamePostService.action(req, res))
+app.post("/getPlayerId", (req, res) => gamePostService.getPlayerId(req, res))
 
 app.use((req, res) => getService.defaultHandler(req, res))

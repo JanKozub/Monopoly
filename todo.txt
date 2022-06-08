@@ -11,3 +11,4 @@
 - stworzyć przegrywanie jeśli kasa się zeruje, przekreślić avatat na liście i uniemożliwić ruch
 - zrobić więzienie żeby wstrzymywało kolejkę dla typa i go pomijalo
 - komunikaty wyjeżdżające o tym co ktoś zrobił, to już jest tylko jako console log i trzeba zrobić w okienko
+- update avatar in db

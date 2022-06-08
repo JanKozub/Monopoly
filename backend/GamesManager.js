@@ -13,18 +13,7 @@ class GamesManager {
         }
 
         for (let k = 0; k < players.length; k++) {
-            let avatar = ""
-            if (players[k].user.avatar === 0) {
-                avatar = "hotdog"
-            } else if (players[k].user.avatar === 0) {
-                avatar = "rj45"
-            } else if (players[k].user.avatar === 0) {
-                avatar = "kebab"
-            } else if (players[k].user.avatar === 0) {
-                avatar = "rezystor"
-            }
-
-            temp2.push({id: k, position: 1, skin: avatar, nick: players[k].user.nick, eq: [], cash: 1500});
+            temp2.push({id: k, position: 1, skin: players[k].user.avatar, nick: players[k].user.nick, eq: [], cash: 1500});
         }
 
         this.games.push({
