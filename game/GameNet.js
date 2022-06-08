@@ -55,7 +55,6 @@ export class GameNet {
             this.turaTime = setInterval(() => {
                 if (this.turaSeconds > 0) {
                     this.turaSeconds--;
-                    console.log(this.turaSeconds)
                 } else {
                     clearInterval(this.turaTime);
                     this.nexttura().then();

@@ -3,9 +3,10 @@
 - dodać jakiś system łączenia pól w kolor żeby się dało stawiać domek tylko jeśli jesteś właścicielem wszystkich z danego koloru
 - renderowanie domków w odpowiednim miejscu
 - wymyślić karty i dodać ich obsługę na serwerze, wystarczy 20 tekstów
-- naprawić wszystkie fetche żeby nie sralo błędami że fetch nie istnieje
 - wymyślić resztę pól i dokończę grafikę planszy
 - stworzyć mnożnik ceny w zależności od ilości domków
 - stworzyć przegrywanie jeśli kasa się zeruje, przekreślić avatat na liście i uniemożliwić ruch
 - zrobić więzienie żeby wstrzymywało kolejkę dla typa i go pomijalo
 - komunikaty wyjeżdżające o tym co ktoś zrobił, to już jest tylko jako console log i trzeba zrobić w okienko
+- pozycjonowanie w lewym gornym / slider ma zle zakresy
+- zablokowanie kostki po jednym rzucie

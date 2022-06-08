@@ -1,3 +1,5 @@
+import {GameNet} from "../GameNet.js";
+
 export class StepEngine {
     ui;
     gameNet;
@@ -53,7 +55,7 @@ export class StepEngine {
             fieldIdx: fieldIdx,
             player_id: player_id
         })
-        await this.gameNet.sendFetch(data, "/action")
+        await GameNet.sendFetch(data, "/action")
     }
 
     async take(fieldIdx, player_id) {  //Pobiera graczowi (player_id) wartość value pola (fieldIdx)
@@ -62,7 +64,7 @@ export class StepEngine {
             fieldIdx: fieldIdx,
             player_id: player_id
         })
-        await this.gameNet.sendFetch(data, "/action")
+        await GameNet.sendFetch(data, "/action")
     }
 
     async card(player_id) {  //Losuje dla gracza treść karty i zwraca text,action,value
@@ -70,7 +72,7 @@ export class StepEngine {
             action: "card",
             player_id: player_id
         })
-        await this.gameNet.sendFetch(data, "/action")
+        await GameNet.sendFetch(data, "/action")
         //wykonaj akcję dla CARD
     }
 
@@ -80,7 +82,7 @@ export class StepEngine {
             player_id: player_id,
             value: value
         })
-        await this.gameNet.sendFetch(data, "/action")
+        await GameNet.sendFetch(data, "/action")
         //wykonaj akcję dla CARD
     }
 
