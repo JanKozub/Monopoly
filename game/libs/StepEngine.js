@@ -1,4 +1,4 @@
-import {GameNet} from "../GameNet.js";
+import { GameNet } from "../GameNet.js";
 
 export class StepEngine {
     ui;
@@ -15,7 +15,7 @@ export class StepEngine {
 
     step(player_id, tura, index, id) {
         if (player_id === tura) {
-            if (this.fields[index].action === "none") { //pole kupowalne
+            if (this.fields[index].action === "none" && this.fields[index].owner === "brak") { //pole kupowalne
 
                 this.ui.showBuymenu(index, id);
                 this.ui.buybuttonStatus(this.playerList[player_id].cash < this.fields[index].price); //włącza / wyłącza przycisk TAK jeśli nie ma cash
@@ -64,6 +64,17 @@ export class StepEngine {
             fieldIdx: fieldIdx,
             player_id: player_id
         })
+        await GameNet.sendFetch(data, "/action")
+    }
+
+    async build(index, typ, player_id) {
+        let data = JSON.stringify({
+            action: "build",
+            fieldIdx: index,
+            type: typ,
+            player_id: player_id,
+        })
+        this.gameNet.nexttura();
         await GameNet.sendFetch(data, "/action")
     }
 

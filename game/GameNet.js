@@ -9,6 +9,7 @@ export class GameNet {
     stepEngine;
     contentUpdate;
     actual_cubes;
+    old_fields;
 
     constructor(game, playerList, animations) {
         this.playerList = playerList;
@@ -40,10 +41,6 @@ export class GameNet {
     }
 
     throwCubes = async (a, b) => {
-
-        let house = await this.game.houses.genHouse(2, 5); //testowo, generuje hotel na polu 5
-        this.animations.raiseFromBottom(house);
-
         let cubes3D = this.game.cubes.getChildren();
         this.cubesInMove = true;
         this.animations.animToIndex(cubes3D[0], a - 1, 0, 0, 0).then();
@@ -76,10 +73,12 @@ export class GameNet {
             this.comparePosition(data); //koryguje pozycję pionków do aktualnej z serwera
             this.updateCashAndEQ(data); //nadpisuje EQ oraz Cash wszystkich graczy
             this.showLatestNews(data); //wyświetla informacje o stanie gry
+            this.updateHouses();
         }
     }
 
     overwrite = (data) => {
+        this.old_fields = this.game.fields;
         this.tura = data.tura;
         this.game.fields = data.fields;
     }
@@ -113,6 +112,16 @@ export class GameNet {
         for (let i = 0; i < this.playerList.length; i++) {
             this.playerList[i].eq = data.playerList[i].eq;
             this.playerList[i].cash = data.playerList[i].cash;
+        }
+    }
+
+    updateHouses = async () => {
+        for (let i in this.game.fields) {
+            if (this.game.fields[i].shops.length != this.old_fields[i].shops.length) {
+                let tempShops = this.game.fields[i].shops;
+                let house = await this.game.houses.genHouse(tempShops[tempShops.length - 1], parseInt(i), this.game.fields[i].shops.length - 1);
+                this.animations.raiseFromBottom(house, 4);
+            }
         }
     }
 
@@ -157,7 +166,7 @@ export class GameNet {
     static sendFetch = async (data, url) => {
         return new Promise(resolve => {
             const options = {
-                method: "POST", body: data, headers: {'Content-Type': 'application/json'}
+                method: "POST", body: data, headers: { 'Content-Type': 'application/json' }
             };
             fetch(url, options) //fetch engine
                 .then(response => response.json())

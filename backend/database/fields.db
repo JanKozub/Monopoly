@@ -18,7 +18,7 @@
 {"id":17,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"Py0MI1lsq3jg57A4"}
 {"id":11,"name":"POLE","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"Qc8fTAeDhh0uOMar"}
 {"id":8,"name":"POLE","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"TgNjtxcgsT4kpSsF"}
-{"id":1,"name":"POLE","owner":"brak","shops":[{"name":"budka z kebabem"},{"name":"automat"}],"price":60,"action":"none","value":0,"_id":"U1AgdzfAifKEiU6u"}
+{"id":1,"name":"POLE","owner":"brak","shops":[],"price":60,"action":"none","value":0,"_id":"U1AgdzfAifKEiU6u"}
 {"id":6,"name":"POLE","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"Ua3cwkHk0N4yvc0K"}
 {"id":12,"name":"POLE","owner":"brak","shops":[],"price":150,"action":"none","value":0,"_id":"W0wwiwoMwTV4cCSQ"}
 {"id":23,"name":"POLE","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"XHZlmZVpojTCTvoD"}

@@ -15,11 +15,27 @@ export class Houses extends THREE.Mesh {
         this.buttons = buttons;
         this.name = "houses";
     }
-    genHouse = async (type, fieldID) => {
+    genHouse = async (type, fieldID, nbCount) => {
         let house = new House(type);
         this.children.push(house);
         let tile = await this.buttons.findByID(fieldID);
-        house.position.set(tile.position.x, -15, tile.position.z);
+        let quater = Math.floor(fieldID / 10);
+        let offset;
+        switch (quater) {
+            case 0:
+                offset = { x: 6 - nbCount * 6, z: -12 }
+                break;
+            case 1:
+                offset = { x: 12, z: -6 + nbCount * 6 }
+                break;
+            case 2:
+                offset = { x: -6 + nbCount * 6, z: 12 }
+                break;
+            case 3:
+                offset = { x: -12, z: 6 - nbCount * 6 }
+                break;
+        }
+        house.position.set(tile.position.x + offset.x, -20, tile.position.z + offset.z);
         return house;
     }
 }

@@ -2,6 +2,7 @@ export class Ui {
     game;
     net;
     playerList;
+    stepEngine;
 
     constructor(game, net, playerList) {
         this.game = game;
@@ -13,7 +14,9 @@ export class Ui {
 
         this.setAvatarImage();
     }
-
+    setStepEngine(stepEngine) {
+        this.stepEngine = stepEngine;
+    }
     createCameraMenu = () => {
 
         document.getElementById("cambutton").onclick = () => {
@@ -136,7 +139,7 @@ export class Ui {
             table.innerHTML = '';
             eq.forEach(field => {
                 let tr = document.createElement("tr")
-                for (let x in [0, 1, 2]) {
+                for (let x in [0, 1, 2, 3]) {
                     let td = document.createElement("td")
                     switch (x) {
                         case "0":
@@ -147,6 +150,13 @@ export class Ui {
                             break;
                         case "2":
                             td.innerText = this.game.fields[field].value;
+                            break;
+                        default:
+                            td.id = "buildbtn";
+                            td.innerText = "Buduj"
+                            td.onclick = () => {
+                                this.showBuildMenu(field);
+                            }
                             break;
                     }
                     tr.appendChild(td);
@@ -176,13 +186,44 @@ export class Ui {
         document.getElementById("buyprice").innerText = "za " + String(this.game.fields[index].price) + "$?";
     }
 
+    showBuildMenu = (index) => {
+        document.getElementById("buildmenu").style.display = "flex";
+        document.getElementById("buildname").innerText = this.game.fields[index].name;
+        document.getElementById("build").innerText = "TAK"
+        if (this.game.fields[index].shops.length < 2) {
+            document.getElementById("buildprice").innerText = "za " + String(this.game.fields[index].price * 1.5) + "$?";
+            document.getElementById("build").onclick = () => {
+                this.hideBuildmenu();
+                this.stepEngine.build(index, 1, this.net.player_id);
+            }
+        } else if (this.game.fields[index].shops.length == 2) {
+            document.getElementById("buildprice").innerText = "za " + String(this.game.fields[index].price * 3) + "$?";
+            document.getElementById("build").onclick = () => {
+                this.hideBuildmenu();
+                this.stepEngine.build(index, 2, this.net.player_id);
+            }
+        } else {
+            document.getElementById("build").innerText = "NIE"
+            document.getElementById("build").onclick = () => {
+                this.hideBuildmenu();
+                this.net.nexttura();
+            }
+        }
+
+    }
+
     hideBuymenu = () => {
         document.getElementById("buymenu").style.display = "none";
     }
+    hideBuildmenu = () => {
+        document.getElementById("buildmenu").style.display = "none";
+    }
+
 
     updateCash = (player_id) => {
         document.getElementById("hud").innerText = "Kredyty: " + this.playerList[player_id].cash + "$"
     }
+
 
     buybuttonStatus = (x) => {
         document.getElementById("buy").disabled = x;

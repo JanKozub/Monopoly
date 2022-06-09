@@ -19,7 +19,7 @@ class GamePostService {
         if (game !== null) {
             res.send(JSON.stringify(game.playerList))
         } else {
-            res.send(JSON.stringify({response: "game not found"}))
+            res.send(JSON.stringify({ response: "game not found" }))
         }
     }
 
@@ -49,7 +49,7 @@ class GamePostService {
                 lastAction: game.lastAction
             }
         } else {
-            data = {response: 'id not found'}
+            data = { response: 'id not found' }
         }
         res.send(JSON.stringify(data))
     }
@@ -110,11 +110,14 @@ class GamePostService {
                 game.playerList[req.body.player_id].cash += req.body.value;
                 game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") otrzymał " + req.body.value + "$";
                 break;
-
-
-            // case "build": //gracz wywołał akcję BUILD
-            //     playerList[req.body.player_id].cash -= fields[req.body.fieldIdx].price;
-            //     break;
+            case "build": //gracz wywołał akcję BUILD
+                let price = this.fields[req.body.fieldIdx].price * (1.5 * req.body.type);
+                game.playerList[req.body.player_id].cash -= price;
+                console.log(req.body.type)
+                this.fields[req.body.fieldIdx].shops.push(req.body.type);
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") rozbudował " +
+                    this.fields[req.body.fieldIdx].name + " za " + String(price) + "$";
+                break;
         }
         if (game.tura > game.playerList.length - 1) {
             game.tura = 0;
@@ -129,12 +132,12 @@ class GamePostService {
         let id = 0;
 
         for (let i = 0; i < game.playerList.length; i++) {
-            if (game.playerList[i].nick === req.session.user.nick){
+            if (game.playerList[i].nick === req.session.user.nick) {
                 id = game.playerList[i].id;
             }
         }
 
-        res.send(JSON.stringify({id: id}))
+        res.send(JSON.stringify({ id: id }))
     }
 }
 

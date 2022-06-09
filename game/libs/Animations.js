@@ -127,9 +127,9 @@ export class Animations {
         }
     }
 
-    raiseFromBottom = (target) => {
+    raiseFromBottom = (target, y) => {
         new TWEEN.Tween(target.position) // co
-            .to({ y: 10 }, 1200) // do jakiej pozycji, w jakim czasie
+            .to({ y: y }, 1200) // do jakiej pozycji, w jakim czasie
             .easing(TWEEN.Easing.Bounce.Out) // typ easingu (zmiana w czasie)
             .start()
     }
