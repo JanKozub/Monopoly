@@ -1,6 +1,6 @@
 - dodać jakiś system łączenia pól w kolor żeby się dało stawiać domek tylko jeśli jesteś właścicielem wszystkich z danego koloru
 - wymyślić karty i dodać ich obsługę na serwerze, wystarczy 20 tekstów
-- wymyślić resztę pól i dokończę grafikę planszy
+- dokończę grafikę planszy
 - stworzyć mnożnik ceny w zależności od ilości domków
 - stworzyć przegrywanie jeśli kasa się zeruje, przekreślić avatat na liście i uniemożliwić ruch
 - zrobić więzienie żeby wstrzymywało kolejkę dla typa i go pomijalo
