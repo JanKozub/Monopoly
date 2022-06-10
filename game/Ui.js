@@ -218,15 +218,28 @@ export class Ui {
         let heightMultiplier = 0;
         this.playerList.forEach(element => {
             if (element.id !== this.game.myId) {
-                heightMultiplier++;
+                let container = document.createElement('div');
+                container.className = 'container-box'
+
+                let nick = document.createElement('p');
+                nick.className = "nick-box"
+                nick.innerText = element.nick;
+
+                let money = document.createElement('p');
+                money.className = "money-box"
+                money.innerText = element.cash + "$";
+
                 let img = document.createElement("img");
                 img.id = element.skin + "-avatar";
                 img.className = "avatar-box";
                 img.src = "./avatars/avatar-" + element.skin + ".jpg";
-                document.getElementById("avatarlist").appendChild(img)
+
+                container.append(nick, money, img)
+                document.getElementById("playersList").appendChild(container)
+                heightMultiplier++;
             }
         });
-        document.getElementById("avatarlist").style.height = (75 * heightMultiplier) + "px";
+        document.getElementById("playersList").style.height = (75 * heightMultiplier) + "px";
     }
 
     getRandomInt = (min, max) => {
@@ -236,7 +249,7 @@ export class Ui {
     };
 
     setAvatarImage() {
-        document.getElementById('avatar-image').src = './avatars/avatar-' + this.game.myId + '.jpg';
+        document.getElementById('avatar-image').src = './avatars/avatar-' + this.playerList[this.game.myId].skin + '.jpg';
     }
 
     setSliderFlag(flag) {

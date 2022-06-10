@@ -17,8 +17,6 @@ let playerAppearance = [
     { offset: { x: -5, z: 15 }, color: 0xffff20, emissive: 0x303010, scale: 1, height: 10, rotation: { x: 0, y: 90, z: 0 } }
 ]
 
-let fields;
-
 window.onload = async () => {
     let id = window.location.href.split('=')[1];
     let playerList = await GameNet.sendFetch(JSON.stringify({ id: id }), "/init")
