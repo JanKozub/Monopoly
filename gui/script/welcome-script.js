@@ -11,12 +11,12 @@ window.onload = () => {
     }
 }
 
-function onClick(url) {
+async function onClick(url) {
     let nick = document.getElementById('nick')
     let password = document.getElementById('passwd')
     if (nick.value !== '') {
         if (password.value !== '') {
-            const obj = Net.sendPostData(url, {nick: nick.value, password: password.value});
+            const obj = await Net.sendPostData(url, {nick: nick.value, password: password.value});
 
             if (obj.response === 'user exists') {
                 showPopup('Ten nick jest już zajęty', 'inform', 3000).then();

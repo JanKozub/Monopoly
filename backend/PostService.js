@@ -1,5 +1,6 @@
 const Utils = require("./Utils.js");
 const Room = require("./rooms/Room.js")
+const bcrypt = require('bcrypt');
 
 class PostService {
     databaseService;
@@ -12,6 +13,10 @@ class PostService {
         this.gamesManager = gamesManager;
     }
 
+    async decryptPass(userpass, encrypted) {
+        return await bcrypt.compare(userpass, encrypted);
+    }
+
     async onLogin(req, res) {
         res.setHeader("content-type", "text/plain")
 
@@ -20,7 +25,7 @@ class PostService {
         if (user === null) {
             res.send(JSON.stringify({response: "user does not exist"}))
         } else {
-            if (user.password === req.body.password) {
+            if (await this.decryptPass(req.body.password, user.password)) {
                 req.session.user = user;
                 res.send(JSON.stringify({response: "success"}))
             } else {
@@ -29,12 +34,16 @@ class PostService {
         }
     }
 
+    async encryptPass(password) {
+        return await bcrypt.hash(password, 10);
+    }
+
     async onRegister(req, res) {
         res.setHeader("content-type", "text/plain")
 
         const user = {
             nick: req.body.nick,
-            password: req.body.password,
+            password: await this.encryptPass(req.body.password),
             id: Utils.generateId(),
             roomId: 0,
             avatar: 0,

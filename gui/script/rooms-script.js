@@ -85,7 +85,6 @@ function renderRooms(rooms) {
         joinButton.className = 'join-button';
         joinButton.onclick = async () => {
             let temp = await Net.sendPostData('/isAvatarInRoom', {id: room.id})
-            console.log(temp)
             if (!temp.response) {
                 window.location.href = '/room?id=' + room.id;
             } else {

@@ -1,4 +1,3 @@
-- ecrypt hasla
 - dodać jakiś system łączenia pól w kolor żeby się dało stawiać domek tylko jeśli jesteś właścicielem wszystkich z danego koloru
 - renderowanie domków w odpowiednim miejscu
 - wymyślić karty i dodać ich obsługę na serwerze, wystarczy 20 tekstów
