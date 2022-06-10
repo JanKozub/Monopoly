@@ -2,6 +2,8 @@ class GamePostService {
     gameDBService;
     gamesManager;
     fields;
+    lastThrow;
+    skinName = ["Hotdog", "RJ-45", "Kebab", "Rezystor", "Router", "Piwo"];
 
     constructor(gameDBService, gamesManager) {
         this.gameDBService = gameDBService;
@@ -27,10 +29,11 @@ class GamePostService {
         let game = this.gamesManager.getGameById(req.session.gameId);
         game.playerList[req.body.player_id].position += (req.body.cube_scores[0] + req.body.cube_scores[1]);
 
+        this.lastThrow = req.body.player_id;
         if (game.playerList[req.body.player_id].position >= 40) {
             game.playerList[req.body.player_id].position -= 40;
             game.playerList[req.body.player_id].cash += 200
-            game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") otrzymał 200$";
+            game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") otrzymał 200$";
         }
         game.actual_cubes = [req.body.cube_scores[0], req.body.cube_scores[1]]
         this.gamesManager.updateGameWithId(game);
@@ -46,7 +49,8 @@ class GamePostService {
                 tura: game.tura,
                 cubes: game.actual_cubes,
                 fields: this.fields,
-                lastAction: game.lastAction
+                lastAction: game.lastAction,
+                lastThrow: this.lastThrow
             }
         } else {
             data = { response: 'id not found' }
@@ -56,7 +60,7 @@ class GamePostService {
 
     nextTura(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
-
+        this.lastThrow = req.body.player_id;
         if (game !== null) {
             game.tura = game.tura + 1;
             if (game.tura > game.playerList.length - 1) {
@@ -92,29 +96,31 @@ class GamePostService {
                     game.playerList[req.body.player_id].eq.push(req.body.fieldIdx);
 
                     this.fields[req.body.fieldIdx].action = "take"
-                    this.fields[req.body.fieldIdx].value = 100 //WSTAWIC OPLATE NA PODSTAWIE LICZBY DOMKÓW I ID POLA
+                    this.fields[req.body.fieldIdx].value = this.fields[req.body.fieldIdx].price / 2 //OPLATA 1/2 CENY DZIALKI
                     this.fields[req.body.fieldIdx].owner = req.body.player_id;
-                    //this.fields[req.body.fieldIdx].price = 0; //POLE STAJE SIE NIEKUPOWALNE
 
-                    game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") kupił " + this.fields[req.body.fieldIdx].name;
+                    game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") kupił " + this.fields[req.body.fieldIdx].name;
                 }
                 break;
             case "take": //gracz wywołał akcję TAKE
                 game.playerList[req.body.player_id].cash -= this.fields[req.body.fieldIdx].value;
-                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") stracił " + this.fields[req.body.fieldIdx].value + "$";
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") stracił " + this.fields[req.body.fieldIdx].value + "$";
                 break;
             case "card": //gracz wywołał akcję CARD
                 //losuj kartę z listy kart, zwróć treść (text), akcje (action)(take lub add) oraz wartość (value) (ile dodać/odjąć)
                 break;
             case "add": //gracz wywołał akcję ADD
                 game.playerList[req.body.player_id].cash += req.body.value;
-                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") otrzymał " + req.body.value + "$";
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") otrzymał " + req.body.value + "$";
                 break;
             case "build": //gracz wywołał akcję BUILD
                 let price = this.fields[req.body.fieldIdx].price * (1.5 * req.body.type);
                 game.playerList[req.body.player_id].cash -= price;
                 this.fields[req.body.fieldIdx].shops.push(req.body.type);
-                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") rozbudował " +
+
+                this.fields[req.body.fieldIdx].value += (this.fields[req.body.fieldIdx].price / 2) * this.fields[req.body.fieldIdx].shops.length;
+
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") rozbudował " +
                     this.fields[req.body.fieldIdx].name + " za " + String(price) + "$";
                 break;
         }

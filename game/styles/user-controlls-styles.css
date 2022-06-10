@@ -64,3 +64,26 @@
     border-radius: 15px;
     padding: 5px;
 }
+
+#skiptura {
+    width: 120px;
+    height: 50px;
+
+    position: fixed;
+    bottom: 80px;
+    left: 15px;
+
+    background-color: rgb(191, 255, 234);
+
+    border: 2px solid green;
+    border-radius: 15px;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#skiptura:hover {
+    background-color: rgb(181, 235, 214);
+    cursor: pointer;
+}

@@ -59,6 +59,10 @@ export class Ui {
             let b = this.getRandomInt(1, 7);
             this.net.throwCubes(a, b).then()
         }
+        document.getElementById("skiptura").onclick = () => {
+            document.getElementById("skiptura").style.display = "none";
+            this.net.nexttura();
+        }
     }
 
     updateSliders = (y) => {
@@ -145,6 +149,18 @@ export class Ui {
                 }
                 table.appendChild(tr);
             });
+        }
+    }
+
+    updateThrowbutton(last, current, tura) {
+        if (last == current) {
+            document.getElementById("throw").style.display = "none";
+            if (current == tura) {
+                document.getElementById("skiptura").style.display = "flex";
+            }
+        }
+        if (current != tura) {
+            document.getElementById("skiptura").style.display = "none";
         }
     }
 

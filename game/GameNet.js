@@ -19,6 +19,7 @@ export class GameNet {
 
         this.player_id = game.myId;
         this.tura = 0;
+        this.lastThrow;
         this.actual_cubes = [2, 2]
         this.contentUpdate = setInterval(this.update, 200);
         this.turaSeconds = 30;
@@ -33,11 +34,14 @@ export class GameNet {
     }
 
     sendCubeScore = async (a, b) => { //PRZESŁANIE DO SERWERA WYLOSOWANYCH OCZEK KOSTEK
-        let data = JSON.stringify({
-            player_id: this.player_id,
-            cube_scores: [a, b]
-        })
-        await GameNet.sendFetch(data, "/cubeScore")
+        if (this.lastThrow != this.player_id) {
+            let data = JSON.stringify({
+                player_id: this.player_id,
+                cube_scores: [a, b]
+            })
+            await GameNet.sendFetch(data, "/cubeScore")
+        }
+
     }
 
     throwCubes = async (a, b) => {
@@ -71,7 +75,7 @@ export class GameNet {
             this.compareCubes(data); //porównuje kostki u gracza z serwerem
             this.overwrite(data); //nadpisuje stałe klienta nowymi z serwera
             this.comparePosition(data); //koryguje pozycję pionków do aktualnej z serwera
-            this.updateCashAndEQ(data); //nadpisuje EQ oraz Cash wszystkich graczy
+            this.updateUI(data); //nadpisuje EQ oraz Cash wszystkich graczy
             this.showLatestNews(data); //wyświetla informacje o stanie gry
             await this.updateHouses();
         }
@@ -81,6 +85,7 @@ export class GameNet {
         this.old_fields = this.game.fields;
         this.tura = data.tura;
         this.game.fields = data.fields;
+        this.lastThrow = data.lastThrow;
     }
 
     compareCubes = (data) => {
@@ -107,8 +112,10 @@ export class GameNet {
         }
     }
 
-    updateCashAndEQ = (data) => {
+    updateUI = (data) => {
         this.ui.updateCash(this.player_id);
+        this.ui.updateThrowbutton(this.lastThrow, this.player_id, this.tura);
+        if (this.player_id != this.tura) { this.ui.hideBuyMenu() };
         for (let i = 0; i < this.playerList.length; i++) {
             this.playerList[i].eq = data.playerList[i].eq;
             this.playerList[i].cash = data.playerList[i].cash;
@@ -135,8 +142,12 @@ export class GameNet {
     }
 
     nexttura = async () => {
-        let data = JSON.stringify({})
-        await GameNet.sendFetch(data, "/nexttura")
+        if (this.tura == this.player_id) {
+            let data = JSON.stringify({
+                player_id: this.player_id
+            })
+            await GameNet.sendFetch(data, "/nexttura")
+        }
     }
 
     stopTuraCounter = () => {

@@ -15,7 +15,7 @@ export class Flags {
             }
         });
 
-        let idsToFlag = ["buymenu", "avatar", "menu_button", "menu", "playersList", "buildmenu"]
+        let idsToFlag = ["buymenu", "avatar", "menu_button", "menu", "playersList", "buildmenu", "skiptura"]
 
         idsToFlag.forEach(element => {
             document.getElementById(element).onmouseover = () => {

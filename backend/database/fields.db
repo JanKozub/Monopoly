@@ -18,14 +18,15 @@
 {"id":26,"name":"Spawner nauczycieli","owner":"brak","shops":[],"price":260,"action":"none","value":0,"_id":"OuiQgkCs4CBgOUbX"}
 {"id":17,"name":"Rata na studniówkę","owner":"brak","shops":[],"price":0,"action":"take","value":200,"_id":"Py0MI1lsq3jg57A4"}
 {"id":11,"name":"Nora Piszka","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"Qc8fTAeDhh0uOMar"}
-{"id":8,"name":"Łaźnie internat","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"TgNjtxcgsT4kpSsF"}
+{"id":8,"name":"Łaźnie internatu","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"TgNjtxcgsT4kpSsF"}
 {"id":1,"name":"URBA","owner":"brak","shops":[],"price":60,"action":"none","value":0,"_id":"U1AgdzfAifKEiU6u"}
-{"id":6,"name":"Jadalnia internat","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"Ua3cwkHk0N4yvc0K"}
+{"id":6,"name":"Jadalnia internatu","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"Ua3cwkHk0N4yvc0K"}
 {"id":12,"name":"Kanapa na piętrze","owner":"brak","shops":[],"price":150,"action":"none","value":0,"_id":"W0wwiwoMwTV4cCSQ"}
 {"id":23,"name":"Ukraiński bar","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"XHZlmZVpojTCTvoD"}
 {"id":16,"name":"Kącik muzyczny w internacie","owner":"brak","shops":[],"price":180,"action":"none","value":0,"_id":"fuX05k1RdnkBj7Up"}
 {"id":34,"name":"Boisko","owner":"brak","shops":[],"price":320,"action":"none","value":0,"_id":"gSwDJqLfbEfy9jdb"}
 {"id":37,"name":"INFI","owner":"brak","shops":[],"price":350,"action":"none","value":0,"_id":"iFdkaCjAEF0HSrdz"}
+{"id":18,"name":"Rododendron","owner":"brak","shops":[],"price":180,"action":"none","value":0,"_id":"ish636dsxSPz5xks"}
 {"id":22,"name":"Szansa","owner":"brak","shops":[],"price":0,"action":"card","value":0,"_id":"oshBNFdPaihdfszq"}
 {"id":30,"name":"Idziesz grabić liście!","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"outsmUawxUPz7hyw"}
 {"id":24,"name":"Dziupla samorządu","owner":"brak","shops":[],"price":240,"action":"none","value":0,"_id":"pfi0tvZ0aCE1QWKe"}

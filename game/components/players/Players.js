@@ -1,4 +1,4 @@
-import {Player} from "./Player.js";
+import { Player } from "./Player.js";
 
 export class Players extends THREE.Mesh {
 
@@ -20,13 +20,13 @@ export class Players extends THREE.Mesh {
     genPlayers(playerList, playerAppearance) {
         playerList.forEach(player => {
             if (player.position !== -1) {
-                let pionek = new Player(player.id, playerAppearance[player.id].color, playerAppearance[player.id].emissive, player.skin);
+                let pionek = new Player(player.id, playerAppearance[player.skin].color, playerAppearance[player.skin].emissive, player.skin);
                 pionek.set_position(112 + playerAppearance[player.id].offset.x, playerAppearance[player.id].height, 112 + playerAppearance[player.id].offset.z);
-                pionek.set_scale(playerAppearance[player.id].scale)
+                pionek.set_scale(playerAppearance[player.skin].scale)
                 pionek.set_rotation(
-                    this.deg2rad(-playerAppearance[player.id].rotation.x),
-                    this.deg2rad(-playerAppearance[player.id].rotation.y),
-                    this.deg2rad(-playerAppearance[player.id].rotation.z))
+                    this.deg2rad(-playerAppearance[player.skin].rotation.x),
+                    this.deg2rad(-playerAppearance[player.skin].rotation.y),
+                    this.deg2rad(-playerAppearance[player.skin].rotation.z))
                 this.children.push(pionek);
             }
 
