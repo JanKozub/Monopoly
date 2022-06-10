@@ -1,0 +1,122 @@
+#camera-control {
+    width: 120px;
+    height: 120px;
+    border: 2px solid green;
+    border-radius: 10px;
+    background-color: aquamarine;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#camButton {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    margin-bottom: -3px;
+    margin-top: -3px;
+}
+
+.btn {
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+    background-color: green;
+    border-radius: 10%;
+    margin: auto;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: darkgreen;
+    transition: all 50ms ease;
+}
+
+.smallBtn {
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.8);
+    background-color: green;
+    border-radius: 10%;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+}
+
+.smallBtn:hover {
+    cursor: pointer;
+    background-color: darkgreen;
+    transition: all 50ms ease;
+}
+
+.camera-control {
+    display: flex;
+    float: left;
+    flex-direction: column;
+}
+
+#camera-control-left {
+    width: 30px;
+    height: 120px;
+}
+
+#camera-control-center {
+    width: 60px;
+    height: 120px;
+}
+
+#camera-control-right {
+    width: 30px;
+    height: 120px;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    border-radius: 10px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    cursor: pointer;
+    height: 21px;
+    background: rgb(191, 255, 234);
+    border-radius: 10px;
+    border: 2px solid rgb(128, 192, 128);
+}
+
+input[type=range]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 23px;
+    background: green;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: 0;
+    opacity: 0.6;
+}
+
+#height {
+    position: absolute;
+    left: 100px;
+    top: 65px;
+    width: 120px;
+    transform: rotate(-90deg);
+}
+
+#rot {
+    position: absolute;
+    left: 15px;
+    top: 150px;
+    width: 120px;
+}
+
+#cam_img {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}

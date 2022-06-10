@@ -13,11 +13,11 @@ export class StepEngine {
         this.fields = fields;
     }
 
-    step(player_id, tura, index, id) {
+    step(player_id, tura, index) {
         if (player_id === tura) {
             if (this.fields[index].action === "none" && this.fields[index].owner === "brak") { //pole kupowalne
 
-                this.ui.showBuyMenu(index, id);
+                this.ui.showBuyMenu(index);
                 this.ui.buyButtonStatus(this.playerList[player_id].cash < this.fields[index].price); //włącza / wyłącza przycisk TAK jeśli nie ma cash
 
                 document.getElementById("dontbuy").onclick = () => {  //KLIK NA NIE

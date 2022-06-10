@@ -101,7 +101,7 @@ export class GameNet {
                 }
                 setTimeout(() => {
                     this.animations.jumpToPoint(id, count, this.game.players)
-                    this.stepEngine.step(this.player_id, this.tura, data.playerList[id].position - 1, id)
+                    this.stepEngine.step(this.player_id, this.tura, data.playerList[id].position - 1)
                 }, 1500);
             }
         }

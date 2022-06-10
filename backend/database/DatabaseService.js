@@ -47,7 +47,7 @@ class DatabaseService {
     async updateAvatar(id, avatar) {
         return new Promise((resolve, reject) => {
             try {
-                this.users.update({ id: id}, { $set: { avatar: avatar} }, {},
+                this.users.update({id: id}, {$set: {avatar: avatar}}, {},
                     function (err, numReplaced) {
                         resolve(numReplaced)
                     }

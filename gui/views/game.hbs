@@ -1,30 +1,34 @@
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../styles/style.css">
+<link rel="stylesheet" href="../styles/camera-control-styles.css">
+<link rel="stylesheet" href="../styles/block-styles.css">
+<link rel="stylesheet" href="../styles/menu-styles.css">
+<link rel="stylesheet" href="../styles/user-controlls-styles.css">
 
 <div id="root">
     <div id="camera-control" class="hud_buttons">
-        <div id="camera-control-left">
-            <div id="left-top" class="smallbtn"></div>
-            <div id="left" class="smallbtn"></div>
-            <div id="left-down" class="smallbtn"></div>
+        <div id="camera-control-left" class="camera-control">
+            <div id="left-top" class="smallBtn"></div>
+            <div id="left" class="smallBtn"></div>
+            <div id="left-down" class="smallBtn"></div>
         </div>
-        <div id="camera-control-center">
-            <div id="up" class="smallbtn"></div>
-            <div id="cambutton" class="btn">
+        <div id="camera-control-center" class="camera-control">
+            <div id="up" class="smallBtn"></div>
+            <div id="camButton" class="btn">
                 <img src="../camera_icon.png" id="cam_img" alt="camera">
             </div>
-            <div id="down" class="smallbtn"></div>
+            <div id="down" class="smallBtn"></div>
         </div>
-        <div id="camera-control-right">
-            <div id="right-top" class="smallbtn"></div>
-            <div id="right" class="smallbtn"></div>
-            <div id="right-down" class="smallbtn"></div>
+        <div id="camera-control-right" class="camera-control">
+            <div id="right-top" class="smallBtn"></div>
+            <div id="right" class="smallBtn"></div>
+            <div id="right-down" class="smallBtn"></div>
         </div>
     </div>
     <div id="horizontal-range" class="hud_buttons">
-        <input id="rot" type="range" min="0" max="360" value="0" step="0.01">
+        <label for="rot"></label><input id="rot" type="range" min="0" max="360" value="0" step="0.01">
     </div>
     <div id="vertical-range" class="hud_buttons">
-        <input id="height" type="range" min="150" max="220" value="180" step="0.01">
+        <label for="height"></label><input id="height" type="range" min="150" max="220" value="180" step="0.01">
     </div>
 
     <div id="menu_button">☰</div>

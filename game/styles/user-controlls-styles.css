@@ -1,0 +1,66 @@
+#hud {
+    width: 250px;
+    height: 50px;
+
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+
+    background-color: rgb(191, 255, 234);
+
+    border: 2px solid green;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#throw {
+    width: 120px;
+    height: 50px;
+
+    position: fixed;
+    bottom: 80px;
+    left: 15px;
+
+    background-color: rgb(191, 255, 234);
+
+    border: 2px solid green;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#throw:hover {
+    background-color: rgb(181, 235, 214);
+    cursor: pointer;
+}
+
+#avatar {
+    width: 120px;
+    height: 120px;
+
+    position: fixed;
+    bottom: 145px;
+    left: 15px;
+
+    background-color: rgb(191, 255, 234);
+
+    border: 2px solid green;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#avatar-image {
+    width: 80px;
+    height: 80px;
+    border: 2px solid green;
+    border-radius: 15px;
+    padding: 5px;
+}

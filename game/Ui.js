@@ -21,11 +21,11 @@ export class Ui {
 
     createCameraMenu() {
 
-        document.getElementById("cambutton").onclick = () => this.game.setBirdView()
+        document.getElementById("camButton").onclick = () => this.game.setBirdView()
 
 
-        document.getElementById("cambutton").onmousedown = () => this.setSliderFlag(true);
-        document.getElementById("cambutton").onmouseout = () => this.setSliderFlag(false);
+        document.getElementById("camButton").onmousedown = () => this.setSliderFlag(true);
+        document.getElementById("camButton").onmouseout = () => this.setSliderFlag(false);
 
         document.getElementById("up").onclick = () => this.game.setCam(0, 150, -200)
         document.getElementById("down").onclick = () => this.game.setCam(0, 150, 200)
@@ -162,7 +162,7 @@ export class Ui {
         target.style.display = "flex";
     }
 
-    showBuyMenu = (index, id) => {
+    showBuyMenu = (index) => {
         document.getElementById("buymenu").style.display = "flex";
         document.getElementById("buyname").innerText = this.game.fields[index].name;
         document.getElementById("buyprice").innerText = "za " + this.game.fields[index].price + "$?";

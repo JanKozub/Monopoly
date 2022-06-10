@@ -18,18 +18,17 @@ class GameDBService {
 
     async getFields() {
         return new Promise((resolve, reject) => {
-            try {
-                this.fields.find({}).sort({ id: 1 }).exec(function (err, docs) {
-                    resolve(docs)
-                })
-            } catch
-            (ex) {
-                reject(ex)
+                try {
+                    this.fields.find({}).sort({id: 1}).exec(function (err, docs) {
+                        resolve(docs)
+                    })
+                } catch
+                    (ex) {
+                    reject(ex)
+                }
             }
-        }
         )
     }
 }
 
-module
-    .exports = GameDBService
+module.exports = GameDBService
