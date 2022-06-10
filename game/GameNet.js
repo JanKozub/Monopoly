@@ -55,7 +55,7 @@ export class GameNet {
                 } else {
                     clearInterval(this.turaTime);
                     this.nexttura().then();
-                    this.ui.hideBuymenu()
+                    this.ui.hideBuyMenu()
                 }
             }, 1000)
         }
@@ -73,7 +73,7 @@ export class GameNet {
             this.comparePosition(data); //koryguje pozycję pionków do aktualnej z serwera
             this.updateCashAndEQ(data); //nadpisuje EQ oraz Cash wszystkich graczy
             this.showLatestNews(data); //wyświetla informacje o stanie gry
-            this.updateHouses();
+            await this.updateHouses();
         }
     }
 
@@ -117,7 +117,7 @@ export class GameNet {
 
     updateHouses = async () => {
         for (let i in this.game.fields) {
-            if (this.game.fields[i].shops.length != this.old_fields[i].shops.length) {
+            if (this.game.fields[i].shops.length !== this.old_fields[i].shops.length) {
                 let tempShops = this.game.fields[i].shops;
                 let house = await this.game.houses.genHouse(tempShops[tempShops.length - 1], parseInt(i), this.game.fields[i].shops.length - 1);
                 this.animations.raiseFromBottom(house, 4);
@@ -128,7 +128,9 @@ export class GameNet {
     showLatestNews = (data) => { //sprawdza czy najnowszy news się zmienił i wyświetla jego treść jeśli tak
         if (this.lastAction !== data.lastAction) {
             this.lastAction = data.lastAction;
-            showPopup(data.lastAction, 'inform', 3000).then();
+            if (data.lastAction !== "") {
+                showPopup(data.lastAction, 'inform', 3000).then();
+            }
         }
     }
 

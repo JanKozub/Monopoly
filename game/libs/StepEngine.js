@@ -17,17 +17,17 @@ export class StepEngine {
         if (player_id === tura) {
             if (this.fields[index].action === "none" && this.fields[index].owner === "brak") { //pole kupowalne
 
-                this.ui.showBuymenu(index, id);
-                this.ui.buybuttonStatus(this.playerList[player_id].cash < this.fields[index].price); //włącza / wyłącza przycisk TAK jeśli nie ma cash
+                this.ui.showBuyMenu(index, id);
+                this.ui.buyButtonStatus(this.playerList[player_id].cash < this.fields[index].price); //włącza / wyłącza przycisk TAK jeśli nie ma cash
 
                 document.getElementById("dontbuy").onclick = () => {  //KLIK NA NIE
-                    this.ui.hideBuymenu();
+                    this.ui.hideBuyMenu();
                     this.gameNet.stopTuraCounter();
                 }
                 document.getElementById("buy").onclick = () => { //KLIK NA TAK
                     this.buy(index, player_id).then(); //zakup pola przez gracza
                     this.gameNet.stopTuraCounter();
-                    this.ui.hideBuymenu();
+                    this.ui.hideBuyMenu();
 
                 }
             } else { //pola zajęte lub niekupowalne

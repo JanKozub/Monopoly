@@ -6,6 +6,7 @@
 - zrobić więzienie żeby wstrzymywało kolejkę dla typa i go pomijalo
 - zablokowanie kostki po jednym rzucie
 - dodac nazwy graczy
+- user nie moze dolaczyc poprzez wpisane linku jezeli nie ma go w grze
 
 
 ===Na sam koniec===

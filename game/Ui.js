@@ -10,49 +10,32 @@ export class Ui {
         this.playerList = playerList;
         this.createCameraMenu();
         this.hamburgerMenu();
-        this.genAvatarlist();
+        this.genPlayersList();
 
         this.setAvatarImage();
     }
+
     setStepEngine(stepEngine) {
         this.stepEngine = stepEngine;
     }
-    createCameraMenu = () => {
 
-        document.getElementById("cambutton").onclick = () => {
-            this.game.setBirdView()
-        }
-        document.getElementById("cambutton").onmousedown = () => {
-            this.game.flags.sliderFlag = true;
-        }
-        document.getElementById("cambutton").onmouseout = () => {
-            this.game.flags.sliderFlag = false;
-        }
+    createCameraMenu() {
 
-        document.getElementById("up").onclick = () => {
-            this.game.setCam(0, 150, -200)
-        }
-        document.getElementById("down").onclick = () => {
-            this.game.setCam(0, 150, 200)
-        }
-        document.getElementById("left-top").onclick = () => {
-            this.game.setCam(-200, 150, -200)
-        }
-        document.getElementById("left").onclick = () => {
-            this.game.setCam(-200, 150, 0)
-        }
-        document.getElementById("left-down").onclick = () => {
-            this.game.setCam(-200, 150, 200)
-        }
-        document.getElementById("right-top").onclick = () => {
-            this.game.setCam(200, 150, -200)
-        }
-        document.getElementById("right").onclick = () => {
-            this.game.setCam(200, 150, 0)
-        }
-        document.getElementById("right-down").onclick = () => {
-            this.game.setCam(200, 150, 200)
-        }
+        document.getElementById("cambutton").onclick = () => this.game.setBirdView()
+
+
+        document.getElementById("cambutton").onmousedown = () => this.setSliderFlag(true);
+        document.getElementById("cambutton").onmouseout = () => this.setSliderFlag(false);
+
+        document.getElementById("up").onclick = () => this.game.setCam(0, 150, -200)
+        document.getElementById("down").onclick = () => this.game.setCam(0, 150, 200)
+        document.getElementById("left-top").onclick = () => this.game.setCam(-200, 150, -200)
+        document.getElementById("left").onclick = () => this.game.setCam(-200, 150, 0)
+        document.getElementById("left-down").onclick = () => this.game.setCam(-200, 150, 200)
+        document.getElementById("right-top").onclick = () => this.game.setCam(200, 150, -200)
+        document.getElementById("right").onclick = () => this.game.setCam(200, 150, 0)
+        document.getElementById("right-down").onclick = () => this.game.setCam(200, 150, 200)
+
         document.getElementById("rot").oninput = () => {
             this.game.camHeight(document.getElementById("height").value);
             this.game.rotCam(document.getElementById("rot").value);
@@ -62,12 +45,10 @@ export class Ui {
             this.game.camHeight(document.getElementById("height").value);
             this.game.flags.sliderFlag = true;
         }
-        document.getElementById("rot").onmouseup = () => {
-            this.game.flags.sliderFlag = false;
-        }
-        document.getElementById("height").onmouseup = () => {
-            this.game.flags.sliderFlag = false;
-        }
+
+        document.getElementById("rot").onmouseup = () => () => this.setSliderFlag(false);
+        document.getElementById("height").onmouseup = () => () => this.setSliderFlag(true);
+
         document.getElementById("block_info_escape").onclick = () => {
             this.game.flags.hamburgerFlag = false;
             document.getElementById("block_info").style.display = "none";
@@ -76,11 +57,11 @@ export class Ui {
             document.getElementById("throw").style.display = "none";
             let a = this.getRandomInt(1, 7);
             let b = this.getRandomInt(1, 7);
-            this.net.throwCubes(a, b)
+            this.net.throwCubes(a, b).then()
         }
     }
 
-    updateSliders = (x, y, z) => {
+    updateSliders = (y) => {
         document.getElementById("height").value = y;
     }
 
@@ -181,10 +162,10 @@ export class Ui {
         target.style.display = "flex";
     }
 
-    showBuymenu = (index, id) => {
+    showBuyMenu = (index, id) => {
         document.getElementById("buymenu").style.display = "flex";
         document.getElementById("buyname").innerText = this.game.fields[index].name;
-        document.getElementById("buyprice").innerText = "za " + String(this.game.fields[index].price) + "$?";
+        document.getElementById("buyprice").innerText = "za " + this.game.fields[index].price + "$?";
     }
 
     showBuildMenu = (index) => {
@@ -192,41 +173,39 @@ export class Ui {
         document.getElementById("buildname").innerText = this.game.fields[index].name;
         document.getElementById("build").innerText = "TAK"
         if (this.game.fields[index].shops.length < 2) {
-            document.getElementById("buildprice").innerText = "za " + String(this.game.fields[index].price * 1.5) + "$?";
+            document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 1.5) + "$?";
             document.getElementById("build").onclick = () => {
-                this.hideBuildmenu();
-                this.stepEngine.build(index, 1, this.net.player_id);
+                this.hideBuildMenu();
+                this.stepEngine.build(index, 1, this.net.player_id).then();
             }
-        } else if (this.game.fields[index].shops.length == 2) {
-            document.getElementById("buildprice").innerText = "za " + String(this.game.fields[index].price * 3) + "$?";
+        } else if (this.game.fields[index].shops.length === 2) {
+            document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 3) + "$?";
             document.getElementById("build").onclick = () => {
-                this.hideBuildmenu();
-                this.stepEngine.build(index, 2, this.net.player_id);
+                this.hideBuildMenu();
+                this.stepEngine.build(index, 2, this.net.player_id).then();
             }
         } else {
             document.getElementById("build").innerText = "NIE"
             document.getElementById("build").onclick = () => {
-                this.hideBuildmenu();
-                this.net.nexttura();
+                this.hideBuildMenu();
+                this.net.nexttura().then();
             }
         }
 
     }
 
-    hideBuymenu = () => {
+    hideBuyMenu = () => {
         document.getElementById("buymenu").style.display = "none";
     }
-    hideBuildmenu = () => {
+    hideBuildMenu = () => {
         document.getElementById("buildmenu").style.display = "none";
     }
-
 
     updateCash = (player_id) => {
         document.getElementById("hud").innerText = "Kredyty: " + this.playerList[player_id].cash + "$"
     }
 
-
-    buybuttonStatus = (x) => {
+    buyButtonStatus = (x) => {
         document.getElementById("buy").disabled = x;
         if (x) {
             document.getElementById("buy").innerText = "Brak pieniędzy"
@@ -235,7 +214,7 @@ export class Ui {
         }
     }
 
-    genAvatarlist = () => {
+    genPlayersList = () => {
         let heightMultiplier = 0;
         this.playerList.forEach(element => {
             if (element.id !== this.game.myId) {
@@ -258,5 +237,9 @@ export class Ui {
 
     setAvatarImage() {
         document.getElementById('avatar-image').src = './avatars/avatar-' + this.game.myId + '.jpg';
+    }
+
+    setSliderFlag(flag) {
+        this.game.flags.sliderFlag = flag;
     }
 }

@@ -134,14 +134,14 @@ export class Game {
     setCam = (x, y, z) => {
         this.cameraTar = { x: x, y: y, z: z }
 
-        this.ui.updateSliders(this.camera.position.x, this.camera.position.y, this.camera.position.z)
+        this.ui.updateSliders(this.camera.position.y)
     }
 
     setBirdView = () => {
         this.camera.position.set(0, 220, 0);
         this.camera.lookAt(this.scene.position);
         this.cameraTar = { x: 0, y: 220, z: 0 }
-        this.ui.updateSliders(0, 220, 0)
+        this.ui.updateSliders(220)
     }
 
     rotCam = (deg) => {
