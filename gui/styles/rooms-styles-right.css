@@ -33,7 +33,7 @@ h3 {
     width: 50%;
     height: 50px;
     position: relative;
-    top: 50px;
+    /*top: 50px;*/
     left: 25%;
     background-color: red;
     border-radius: 10px;
@@ -50,10 +50,11 @@ h3 {
 }
 
 .avatar {
-    width: calc(33% - 11px);
+    width: 75px;
     border-radius: 5px;
     border: 3px solid black;
     cursor: pointer;
+    margin-top: 10px;
     -webkit-filter: brightness(100%);
 }
 
@@ -63,8 +64,18 @@ h3 {
 }
 
 #avatars {
-    width: 60%;
+    width: 80%;
     position: relative;
     top: 20px;
-    left: 20%;
+    left: 10%;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+#your-stats {
+    margin: 0px;
 }
