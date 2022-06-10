@@ -1,13 +1,11 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-weight: bold;
     -webkit-text-stroke: 1px black;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -o-user-select: none;
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 100;
@@ -140,7 +138,7 @@ input[type=range]::-webkit-slider-thumb {
     background: green;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: 0px;
+    margin-top: 0;
     opacity: 0.6;
 }
 
@@ -209,8 +207,7 @@ input[type=range]::-webkit-slider-thumb {
     top: 0;
     right: 0;
 
-    margin: 2px;
-    margin-right: 5px;
+    margin: 2px 5px 2px 2px;
 
     background-color: rgb(255, 50, 50);
     border-radius: 5px;
@@ -457,7 +454,7 @@ input[type=range]::-webkit-slider-thumb {
 
 ::-webkit-scrollbar {
     position: absolute;
-    width: 0px;
+    width: 0;
 }
 
 #playersList {
@@ -488,15 +485,6 @@ input[type=range]::-webkit-slider-thumb {
     height: 50px;
     border: 2px solid green;
     border-radius: 10px;
-    /*display: inline-block;*/
-}
-
-.nick-box {
-    /*display: inline-block;*/
-}
-
-.money-box {
-    /*display: inline-block;*/
 }
 
 #buildbtn:hover {
