@@ -105,7 +105,7 @@ export class Ui {
     }
 
     updateBlockInfo = (id) => {
-        let restricted_names = ["brak", "Dyrektor Piszkowski", "i tak to idzie na fajki"];
+        let restricted_names = ["brak", "Dyrektor Piszkowski", "i tak to idzie na fajki", "Dragosz"];
         document.getElementById("block_name").innerText = this.game.fields[id].name;
         if (!restricted_names.includes(this.game.fields[id].owner)) {
             document.getElementById("block_owner").innerText = "Właściciel: " + this.playerList[this.game.fields[id].owner].skin;
