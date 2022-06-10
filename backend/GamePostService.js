@@ -94,7 +94,7 @@ class GamePostService {
                     this.fields[req.body.fieldIdx].action = "take"
                     this.fields[req.body.fieldIdx].value = 100 //WSTAWIC OPLATE NA PODSTAWIE LICZBY DOMKÓW I ID POLA
                     this.fields[req.body.fieldIdx].owner = req.body.player_id;
-                    this.fields[req.body.fieldIdx].price = 0; //POLE STAJE SIE NIEKUPOWALNE
+                    //this.fields[req.body.fieldIdx].price = 0; //POLE STAJE SIE NIEKUPOWALNE
 
                     game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") kupił " + this.fields[req.body.fieldIdx].name;
                 }
@@ -113,7 +113,6 @@ class GamePostService {
             case "build": //gracz wywołał akcję BUILD
                 let price = this.fields[req.body.fieldIdx].price * (1.5 * req.body.type);
                 game.playerList[req.body.player_id].cash -= price;
-                console.log(req.body.type)
                 this.fields[req.body.fieldIdx].shops.push(req.body.type);
                 game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + game.playerList[req.body.player_id].skin + ") rozbudował " +
                     this.fields[req.body.fieldIdx].name + " za " + String(price) + "$";

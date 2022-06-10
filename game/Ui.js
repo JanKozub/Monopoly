@@ -105,8 +105,9 @@ export class Ui {
     }
 
     updateBlockInfo = (id) => {
+        let restricted_names = ["brak", "Dyrektor Piszkowski", "i tak to idzie na fajki"];
         document.getElementById("block_name").innerText = this.game.fields[id].name;
-        if (this.game.fields[id].owner !== "brak") {
+        if (!restricted_names.includes(this.game.fields[id].owner)) {
             document.getElementById("block_owner").innerText = "Właściciel: " + this.playerList[this.game.fields[id].owner].skin;
         } else {
             document.getElementById("block_owner").innerText = "Właściciel: " + this.game.fields[id].owner;

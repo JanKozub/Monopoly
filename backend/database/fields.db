@@ -1,38 +1,40 @@
-{"id":14,"name":"POLE","owner":"brak","shops":[],"price":160,"action":"none","value":0,"_id":"0MvAjG8dihu0YqHP"}
-{"id":21,"name":"POLE","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"16ut5du0ANoCsEwN"}
+{"id":14,"name":"Brazzers Inc.","owner":"brak","shops":[],"price":160,"action":"none","value":0,"_id":"0MvAjG8dihu0YqHP"}
+{"id":21,"name":"Szatnie w podziemiach","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"16ut5du0ANoCsEwN"}
 {"id":35,"name":"POLE","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"4CLlQT5Pno1fgs09"}
 {"id":20,"name":"Parking przy Domu Pomocy.","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"5VK8ogXOfjr0hh8M"}
 {"id":38,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"take","value":100,"_id":"6Gc64cup2Yer8rU0"}
 {"id":25,"name":"POLE","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"82Ryqq1m3LjvciqC"}
-{"id":31,"name":"POLE","owner":"brak","shops":[],"price":300,"action":"none","value":0,"_id":"8ODeXelmsNcodLGk"}
+{"id":31,"name":"Palarnia na skrzyżowaniu","owner":"brak","shops":[],"price":300,"action":"none","value":0,"_id":"8ODeXelmsNcodLGk"}
 {"id":36,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"card","value":0,"_id":"8Vpba8puGUkNI7cc"}
-{"id":4,"name":"Budżet dla samorządu","owner":"brak","shops":[],"price":0,"action":"take","value":200,"_id":"9zBDi8rX1qAvdmn5"}
-{"id":13,"name":"POLE","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"BVbBxyideISeP67o"}
+{"id":4,"name":"Budżet dla samorządu","owner":"i tak to idzie na fajki","shops":[],"price":0,"action":"take","value":200,"_id":"9zBDi8rX1qAvdmn5"}
+{"id":13,"name":"Sekretariat","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"BVbBxyideISeP67o"}
 {"id":29,"name":"POLE","owner":"brak","shops":[],"price":280,"action":"none","value":0,"_id":"DkiqNoGtB4ewcmtZ"}
 {"id":5,"name":"Toaleta na pracowniach","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"GXXw1csAPCVSYUWi"}
 {"id":19,"name":"POLE","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"HtL8t3uboKDfeT0S"}
-{"id":3,"name":"POLE","owner":"brak","shops":[],"price":60,"action":"none","value":0,"_id":"K33ijdZYj0uff1We"}
-{"id":2,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"add","value":100,"_id":"K9ApNvxw5boNwMXc"}
-{"id":10,"name":"Spacerniak ZSŁ. Dla odwiedzających.","owner":"brak","shops":[],"price":0,"action":"add","value":200,"_id":"LnXk3zbjleX3MFJb"}
+{"id":3,"name":"Korytarz B","owner":"brak","shops":[],"price":60,"action":"none","value":0,"_id":"K33ijdZYj0uff1We"}
+{"id":2,"name":"Dostałeś uścisk dłoni dyrektora, otrzymujesz 100$","owner":"Dyrektor Piszkowski","shops":[],"price":0,"action":"add","value":100,"_id":"K9ApNvxw5boNwMXc"}
+{"id":10,"name":"Spacerniak ZSŁ. Dla odwiedzających.","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"LnXk3zbjleX3MFJb"}
 {"id":7,"name":"Szansa","owner":"brak","shops":[],"price":0,"action":"card","value":0,"_id":"MkPQzJllThCdkIRz"}
 {"id":17,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"Py0MI1lsq3jg57A4"}
-{"id":11,"name":"POLE","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"Qc8fTAeDhh0uOMar"}
+{"id":11,"name":"Nora Piszka","owner":"brak","shops":[],"price":140,"action":"none","value":0,"_id":"Qc8fTAeDhh0uOMar"}
 {"id":8,"name":"POLE","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"TgNjtxcgsT4kpSsF"}
-{"id":1,"name":"POLE","owner":"brak","shops":[],"price":60,"action":"none","value":0,"_id":"U1AgdzfAifKEiU6u"}
+{"id":1,"name":"URBA","owner":"brak","shops":[],"price":60,"action":"none","value":0,"_id":"U1AgdzfAifKEiU6u"}
 {"id":6,"name":"POLE","owner":"brak","shops":[],"price":100,"action":"none","value":0,"_id":"Ua3cwkHk0N4yvc0K"}
 {"id":12,"name":"POLE","owner":"brak","shops":[],"price":150,"action":"none","value":0,"_id":"W0wwiwoMwTV4cCSQ"}
-{"id":23,"name":"POLE","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"XHZlmZVpojTCTvoD"}
+{"id":23,"name":"Ukraiński bar","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"XHZlmZVpojTCTvoD"}
 {"id":26,"name":"POLE","owner":"brak","shops":[],"price":260,"action":"none","value":0,"_id":"aFOHJ85attb3D01o"}
-{"id":0,"name":"Start","owner":"brak","shops":[],"price":0,"action":"add","value":200,"_id":"dvRCuqWeLFzaaWhs"}
 {"id":16,"name":"POLE","owner":"brak","shops":[],"price":180,"action":"none","value":0,"_id":"fuX05k1RdnkBj7Up"}
-{"id":34,"name":"POLE","owner":"brak","shops":[],"price":320,"action":"none","value":0,"_id":"gSwDJqLfbEfy9jdb"}
+{"id":34,"name":"Boisko","owner":"brak","shops":[],"price":320,"action":"none","value":0,"_id":"gSwDJqLfbEfy9jdb"}
 {"id":37,"name":"POLE","owner":"brak","shops":[],"price":350,"action":"none","value":0,"_id":"iFdkaCjAEF0HSrdz"}
 {"id":18,"name":"POLE","owner":"brak","shops":[],"price":180,"action":"none","value":0,"_id":"nAysvHzWvXadZwWy"}
 {"id":22,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"card","value":0,"_id":"oshBNFdPaihdfszq"}
-{"id":24,"name":"POLE","owner":"brak","shops":[],"price":240,"action":"none","value":0,"_id":"pfi0tvZ0aCE1QWKe"}
+{"id":30,"name":"Idziesz grabić liście!","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"outsmUawxUPz7hyw"}
+{"id":24,"name":"Dziupla samorządu","owner":"brak","shops":[],"price":240,"action":"none","value":0,"_id":"pfi0tvZ0aCE1QWKe"}
 {"id":9,"name":"POLE","owner":"brak","shops":[],"price":120,"action":"none","value":0,"_id":"qFHwiTrNhpwaJqT0"}
 {"id":27,"name":"POLE","owner":"brak","shops":[],"price":260,"action":"none","value":0,"_id":"rT6PySKaZNBDWg9O"}
-{"id":32,"name":"POLE","owner":"brak","shops":[],"price":300,"action":"none","value":0,"_id":"uH8oJauw6oP7F7iU"}
+{"id":28,"name":"POLE","owner":"brak","shops":[],"price":150,"action":"none","value":0,"_id":"sj5WBaug2NwUUUsT"}
+{"id":32,"name":"Siłownia plenerowa","owner":"brak","shops":[],"price":300,"action":"none","value":0,"_id":"uH8oJauw6oP7F7iU"}
+{"id":0,"name":"Start","owner":"brak","shops":[],"price":0,"action":"add","value":200,"_id":"usfjs6shiOPz5xyq"}
 {"id":15,"name":"POLE","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"vfijIX2o1APGEKEx"}
 {"id":33,"name":"POLE","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"wj5WBksr2NwKKUwT"}
 {"id":39,"name":"POLE","owner":"brak","shops":[],"price":400,"action":"none","value":0,"_id":"yutgmUdwxOPz5xyq"}
