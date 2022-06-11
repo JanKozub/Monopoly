@@ -189,6 +189,7 @@ class PostService {
         let id = req.body.id;
         this.gamesManager.addNewGame(id, this.roomManager.getRoomById(id).users);
         req.session.gameId = id;
+        this.roomManager.remove
         res.send(JSON.stringify({response: "ok"}))
     }
 

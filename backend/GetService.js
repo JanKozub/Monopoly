@@ -12,7 +12,8 @@ class GetService {
 
         if (user) {
             if (user.roomId !== undefined) {
-                this.roomManager.logOutRoom(user.roomId, user);
+                this.roomManager.removeUserFromRoom(user.roomId, user);
+                req.session.user.roomId = undefined;
             }
             res.render('rooms.hbs');
         } else {
@@ -27,7 +28,8 @@ class GetService {
 
         if (user) {
             if (user.roomId !== undefined) {
-                this.roomManager.logOutRoom(user.roomId, user);
+                this.roomManager.removeUserFromRoom(user.roomId, user);
+                req.session.user.roomId = undefined;
             }
             res.render('room.hbs');
         } else {
@@ -39,6 +41,9 @@ class GetService {
     gameHandler(req, res) {
         const user = req.session.user;
         if (user) {
+            this.roomManager.removeRoom(user.roomId);
+            req.session.user.roomId = undefined;
+            console.log(this.roomManager.rooms)
             res.render('game.hbs');
         } else {
             console.log('user not logged in - rendering welcome')

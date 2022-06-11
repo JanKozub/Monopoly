@@ -2,7 +2,6 @@
 - stworzyć przegrywanie jeśli kasa się zeruje, przekreślić avatat na liście i uniemożliwić ruch
 
 - user nie moze dolaczyc poprzez wpisane linku jezeli nie ma go w grze
-- usun lobby po rozpoczeciu gry
 
 ===Na sam koniec===
 - Kiedy wszyscy nie sa gotowi to nie zaczyna gry

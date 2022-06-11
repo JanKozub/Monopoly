@@ -77,7 +77,7 @@ class RoomManager {
         return false;
     }
 
-    logOutRoom(id, user) {
+    removeUserFromRoom(id, user) {
         for (let i = 0; i < this.rooms.length; i++) {
             if (this.rooms[i].id === id) {
                 this.rooms[i].users = this.rooms[i].users.filter(function (u) {
@@ -113,6 +113,12 @@ class RoomManager {
                 return false;
             }
         }
+    }
+
+    removeRoom(id) {
+        this.rooms = this.rooms.filter(function (r) {
+            return r.id !== id;
+        });
     }
 }
 
