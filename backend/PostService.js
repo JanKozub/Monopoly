@@ -202,6 +202,17 @@ class PostService {
             res.send(JSON.stringify({response: false}));
         }
     }
+
+    getReadyUsers(req, res) {
+        let room = this.roomManager.getRoomById(req.body.id)
+        let counter = 0;
+        for (let i = 0; i < room.users.length; i++) {
+            if (room.users[i].ready){
+                counter++;
+            }
+        }
+        res.send(JSON.stringify({readyUsers: counter}))
+    }
 }
 
 module.exports = PostService;

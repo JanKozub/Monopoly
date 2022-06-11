@@ -13,7 +13,14 @@ class GamesManager {
         }
 
         for (let k = 0; k < players.length; k++) {
-            temp2.push({id: k, position: 1, skin: players[k].user.avatar, nick: players[k].user.nick, eq: [], cash: 1500});
+            temp2.push({
+                id: k,
+                position: 1,
+                skin: players[k].user.avatar,
+                nick: players[k].user.nick,
+                eq: [],
+                cash: 1500
+            });
         }
 
         this.games.push({
@@ -41,6 +48,16 @@ class GamesManager {
                 return this.games[i] = game;
             }
         }
+    }
+
+    isPlayerInGame(gameId, playerId) {
+        let game = this.getGameById(gameId)
+        for (let i = 0; i < game.players.length; i++) {
+            if (game.players[i].id === playerId) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

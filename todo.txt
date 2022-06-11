@@ -1,8 +1,5 @@
 - wymyślić karty i dodać ich obsługę na serwerze, wystarczy 20 tekstów
 - stworzyć przegrywanie jeśli kasa się zeruje, przekreślić avatat na liście i uniemożliwić ruch
 
-- user nie moze dolaczyc poprzez wpisane linku jezeli nie ma go w grze
-
 ===Na sam koniec===
-- Kiedy wszyscy nie sa gotowi to nie zaczyna gry
 - Sprawdzanie hasla do lobby

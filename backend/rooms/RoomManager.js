@@ -77,7 +77,7 @@ class RoomManager {
         return false;
     }
 
-    removeUserFromRoom(id, user) {
+    removeUser(id, user) {
         for (let i = 0; i < this.rooms.length; i++) {
             if (this.rooms[i].id === id) {
                 this.rooms[i].users = this.rooms[i].users.filter(function (u) {

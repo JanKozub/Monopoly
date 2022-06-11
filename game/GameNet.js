@@ -61,7 +61,6 @@ export class GameNet {
                     this.nexttura().then();
                     this.ui.hideBuyMenu()
                 }
-                console.log(this.turaSeconds)
             }, 1000)
         }
     }

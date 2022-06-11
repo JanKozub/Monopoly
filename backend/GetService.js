@@ -1,8 +1,10 @@
 class GetService {
     roomManager;
+    gamesManager;
 
-    constructor(roomManager) {
+    constructor(roomManager, gamesManager) {
         this.roomManager = roomManager;
+        this.gamesManager = gamesManager;
     }
 
     defaultHandler(req, res) {
@@ -11,8 +13,8 @@ class GetService {
         const user = req.session.user;
 
         if (user) {
-            if (user.roomId !== undefined) {
-                this.roomManager.removeUserFromRoom(user.roomId, user);
+            if (user.roomId !== undefined && user.roomId !== null) {
+                this.roomManager.removeUser(user.roomId, user);
                 req.session.user.roomId = undefined;
             }
             res.render('rooms.hbs');
@@ -27,8 +29,8 @@ class GetService {
         const user = req.session.user;
 
         if (user) {
-            if (user.roomId !== undefined) {
-                this.roomManager.removeUserFromRoom(user.roomId, user);
+            if (user.roomId !== undefined && user.roomId !== null) {
+                this.roomManager.removeUser(user.roomId, user);
                 req.session.user.roomId = undefined;
             }
             res.render('room.hbs');
@@ -41,10 +43,13 @@ class GetService {
     gameHandler(req, res) {
         const user = req.session.user;
         if (user) {
-            this.roomManager.removeRoom(user.roomId);
-            req.session.user.roomId = undefined;
-            console.log(this.roomManager.rooms)
-            res.render('game.hbs');
+            if (this.gamesManager.isPlayerInGame(req.url.split('=')[1], user.id)) {
+                this.roomManager.removeRoom(user.roomId);
+                req.session.user.roomId = undefined;
+                res.render('game.hbs');
+            } else {
+                res.render('rooms.hbs');
+            }
         } else {
             console.log('user not logged in - rendering welcome')
             res.render('welcome.hbs');

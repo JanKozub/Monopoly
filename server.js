@@ -20,7 +20,7 @@ const roomManager = new RoomManager();
 const gamesManager = new GamesManager();
 const postService = new PostService(new DatabaseService(), roomManager, gamesManager);
 const gamePostService = new GamePostService(new GameDBService(), gamesManager);
-const getService = new GetService(roomManager);
+const getService = new GetService(roomManager, gamesManager);
 
 let app = express();
 
@@ -64,6 +64,7 @@ app.post("/getReady", (req, res) => postService.getReady(req, res))
 app.post("/kickUser", (req, res) => postService.kickUser(req, res))
 app.post("/startNewGame", (req, res) => postService.startNewGame(req, res))
 app.post("/isGameStarted", (req, res) => postService.isGameStarted(req, res))
+app.post("/getReadyUsers", (req, res) => postService.getReadyUsers(req, res))
 
 //game
 app.post("/init", (req, res) => gamePostService.initGame(req, res))

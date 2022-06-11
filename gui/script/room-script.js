@@ -96,15 +96,20 @@ function renderPlayers() {
     }
 }
 
-function startGame() {
-    // if (room.users.length === parseInt(room.size)) {
-    console.log('starting game...')
-    let id = window.location.href.split('=')[1]
-    Net.sendPostData('/startNewGame', {id: id}).then()
-    window.location.href = '/game?id=' + id;
-    // } else {
-    //     showPopup('Niewystarczająca ilość graczy!', 'inform', 3000).then();
-    // }
+async function startGame() {
+    if (room.users.length === parseInt(room.size)) {
+        let readyUsersCounter = await Net.sendPostData('/getReadyUsers', {id: id}).then()
+        if (readyUsersCounter.readyUsers === parseInt(room.size)) {
+            console.log('starting game...')
+            let id = window.location.href.split('=')[1]
+            Net.sendPostData('/startNewGame', {id: id}).then()
+            window.location.href = '/game?id=' + id;
+        } else {
+            showPopup('Nie wszyscy są gotowi!', 'inform', 3000).then();
+        }
+    } else {
+        showPopup('Niewystarczająca ilość graczy!', 'inform', 3000).then();
+    }
 }
 
 async function setReady() {
@@ -116,7 +121,7 @@ async function setReady() {
             clearInterval(inter);
             window.location.href = '/game?id=' + id;
         }
-    }, 1000);
+    }, 100);
 }
 
 function roomClosed() {
