@@ -61,6 +61,7 @@ export class GameNet {
                     this.nexttura().then();
                     this.ui.hideBuyMenu()
                 }
+                console.log(this.turaSeconds)
             }, 1000)
         }
     }
@@ -86,6 +87,7 @@ export class GameNet {
         this.tura = data.tura;
         this.game.fields = data.fields;
         this.lastThrow = data.lastThrow;
+        this.stepEngine.update(data.fields);
     }
 
     compareCubes = (data) => {
@@ -115,6 +117,7 @@ export class GameNet {
     updateUI = (data) => {
         this.ui.updateCash(this.player_id);
         this.ui.updateThrowbutton(this.lastThrow, this.player_id, this.tura);
+        this.ui.updateEnemyList(this.playerList, this.player_id);
         if (this.player_id != this.tura) { this.ui.hideBuyMenu() };
         for (let i = 0; i < this.playerList.length; i++) {
             this.playerList[i].eq = data.playerList[i].eq;
@@ -142,6 +145,7 @@ export class GameNet {
     }
 
     nexttura = async () => {
+        clearInterval(this.turaTime);
         if (this.tura == this.player_id) {
             let data = JSON.stringify({
                 player_id: this.player_id
@@ -152,7 +156,6 @@ export class GameNet {
 
     stopTuraCounter = () => {
         clearInterval(this.turaTime);
-        this.nexttura().then();
     }
 
     setcubes = async (cueba, cubeb) => {

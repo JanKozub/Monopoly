@@ -3,6 +3,9 @@ class GamePostService {
     gamesManager;
     fields;
     lastThrow;
+    prison = [];
+    time_inprison = [];
+    punishment = 3;
     skinName = ["Hotdog", "RJ-45", "Kebab", "Rezystor", "Router", "Piwo"];
 
     constructor(gameDBService, gamesManager) {
@@ -66,6 +69,24 @@ class GamePostService {
             if (game.tura > game.playerList.length - 1) {
                 game.tura = 0;
             }
+            if (this.prison.includes(game.tura)) { //JEŻELI GRACZ JEST W PRISON TO SKIPUJE MU KOLEJKE
+                this.time_inprison.forEach(prisoner => {
+                    if (prisoner.who === game.tura) {
+                        prisoner.time++; //CO KAŻDĄ KOLEJKĘ ROŚNIE MU CZAS SPĘDZOZNY W WIĘZIENIU
+                        if (prisoner.time <= this.punishment) { game.tura++; }
+                        else { //JEŚLI POBYT W WIĘZIENIU JEST DŁUŻSZY NIŻ CZAS KARY TO GO WYPUŚĆ
+                            let prison_id = this.prison.indexOf(prisoner.who);
+                            let prison_time_id = this.time_inprison.indexOf(prisoner);
+                            this.prison.splice(prison_id, 1);
+                            this.time_inprison.splice(prison_time_id, 1);
+                        }
+                    }
+                });
+            }
+            if (this.prison.length == game.playerList.length) {
+                this.prison.splice(0, 1);
+            }
+
             this.gamesManager.updateGameWithId(game);
         }
         res.send(JSON.stringify("a"))
@@ -103,8 +124,12 @@ class GamePostService {
                 }
                 break;
             case "take": //gracz wywołał akcję TAKE
+                let restricted_names = ["brak", "Dyrektor Piszkowski", "i tak to idzie na fajki", "Dragosz"];
                 game.playerList[req.body.player_id].cash -= this.fields[req.body.fieldIdx].value;
                 game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") stracił " + this.fields[req.body.fieldIdx].value + "$";
+                if (!restricted_names.includes(this.fields[req.body.fieldIdx].owner)) {
+                    game.playerList[this.fields[req.body.fieldIdx].owner].cash += this.fields[req.body.fieldIdx].value;
+                }
                 break;
             case "card": //gracz wywołał akcję CARD
                 //losuj kartę z listy kart, zwróć treść (text), akcje (action)(take lub add) oraz wartość (value) (ile dodać/odjąć)
@@ -122,6 +147,11 @@ class GamePostService {
 
                 game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") rozbudował " +
                     this.fields[req.body.fieldIdx].name + " za " + String(price) + "$";
+                break;
+            case "prison": //gracz wywołał akcję PRISON
+                this.prison.push(req.body.player_id)
+                this.time_inprison.push({ who: req.body.player_id, time: 1 })
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") trafił do więzienia! ";
                 break;
         }
         if (game.tura > game.playerList.length - 1) {

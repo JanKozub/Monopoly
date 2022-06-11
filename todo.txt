@@ -1,9 +1,8 @@
 - wymyślić karty i dodać ich obsługę na serwerze, wystarczy 20 tekstów
 - stworzyć przegrywanie jeśli kasa się zeruje, przekreślić avatat na liście i uniemożliwić ruch
-- zrobić więzienie żeby wstrzymywało kolejkę dla typa i go pomijalo
+
 - user nie moze dolaczyc poprzez wpisane linku jezeli nie ma go w grze
 - usun lobby po rozpoczeciu gry
-- lista enemy graczy rozszerza się po najechaniu
 
 ===Na sam koniec===
 - Kiedy wszyscy nie sa gotowi to nie zaczyna gry

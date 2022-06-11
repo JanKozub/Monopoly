@@ -1,7 +1,7 @@
 {"id":14,"name":"Brazzers Inc.","owner":"brak","shops":[],"price":160,"action":"none","value":0,"_id":"0MvAjG8dihu0YqHP"}
 {"id":21,"name":"Szatnie w podziemiach","owner":"brak","shops":[],"price":220,"action":"none","value":0,"_id":"16ut5du0ANoCsEwN"}
 {"id":35,"name":"Shot alkohole","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"4CLlQT5Pno1fgs09"}
-{"id":20,"name":"Park dębnicki","owner":"brak","shops":[],"price":120,"action":"none","value":0,"_id":"5VK8ogXOfjr0hh8M"}
+{"id":20,"name":"Parking u starych","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"5VK8ogXOfjr0hh8M"}
 {"id":38,"name":"Ukradłeś projekcik","owner":"Dragosz","shops":[],"price":0,"action":"take","value":100,"_id":"6Gc64cup2Yer8rU0"}
 {"id":25,"name":"Carrefour express","owner":"brak","shops":[],"price":200,"action":"none","value":0,"_id":"82Ryqq1m3LjvciqC"}
 {"id":31,"name":"Palarnia na skrzyżowaniu","owner":"brak","shops":[],"price":300,"action":"none","value":0,"_id":"8ODeXelmsNcodLGk"}
@@ -28,7 +28,7 @@
 {"id":37,"name":"INFI","owner":"brak","shops":[],"price":350,"action":"none","value":0,"_id":"iFdkaCjAEF0HSrdz"}
 {"id":18,"name":"Rododendron","owner":"brak","shops":[],"price":180,"action":"none","value":0,"_id":"ish636dsxSPz5xks"}
 {"id":22,"name":"Szansa","owner":"brak","shops":[],"price":0,"action":"card","value":0,"_id":"oshBNFdPaihdfszq"}
-{"id":30,"name":"Idziesz grabić liście!","owner":"brak","shops":[],"price":0,"action":"none","value":0,"_id":"outsmUawxUPz7hyw"}
+{"id":30,"name":"Idziesz grabić liście!","owner":"brak","shops":[],"price":0,"action":"prison","value":0,"_id":"outsmUawxUPz7hyw"}
 {"id":24,"name":"Dziupla samorządu","owner":"brak","shops":[],"price":240,"action":"none","value":0,"_id":"pfi0tvZ0aCE1QWKe"}
 {"id":9,"name":"Dach internatu","owner":"brak","shops":[],"price":120,"action":"none","value":0,"_id":"qFHwiTrNhpwaJqT0"}
 {"id":27,"name":"Gabinet polonistyczny","owner":"brak","shops":[],"price":260,"action":"none","value":0,"_id":"rT6PySKaZNBDWg9O"}

@@ -12,23 +12,23 @@ export class StepEngine {
         this.playerList = playerList;
         this.fields = fields;
     }
-
+    update(fields) {
+        this.fields = fields;
+    }
     step(player_id, tura, index) {
         if (player_id === tura) {
             if (this.fields[index].action === "none" && this.fields[index].owner === "brak" && this.fields[index].price != 0) { //pole kupowalne
-
                 this.ui.showBuyMenu(index);
                 this.ui.buyButtonStatus(this.playerList[player_id].cash < this.fields[index].price); //włącza / wyłącza przycisk TAK jeśli nie ma cash
 
                 document.getElementById("dontbuy").onclick = () => {  //KLIK NA NIE
                     this.ui.hideBuyMenu();
-                    this.gameNet.stopTuraCounter();
+                    //this.gameNet.stopTuraCounter();
+                    this.gameNet.nexttura();
                 }
                 document.getElementById("buy").onclick = () => { //KLIK NA TAK
                     this.buy(index, player_id).then(); //zakup pola przez gracza
-                    this.gameNet.stopTuraCounter();
                     this.ui.hideBuyMenu();
-
                 }
             } else { //pola zajęte lub niekupowalne
                 switch (this.fields[index].action) {
@@ -43,6 +43,9 @@ export class StepEngine {
                     case "add":
                         this.add(player_id, this.fields[index].value).then(); //dodaje graczowi o id (player_id) liczbę $
                         break;
+                    case "prison":
+                        this.prison(player_id).then(); //wstrzymuje kolejkę dla (player_id)
+                        break;
                 }
             }
 
@@ -55,6 +58,7 @@ export class StepEngine {
             fieldIdx: fieldIdx,
             player_id: player_id
         })
+        this.gameNet.nexttura();
         await GameNet.sendFetch(data, "/action")
     }
 
@@ -95,6 +99,15 @@ export class StepEngine {
         })
         await GameNet.sendFetch(data, "/action")
         //wykonaj akcję dla CARD
+    }
+    async prison(player_id) {  //zamyka gracza w więzieniu
+        let data = JSON.stringify({
+            action: "prison",
+            player_id: player_id,
+        })
+        this.gameNet.nexttura();
+        await GameNet.sendFetch(data, "/action")
+        //wykonaj akcję dla PRISON
     }
 
 }

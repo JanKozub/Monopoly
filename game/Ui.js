@@ -3,6 +3,7 @@ export class Ui {
     net;
     playerList;
     stepEngine;
+    skinName = ["Hotdog", "RJ-45", "Kebab", "Rezystor", "Router", "Piwo"];
 
     constructor(game, net, playerList) {
         this.game = game;
@@ -93,14 +94,18 @@ export class Ui {
         let restricted_names = ["brak", "Dyrektor Piszkowski", "i tak to idzie na fajki", "Dragosz"];
         document.getElementById("block_name").innerText = this.game.fields[id].name;
         if (!restricted_names.includes(this.game.fields[id].owner)) {
-            document.getElementById("block_owner").innerText = "Właściciel: " + this.playerList[this.game.fields[id].owner].skin;
+            document.getElementById("block_owner").innerText = "Właściciel: " + this.skinName[this.playerList[this.game.fields[id].owner].skin];
         } else {
             document.getElementById("block_owner").innerText = "Właściciel: " + this.game.fields[id].owner;
         }
         document.getElementById("block_shops").innerText = "Sklepy: ";
+        let house_count = { small: 0, big: 0 };
         this.game.fields[id].shops.forEach(element => {
-            document.getElementById("block_shops").innerText += element.name + ", "
+            if (element == 1) { house_count.small++ }
+            else if (element == 2) { house_count.big++ }
         });
+        if (house_count.small > 0) { document.getElementById("block_shops").innerText += String(house_count.small) + "x automat" }
+        if (house_count.big > 0) { document.getElementById("block_shops").innerText += ", " + String(house_count.big) + "x budka z kebabem" }
         switch (this.game.fields[id].action) {
             case "none":
                 document.getElementById("block_action").innerText = "Odwiedzający nic nie płaci ani nie otrzymuje.";
@@ -156,12 +161,21 @@ export class Ui {
         if (last == current) {
             document.getElementById("throw").style.display = "none";
             if (current == tura) {
-                document.getElementById("skiptura").style.display = "flex";
+                if (!this.net.cubesInMove) {
+                    document.getElementById("skiptura").style.display = "flex";
+                }
             }
         }
         if (current != tura) {
             document.getElementById("skiptura").style.display = "none";
         }
+    }
+    updateEnemyList(playerList, player_id) {
+        playerList.forEach(element => {
+            if (element.id != player_id) {
+                document.getElementById(element.nick + "_cashbox").innerText = String(element.cash) + "$";
+            }
+        });
     }
 
     toggleThrowbutton(tura, id) {
@@ -185,29 +199,30 @@ export class Ui {
     }
 
     showBuildMenu = (index) => {
-        document.getElementById("buildmenu").style.display = "flex";
-        document.getElementById("buildname").innerText = this.game.fields[index].name;
-        document.getElementById("build").innerText = "TAK"
-        if (this.game.fields[index].shops.length < 2) {
-            document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 1.5) + "$?";
-            document.getElementById("build").onclick = () => {
-                this.hideBuildMenu();
-                this.stepEngine.build(index, 1, this.net.player_id).then();
-            }
-        } else if (this.game.fields[index].shops.length === 2) {
-            document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 3) + "$?";
-            document.getElementById("build").onclick = () => {
-                this.hideBuildMenu();
-                this.stepEngine.build(index, 2, this.net.player_id).then();
-            }
-        } else {
-            document.getElementById("build").innerText = "NIE"
-            document.getElementById("build").onclick = () => {
-                this.hideBuildMenu();
-                this.net.nexttura().then();
+        if (this.net.tura == this.net.player_id) {
+            document.getElementById("buildmenu").style.display = "flex";
+            document.getElementById("buildname").innerText = this.game.fields[index].name;
+            document.getElementById("build").innerText = "TAK"
+            if (this.game.fields[index].shops.length < 2) {
+                document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 1.5) + "$?";
+                document.getElementById("build").onclick = () => {
+                    this.hideBuildMenu();
+                    this.stepEngine.build(index, 1, this.net.player_id).then();
+                }
+            } else if (this.game.fields[index].shops.length === 2) {
+                document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 3) + "$?";
+                document.getElementById("build").onclick = () => {
+                    this.hideBuildMenu();
+                    this.stepEngine.build(index, 2, this.net.player_id).then();
+                }
+            } else {
+                document.getElementById("build").innerText = "NIE"
+                document.getElementById("build").onclick = () => {
+                    this.hideBuildMenu();
+                    this.net.nexttura().then();
+                }
             }
         }
-
     }
 
     hideBuyMenu = () => {
@@ -235,14 +250,15 @@ export class Ui {
         this.playerList.forEach(element => {
             if (element.id !== this.game.myId) {
                 let container = document.createElement('div');
-                container.className = 'container-box'
+                container.className = 'container-box';
 
                 let nick = document.createElement('p');
-                nick.className = "nick-box"
+                nick.className = "nick-box";
                 nick.innerText = element.nick;
 
                 let money = document.createElement('p');
-                money.className = "money-box"
+                money.className = "money-box";
+                money.id = element.nick + "_cashbox";
                 money.innerText = element.cash + "$";
 
                 let img = document.createElement("img");
