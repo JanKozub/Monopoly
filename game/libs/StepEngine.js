@@ -23,7 +23,6 @@ export class StepEngine {
 
                 document.getElementById("dontbuy").onclick = () => {  //KLIK NA NIE
                     this.ui.hideBuyMenu();
-                    //this.gameNet.stopTuraCounter();
                     this.gameNet.nexttura();
                 }
                 document.getElementById("buy").onclick = () => { //KLIK NA TAK

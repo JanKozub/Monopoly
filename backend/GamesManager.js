@@ -19,7 +19,8 @@ class GamesManager {
                 skin: players[k].user.avatar,
                 nick: players[k].user.nick,
                 eq: [],
-                cash: 1500
+                dead: false,
+                cash: 10
             });
         }
 

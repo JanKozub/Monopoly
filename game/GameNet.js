@@ -77,6 +77,8 @@ export class GameNet {
             this.comparePosition(data); //koryguje pozycję pionków do aktualnej z serwera
             this.updateUI(data); //nadpisuje EQ oraz Cash wszystkich graczy
             this.showLatestNews(data); //wyświetla informacje o stanie gry
+            this.checkIfLose();
+            this.checkWin(data);
             await this.updateHouses();
         }
     }
@@ -141,6 +143,18 @@ export class GameNet {
                 showPopup(data.lastAction, 'inform', 3000).then();
             }
         }
+    }
+    checkIfLose = async () => {
+        if (this.playerList[this.player_id].cash <= 0) {
+            let data = JSON.stringify({
+                action: "lose",
+                player_id: this.player_id,
+            })
+            await GameNet.sendFetch(data, "/action")
+        }
+    }
+    checkWin = (data) => {
+        console.log("Gracz " + String(data.win) + " wygrał grę!");
     }
 
     nexttura = async () => {

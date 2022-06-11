@@ -174,6 +174,9 @@ export class Ui {
         playerList.forEach(element => {
             if (element.id != player_id) {
                 document.getElementById(element.nick + "_cashbox").innerText = String(element.cash) + "$";
+                if (element.dead == true) {
+                    document.getElementById(element.skin + "-avatar").src = "./avatars/dead.jpg";
+                }
             }
         });
     }
