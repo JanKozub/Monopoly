@@ -1,0 +1,75 @@
+#join-prompt {
+    width: 400px;
+    height: 200px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 15px;
+    z-index: 2;
+    position: absolute;
+    top: calc(50vh - 200px);
+    left: calc(50vw - 200px);
+    visibility: hidden;
+}
+
+#close-prompt {
+    width: 75px;
+    height: 40px;
+    background-color: red;
+    position: absolute;
+    border-top-right-radius: 13px;
+    border-bottom-left-radius: 13px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    right: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    text-decoration: none;
+    font-size: 23px;
+}
+
+#elements-prompt {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    align-content: space-around;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#close-prompt:hover {
+    background-color: #a60000;
+    transition: all 50ms ease;
+}
+
+#msg-prompt {
+    font-size: 28px;
+    margin: 0;
+}
+
+#password-input-prompt {
+    width: 250px;
+    margin: 5px;
+}
+
+#button-prompt {
+    width: 250px;
+    height: 48px;
+    background-color: limegreen;
+    padding: 0;
+    margin: 5px 0 0 5px;
+    border-radius: 10px;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+#button-prompt:hover {
+    background-color: #2cb22c;
+    transition: all 50ms ease;
+}

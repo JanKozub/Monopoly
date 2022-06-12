@@ -20,6 +20,10 @@ window.onload = async () => {
         const rooms = await Net.sendPostData('/loadRooms', {});
         renderRooms(rooms.rooms)
     }, 500);
+
+    document.getElementById('close-prompt').onclick = () => {
+        document.getElementById('join-prompt').style.visibility = 'hidden';
+    }
 }
 
 async function loadStats() {
@@ -83,14 +87,7 @@ function renderRooms(rooms) {
 
         let joinButton = document.createElement('div')
         joinButton.className = 'join-button';
-        joinButton.onclick = async () => {
-            let temp = await Net.sendPostData('/isAvatarInRoom', {id: room.id})
-            if (!temp.response) {
-                window.location.href = '/room?id=' + room.id;
-            } else {
-                showPopup('Ten avatar jest już w lobby', 'error', 3000).then();
-            }
-        }
+        joinButton.onclick = () => openJoinPrompt(room);
         let buttonText = document.createElement('p')
         buttonText.className = 'join-button-text';
         buttonText.innerText = 'Wejdź!'
@@ -120,5 +117,26 @@ function getWinProc(won, overall) {
         return Math.floor((won / overall) * 100) + '%';
     } else {
         return '0%';
+    }
+}
+
+function openJoinPrompt(room) {
+    let joinPrompt = document.getElementById('join-prompt');
+    joinPrompt.style.visibility = 'visible';
+
+    document.getElementById('button-prompt').onclick = async () => {
+        let enteredPass = document.getElementById('password-input-prompt').value;
+        if (enteredPass ===  room.password) {
+            let temp = await Net.sendPostData('/isAvatarInRoom', {id: room.id})
+            if (!temp.response) {
+                window.location.href = '/room?id=' + room.id;
+            } else {
+                showPopup('Ten avatar jest już w lobby', 'error', 3000).then();
+                joinPrompt.style.visibility = 'hidden';
+            }
+        } else {
+            showPopup('Błędne hasło', 'error', 3000).then();
+            joinPrompt.style.visibility = 'hidden';
+        }
     }
 }

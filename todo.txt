@@ -1,3 +1,2 @@
 ===Na sam koniec===
-- Sprawdzanie hasla do lobby
 - Zrobić ekran wygrał/przegrał. GameNet.js linijka 169
