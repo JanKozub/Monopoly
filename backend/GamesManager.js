@@ -77,6 +77,14 @@ class GamesManager {
             return r.id !== gameId;
         });
     }
+
+    endGameProcess(gameId) {
+        for (let i = 0; i < this.games.length; i++) {
+            if (this.games[i].id === gameId) {
+                this.games[i].win = 0;
+            }
+        }
+    }
 }
 
 module.exports = GamesManager;

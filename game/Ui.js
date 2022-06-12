@@ -294,7 +294,8 @@ export class Ui {
         this.game.flags.sliderFlag = flag;
     }
 
-    showWinPrompt() {
-
+    showWinPrompt(msg) {
+        document.getElementById('win-prompt-msg').innerText = msg
+        document.getElementById('win-prompt').style.visibility = 'visible';
     }
 }

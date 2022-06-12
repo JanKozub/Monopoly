@@ -79,5 +79,6 @@ app.post("/setposition", (req, res) => gamePostService.setPosition(req, res))
 app.post("/action", (req, res) => gamePostService.action(req, res))
 app.post("/getPlayerId", (req, res) => gamePostService.getPlayerId(req, res))
 app.post("/deleteGame", (req, res) => gamePostService.deleteGame(req, res))
+app.post("/endGame", (req, res) => gamePostService.endGame(req, res))
 
 app.use((req, res) => getService.defaultHandler(req, res))

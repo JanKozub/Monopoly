@@ -76,7 +76,6 @@ export class GameNet {
         })
         let data = await GameNet.sendFetch(dane, "/update");
         if (data !== "error") {
-            console.log(data)
             let win = await this.checkWin(data);
             if (win) {
                 this.ui.toggleThrowButton(this.tura, this.player_id);
@@ -174,28 +173,33 @@ export class GameNet {
 
     checkWin = async (data) => {
         if (data.win !== -1) {
-            console.log("Gracz " + data.win + " wygrał grę!"); //DODAC ZAKONCZENIE GRY / PRZYPISAC STATYSTYKI
-            await GameNet.sendFetch(JSON.stringify({id: window.location.href.split('=')[1]}), "/deleteGame")
-            this.ui.showWinPrompt();
-            clearInterval(this.contentUpdate)
-            setTimeout(() => {
-                window.location.href = '/rooms'
-            }, 5000);
+            await this.endProcedure(data.win)
             return false;
         } else if (this.instantWin === 1) { //insta win key shortcut
             this.instantWin = 0;
-            for (let i = 0; i < this.playerList.length; i++) {
-                if (i !== this.player_id) {
-                    let data = JSON.stringify({
-                        action: "lose",
-                        player_id: i,
-                    })
-                    await GameNet.sendFetch(data, "/action")
-                }
-            }
+            await GameNet.sendFetch(JSON.stringify({id: window.location.href.split('=')[1]}), "/endGame")
+            await this.endProcedure(0)
             return false;
+        } else {
+            return true;
         }
-        return true;
+    }
+
+    async endProcedure(id) {
+        await GameNet.sendFetch(JSON.stringify({id: window.location.href.split('=')[1]}), "/deleteGame")
+
+        let msg;
+        if (id === this.player_id) {
+            msg = 'Wygrales grę!'
+        } else {
+            msg = 'Przegrałeś :('
+        }
+
+        this.ui.showWinPrompt(msg);
+        clearInterval(this.contentUpdate)
+        setTimeout(() => {
+            window.location.href = '/rooms'
+        }, 5000);
     }
 
     nextTura = async () => {

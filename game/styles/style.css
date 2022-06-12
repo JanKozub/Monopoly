@@ -190,3 +190,31 @@ body {
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
+#win-prompt {
+    width: 600px;
+    height: 600px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 15px;
+    z-index: 2;
+    position: absolute;
+    top: calc(50vh - 300px);
+    left: calc(50vw - 300px);
+    visibility: hidden;
+    display: flex;
+    align-content: space-around;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#win-prompt-msg {
+    font-size: 45px;
+    margin: 0;
+}
+#win-prompt-msg2 {
+    font-size: 25px;
+    margin: 20px;
+}

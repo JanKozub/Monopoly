@@ -277,6 +277,11 @@ class GamePostService {
         this.gamesManager.deleteGameWithId(req.body.id);
         res.send('game deleted');
     }
+
+    endGame(req, res) {
+        this.gamesManager.endGameProcess(req.body.id);
+        res.send('game ended')
+    }
 }
 
 module.exports = GamePostService;
