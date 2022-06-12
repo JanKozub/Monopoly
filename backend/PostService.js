@@ -51,7 +51,8 @@ class PostService {
             gamesWon: 0,
             moneySum: 0,
             placesBoughtSum: 0,
-            averageRoll: 0
+            rollCounter: 0,
+            rolledNumSum: 0
         }
 
         if (await this.databaseService.isUserInDatabaseByNick(user.nick)) {

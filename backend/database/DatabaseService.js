@@ -99,8 +99,14 @@ class DatabaseService {
                             resolve(numReplaced)
                         }
                     );
-                } else if (stat === 'averageRoll') {
-                    this.users.update({id: id}, {$set: {averageRoll: data}}, {},
+                } else if (stat === 'rollCounter') {
+                    this.users.update({id: id}, {$set: {rollCounter: data}}, {},
+                        function (err, numReplaced) {
+                            resolve(numReplaced)
+                        }
+                    );
+                } else if (stat === 'rolledNumSum') {
+                    this.users.update({id: id}, {$set: {rolledNumSum: data}}, {},
                         function (err, numReplaced) {
                             resolve(numReplaced)
                         }

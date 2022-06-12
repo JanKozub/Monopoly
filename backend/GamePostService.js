@@ -28,9 +28,13 @@ class GamePostService {
         }
     }
 
-    cubeScore(req, res) {
+    async cubeScore(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
         game.playerList[req.body.player_id].position += (req.body.cube_scores[0] + req.body.cube_scores[1]);
+
+        let user = await this.databaseService.getUserFromDataBase(game.playerList[req.body.player_id].nick); // STATS UPDATE
+        await this.databaseService.updateStat(user.id, 'rolledNumSum', user.rolledNumSum + (req.body.cube_scores[0] + req.body.cube_scores[1])).then()
+        await this.databaseService.updateStat(user.id, 'rollCounter', user.rollCounter + 1).then()
 
         if (game.prison.length < game.playerList.length / 2) {
             game.lastThrow = req.body.player_id;
@@ -40,7 +44,11 @@ class GamePostService {
             game.playerList[req.body.player_id].position -= 40;
             game.playerList[req.body.player_id].cash += 200
             game.lastAction =
-                "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") otrzymał 200$";
+                "Gracz " + game.playerList[req.body.player_id].nick +
+                " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") otrzymał 200$";
+
+            let user = await this.databaseService.getUserFromDataBase(game.playerList[req.body.player_id].nick); // STATS UPDATE
+            await this.databaseService.updateStat(user.id, 'moneySum', user.moneySum + 200).then()
         }
         game.actual_cubes = [req.body.cube_scores[0], req.body.cube_scores[1]]
         this.gamesManager.updateGameWithId(game);
@@ -170,12 +178,14 @@ class GamePostService {
         res.send(JSON.stringify("a"))
     }
 
-    action(req, res) {
+    async action(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
 
         switch (req.body.action) {
             case "buy": //gracz wywołał akcję BUY
                 if (game.playerList[req.body.player_id].cash >= this.fields[req.body.fieldIdx].price) {
+                    let user = await this.databaseService.getUserFromDataBase(game.playerList[req.body.player_id].nick); // STATS UPDATE
+                    await this.databaseService.updateStat(user.id, 'placesBoughtSum', user.placesBoughtSum + 1).then()
 
                     game.playerList[req.body.player_id].cash -= this.fields[req.body.fieldIdx].price;
                     game.playerList[req.body.player_id].eq.push(req.body.fieldIdx);
@@ -206,6 +216,9 @@ class GamePostService {
                     game.playerList[req.body.player_id].cash -= card.value;
                 } else if (card.action === "add") {
                     game.playerList[req.body.player_id].cash += card.value;
+
+                    let user = await this.databaseService.getUserFromDataBase(game.playerList[req.body.player_id].nick); // STATS UPDATE
+                    await this.databaseService.updateStat(user.id, 'moneySum', user.moneySum + parseInt(card.value)).then()
                 }
                 break;
             case "add": //gracz wywołał akcję ADD
@@ -215,6 +228,9 @@ class GamePostService {
                         game.playerList[req.body.player_id].nick +
                         " (" + this.skinName[game.playerList[req.body.player_id].skin]
                         + ") otrzymał " + req.body.value + "$";
+
+                    let user = await this.databaseService.getUserFromDataBase(game.playerList[req.body.player_id].nick); // STATS UPDATE
+                    await this.databaseService.updateStat(user.id, 'moneySum', user.moneySum + parseInt(req.body.value)).then()
                 }
                 break;
             case "build": //gracz wywołał akcję BUILD
@@ -284,7 +300,6 @@ class GamePostService {
             let user = await this.databaseService.getUserFromDataBase(game.playerList[game.win].nick);
             await this.databaseService.updateStat(user.id, 'gamesWon', user.gamesWon + 1).then()
         }
-
 
         this.gamesManager.deleteGameWithId(req.body.id);
         res.send('game deleted');

@@ -32,11 +32,11 @@ async function loadStats() {
 
     document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
     document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed; //done
-    document.getElementById('win-proc').innerText = 'Gry wygrane(%): ' + getWinProc(parseInt(obj.gamesWon), parseInt(obj.gamesPlayed));
-    document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum;
-    document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon;
-    document.getElementById('avg-roll').innerText = 'Średnie losowanie: ' + obj.averageRoll;
-    document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum;
+    document.getElementById('win-proc').innerText = 'Gry wygrane(%): ' + getWinProc(parseInt(obj.gamesWon), parseInt(obj.gamesPlayed)); //done
+    document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum; //done
+    document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon; //done
+    document.getElementById('avg-roll').innerText = 'Średnie losowanie: ' + getAvgRoll(parseInt(obj.rolledNumSum), parseInt(obj.rollCounter)); //done
+    document.getElementById('money-sum').innerText = 'Razem zebrano: ' + obj.moneySum; // done
     document.getElementById('avatar-' + obj.avatar).style.filter = 'brightness(70%)'
 }
 
@@ -121,13 +121,21 @@ function getWinProc(won, overall) {
     }
 }
 
+function getAvgRoll(roll, counter) {
+    if (counter === 0) {
+        return '0';
+    } else {
+        return Math.floor(roll / counter)
+    }
+}
+
 function openJoinPrompt(room) {
     let joinPrompt = document.getElementById('join-prompt');
     joinPrompt.style.visibility = 'visible';
 
     document.getElementById('button-prompt').onclick = async () => {
         let enteredPass = document.getElementById('password-input-prompt');
-        if (enteredPass.value ===  room.password) {
+        if (enteredPass.value === room.password) {
             let temp = await Net.sendPostData('/isAvatarInRoom', {id: room.id})
             if (!temp.response) {
                 window.location.href = '/room?id=' + room.id;
