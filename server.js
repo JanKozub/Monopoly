@@ -66,6 +66,7 @@ app.post("/kickUser", (req, res) => postService.kickUser(req, res))
 app.post("/startNewGame", (req, res) => postService.startNewGame(req, res))
 app.post("/isGameStarted", (req, res) => postService.isGameStarted(req, res))
 app.post("/getReadyUsers", (req, res) => postService.getReadyUsers(req, res))
+app.post("/getReadyUsers", (req, res) => postService.getReadyUsers(req, res))
 
 //game
 app.post("/init", (req, res) => gamePostService.initGame(req, res))
@@ -77,5 +78,6 @@ app.post("/setcubes", (req, res) => gamePostService.setCubes(res, res))
 app.post("/setposition", (req, res) => gamePostService.setPosition(req, res))
 app.post("/action", (req, res) => gamePostService.action(req, res))
 app.post("/getPlayerId", (req, res) => gamePostService.getPlayerId(req, res))
+app.post("/deleteGame", (req, res) => gamePostService.deleteGame(req, res))
 
 app.use((req, res) => getService.defaultHandler(req, res))

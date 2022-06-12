@@ -125,8 +125,8 @@ function openJoinPrompt(room) {
     joinPrompt.style.visibility = 'visible';
 
     document.getElementById('button-prompt').onclick = async () => {
-        let enteredPass = document.getElementById('password-input-prompt').value;
-        if (enteredPass ===  room.password) {
+        let enteredPass = document.getElementById('password-input-prompt');
+        if (enteredPass.value ===  room.password) {
             let temp = await Net.sendPostData('/isAvatarInRoom', {id: room.id})
             if (!temp.response) {
                 window.location.href = '/room?id=' + room.id;
@@ -138,5 +138,6 @@ function openJoinPrompt(room) {
             showPopup('Błędne hasło', 'error', 3000).then();
             joinPrompt.style.visibility = 'hidden';
         }
+        enteredPass.value = ''
     }
 }

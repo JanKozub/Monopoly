@@ -12,6 +12,7 @@ export class GameNet {
     actual_cubes;
     old_fields;
     instantWin = 0;
+    lastRead = 0;
 
     constructor(game, playerList, animations) {
         this.playerList = playerList;
@@ -75,15 +76,18 @@ export class GameNet {
         })
         let data = await GameNet.sendFetch(dane, "/update");
         if (data !== "error") {
-            this.ui.toggleThrowButton(this.tura, this.player_id);
-            this.compareCubes(data); //porównuje kostki u gracza z serwerem
-            this.overwrite(data); //nadpisuje stałe klienta nowymi z serwera
-            this.comparePosition(data); //koryguje pozycję pionków do aktualnej z serwera
-            this.updateUI(data); //nadpisuje EQ oraz Cash wszystkich graczy
-            this.showLatestNews(data); //wyświetla informacje o stanie gry
-            await this.checkIfLose();
-            await this.checkWin(data);
-            await this.updateHouses();
+            console.log(data)
+            let win = await this.checkWin(data);
+            if (win) {
+                this.ui.toggleThrowButton(this.tura, this.player_id);
+                this.compareCubes(data); //porównuje kostki u gracza z serwerem
+                this.overwrite(data); //nadpisuje stałe klienta nowymi z serwera
+                this.comparePosition(data); //koryguje pozycję pionków do aktualnej z serwera
+                this.updateUI(data); //nadpisuje EQ oraz Cash wszystkich graczy
+                this.showLatestNews(data); //wyświetla informacje o stanie gry
+                await this.checkIfLose();
+                await this.updateHouses();
+            }
         }
     }
 
@@ -157,6 +161,7 @@ export class GameNet {
             }
         }
     }
+
     checkIfLose = async () => {
         if (this.playerList[this.player_id].cash <= 0) {
             let data = JSON.stringify({
@@ -166,11 +171,19 @@ export class GameNet {
             await GameNet.sendFetch(data, "/action")
         }
     }
+
     checkWin = async (data) => {
         if (data.win !== -1) {
             console.log("Gracz " + data.win + " wygrał grę!"); //DODAC ZAKONCZENIE GRY / PRZYPISAC STATYSTYKI
+            await GameNet.sendFetch(JSON.stringify({id: window.location.href.split('=')[1]}), "/deleteGame")
             this.ui.showWinPrompt();
+            clearInterval(this.contentUpdate)
+            setTimeout(() => {
+                window.location.href = '/rooms'
+            }, 5000);
+            return false;
         } else if (this.instantWin === 1) { //insta win key shortcut
+            this.instantWin = 0;
             for (let i = 0; i < this.playerList.length; i++) {
                 if (i !== this.player_id) {
                     let data = JSON.stringify({
@@ -180,7 +193,9 @@ export class GameNet {
                     await GameNet.sendFetch(data, "/action")
                 }
             }
+            return false;
         }
+        return true;
     }
 
     nextTura = async () => {

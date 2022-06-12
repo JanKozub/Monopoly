@@ -4,13 +4,6 @@ class GamePostService {
     gameDBService;
     gamesManager;
     fields;
-    lastThrow;
-    prison = [];
-    time_inprison = [];
-    dead = [];
-    punishment = 2;
-    onlyFree = -1;
-    win = -1;
     skinName = ["Hotdog", "RJ-45", "Kebab", "Rezystor", "Router", "Piwo"];
 
     constructor(gameDBService, gamesManager) {
@@ -37,14 +30,15 @@ class GamePostService {
         let game = this.gamesManager.getGameById(req.session.gameId);
         game.playerList[req.body.player_id].position += (req.body.cube_scores[0] + req.body.cube_scores[1]);
 
-        if (this.prison.length < game.playerList.length / 2) {
-            this.lastThrow = req.body.player_id;
+        if (game.prison.length < game.playerList.length / 2) {
+            game.lastThrow = req.body.player_id;
         }
 
         if (game.playerList[req.body.player_id].position >= 40) {
             game.playerList[req.body.player_id].position -= 40;
             game.playerList[req.body.player_id].cash += 200
-            game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") otrzymał 200$";
+            game.lastAction =
+                "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") otrzymał 200$";
         }
         game.actual_cubes = [req.body.cube_scores[0], req.body.cube_scores[1]]
         this.gamesManager.updateGameWithId(game);
@@ -64,9 +58,9 @@ class GamePostService {
                 fields: this.fields,
                 lastAction: game.lastAction,
                 lastCard: game.lastCard,
-                lastThrow: this.lastThrow,
-                onlyFree: this.lastFree,
-                win: this.win
+                lastThrow: game.lastThrow,
+                onlyFree: game.lastFree,
+                win: game.win
             }
         } else {
             data = {response: 'id not found'}
@@ -75,12 +69,12 @@ class GamePostService {
     }
 
     ifLastStand = (game) => {
-        if (this.dead.length === game.playerList.length - 1) {
+        if (game.dead.length === game.playerList.length - 1) {
             let tempList = [];
             game.playerList.forEach(element => {
                 tempList.push(element)
             });
-            this.dead.forEach(elementX => {
+            game.dead.forEach(elementX => {
                 tempList.forEach(elementY => {
                     if (elementY.id === elementX) {
                         let index = tempList.indexOf(elementY);
@@ -88,17 +82,18 @@ class GamePostService {
                     }
                 });
             });
-            this.win = tempList[0].id;
+            game.win = tempList[0].id;
         }
     }
+
     ifOnlyOneFree = (game) => {
-        if (this.prison.length === game.playerList.length - 1) {
+        if (game.prison.length === game.playerList.length - 1) {
             let tempList = []
             game.playerList.forEach(element => {
                 tempList.push(element);
             });
             tempList.forEach(element => {
-                if (this.prison.includes(element.id)) {
+                if (game.prison.includes(element.id)) {
                     let index = tempList.indexOf(element);
                     tempList.splice(index, 1);
                 }
@@ -111,41 +106,41 @@ class GamePostService {
 
     nextTura(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
-        this.lastThrow = req.body.player_id;
         if (game !== null) {
+            game.lastThrow = req.body.player_id;
             game.tura = game.tura + 1;
             if (game.tura > game.playerList.length - 1) {
                 game.tura = 0;
             }
-            if (this.prison.includes(game.tura)) { //JEŻELI GRACZ JEST W PRISON TO SKIPUJE MU KOLEJKE
-                this.time_inprison.forEach(prisoner => {
+            if (game.prison.includes(game.tura)) { //JEŻELI GRACZ JEST W PRISON TO SKIPUJE MU KOLEJKE
+                game.time_inprison.forEach(prisoner => {
                     if (prisoner.who === game.tura) {
                         prisoner.time++; //CO KAŻDĄ KOLEJKĘ ROŚNIE MU CZAS SPĘDZOZNY W WIĘZIENIU
-                        if (prisoner.time < this.punishment) {
+                        if (prisoner.time < game.punishment) {
                             game.tura++;
                             if (game.tura > game.playerList.length - 1) {
                                 game.tura = 0;
                             }
                         } else { //JEŚLI POBYT W WIĘZIENIU JEST DŁUŻSZY NIŻ CZAS KARY TO GO WYPUŚĆ
-                            let prison_id = this.prison.indexOf(prisoner.who);
-                            let prison_time_id = this.time_inprison.indexOf(prisoner);
-                            this.prison.splice(prison_id, 1);
-                            this.time_inprison.splice(prison_time_id, 1);
+                            let prison_id = game.prison.indexOf(prisoner.who);
+                            let prison_time_id = game.time_inprison.indexOf(prisoner);
+                            game.prison.splice(prison_id, 1);
+                            game.time_inprison.splice(prison_time_id, 1);
                         }
                     }
                 });
             }
-            if (this.prison.length === game.playerList.length) {
-                this.prison.splice(0, 1);
-                this.time_inprison.forEach(prisoner => {
-                    if (prisoner.who === this.prison[0]) {
-                        let index = this.time_inprison.indexOf(prisoner);
-                        this.time_inprison.splice(index, 1);
+            if (game.prison.length === game.playerList.length) {
+                game.prison.splice(0, 1);
+                game.time_inprison.forEach(prisoner => {
+                    if (prisoner.who === game.prison[0]) {
+                        let index = game.time_inprison.indexOf(prisoner);
+                        game.time_inprison.splice(index, 1);
                     }
                 });
             }
-            if (this.prison.length === game.playerList.length - 1) {
-                this.lastThrow = this.prison[this.prison.length - 1];
+            if (game.prison.length === game.playerList.length - 1) {
+                game.lastThrow = game.prison[game.prison.length - 1];
             }
             if (game.playerList[game.tura].dead) {
                 game.tura++
@@ -201,7 +196,10 @@ class GamePostService {
             case "card": //gracz wywołał akcję CARD
                 //losuj kartę z listy kart, zwróć treść (text), akcje (action)(take lub add) oraz wartość (value) (ile dodać/odjąć)
                 let card = this.getRandomCard();
-                game.lastCard = "Karta dla gracza: " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") " + card.text;
+                game.lastCard = "Karta dla gracza: " +
+                    game.playerList[req.body.player_id].nick +
+                    " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") "
+                    + card.text;
                 if (card.action === "take") {
                     game.playerList[req.body.player_id].cash -= card.value;
                 } else if (card.action === "add") {
@@ -211,7 +209,10 @@ class GamePostService {
             case "add": //gracz wywołał akcję ADD
                 if (!game.playerList[req.body.player_id].dead) {
                     game.playerList[req.body.player_id].cash += req.body.value;
-                    game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") otrzymał " + req.body.value + "$";
+                    game.lastAction = "Gracz " +
+                        game.playerList[req.body.player_id].nick +
+                        " (" + this.skinName[game.playerList[req.body.player_id].skin]
+                        + ") otrzymał " + req.body.value + "$";
                 }
                 break;
             case "build": //gracz wywołał akcję BUILD
@@ -221,19 +222,23 @@ class GamePostService {
 
                 this.fields[req.body.fieldIdx].value += (this.fields[req.body.fieldIdx].price / 2) * this.fields[req.body.fieldIdx].shops.length;
 
-                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") rozbudował " +
-                    this.fields[req.body.fieldIdx].name + " za " + String(price) + "$";
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick +
+                    " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") rozbudował " +
+                    this.fields[req.body.fieldIdx].name + " za " + price + "$";
                 break;
             case "prison": //gracz wywołał akcję PRISON
-                this.prison.push(req.body.player_id)
-                this.time_inprison.push({who: req.body.player_id, time: 1})
-                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") trafił do więzienia! ";
+                game.prison.push(req.body.player_id)
+                game.time_inprison.push({who: req.body.player_id, time: 1})
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick +
+                    " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") " +
+                    "trafił do więzienia! ";
                 break;
             case "lose": //gracz stracił całe pieniądze
                 game.playerList[req.body.player_id].dead = true;
                 game.playerList[req.body.player_id].cash = 0;
-                this.dead.push(req.body.player_id);
-                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") zbankurotwał! ";
+                game.dead.push(req.body.player_id);
+                game.lastAction = "Gracz " + game.playerList[req.body.player_id].nick +
+                    " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") zbankurotwał! ";
                 break;
         }
         if (game.tura > game.playerList.length - 1) {
@@ -266,6 +271,11 @@ class GamePostService {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    deleteGame(req, res) {
+        this.gamesManager.deleteGameWithId(req.body.id);
+        res.send('game deleted');
     }
 }
 

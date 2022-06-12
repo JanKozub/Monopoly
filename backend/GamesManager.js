@@ -31,7 +31,15 @@ class GamesManager {
             lastAction: "",
             lastCard: "",
             actual_cubes: [2, 2],
-            tura: 0
+            tura: 0,
+            lastThrow: -1,
+            lastFree: -1,
+            win: -1,
+            prison: [],
+            time_inprison: [],
+            dead: [],
+            punishment: 2,
+            onlyFree: -1
         })
     }
 
@@ -54,12 +62,20 @@ class GamesManager {
 
     isPlayerInGame(gameId, playerId) {
         let game = this.getGameById(gameId)
-        for (let i = 0; i < game.players.length; i++) {
-            if (game.players[i].id === playerId) {
-                return true;
+        if (game !== null) {
+            for (let i = 0; i < game.players.length; i++) {
+                if (game.players[i].id === playerId) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    deleteGameWithId(gameId) {
+        this.games = this.games.filter(function (r) {
+            return r.id !== gameId;
+        });
     }
 }
 
