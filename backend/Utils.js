@@ -13,7 +13,7 @@ class Utils {
             "Nie przebrałeś bucików i dorwał cię dyrektor Piszkowski, płacisz 50$ za woreczki",
             "Zapomniałeś o deadline u Mendeli, kupujesz projekcik za 150$",
             "Nie zabrałeś z domu śniadania, kupujesz hotdoga z dodatkami za 70$",
-            "Przyjechałeś samochodem za 9:20 i musisz zaparkować na strefie. Płacisz 100$ za 6h parkingu.",
+            "Przyjechałeś samochodem na 9:20 i musisz zaparkować na strefie. Płacisz 100$ za 6h parkingu.",
             "Wszedłeś do DSa bez pukania, tracisz 50$ i dwie jedynki",
             "Oszukiwałeś w szkolnych zawodach szachowych, dyr. Piszkowski cię przyłapał, straciłeś 100$",
             "Przyszedłeś na zakończenie roku bez krawatu ZSŁ, tracisz 100$ bo tak się nie robi",

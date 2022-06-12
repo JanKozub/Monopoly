@@ -52,13 +52,15 @@ export class Animations {
         let pionki = players.getChildren();
         pionki.forEach(pionek => {
             if (pionek.PlayerID === id) {
-                this.jumpXtimes(pionek, jumps, this.playerAppearance[id].height, id);
+                let skin_height = this.playerList[id].skin;
+                this.jumpXtimes(pionek, jumps, this.playerAppearance[skin_height].height, id);
             }
         });
     }
 
     jumpXtimes(target, x, back_y, id) {
         let cnt = 0;
+        let skin = this.playerList[target.PlayerID].skin;
         jump(this.playerList, this.playerAppearance, this.game, this.gameNet);
 
         function jump(playerList, playerAppearance, game, gameNet) {
@@ -70,22 +72,26 @@ export class Animations {
             buttons.forEach(element => {
                 if (element.fieldID === pos) {
                     dir = { x: element.position.x, z: element.position.z };
-                    dir.x += playerAppearance[target.PlayerID].offset.x;
-                    dir.z += playerAppearance[target.PlayerID].offset.z;
+                    dir.x += playerAppearance[skin].offset.x;
+                    dir.z += playerAppearance[skin].offset.z;
                 }
             });
 
             if (cnt < x) {
                 if (corners.includes(pos)) {
-                    new TWEEN.Tween(target.rotation)
-                        .to({ y: target.rotation.y - 90 * (Math.PI / 180) }, 300)
-                        .repeat(0)
-                        .easing(TWEEN.Easing.Linear.None)
-                        .onUpdate(() => {
-                        })
-                        .onComplete(() => {
-                        })
-                        .start()
+                    let turn = new TWEEN.Tween(target.rotation)
+                    let axis = playerAppearance[skin].turn.axis;
+                    let sign = playerAppearance[skin].turn.sign;
+                    if (axis === "x") {
+                        turn.to({ x: target.rotation.x + sign * 90 * (Math.PI / 180) }, 300)
+                    } else if (axis === "y") {
+                        turn.to({ y: target.rotation.y + sign * 90 * (Math.PI / 180) }, 300)
+                    } else if (axis === "z") {
+                        turn.to({ z: target.rotation.z + sign * 90 * (Math.PI / 180) }, 300)
+                    }
+                    turn.repeat(0)
+                    turn.easing(TWEEN.Easing.Linear.None)
+                    turn.start()
                 }
                 new TWEEN.Tween(target.position)
                     .to({ x: dir.x, z: dir.z }, 300)
