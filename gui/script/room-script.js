@@ -1,6 +1,7 @@
 let id = undefined;
 let room = undefined;
 let currentUser = undefined;
+let interval = undefined;
 
 window.onload = async () => {
     id = window.location.href.split('=')[1];
@@ -17,7 +18,7 @@ window.onload = async () => {
         renderTopBar();
         renderPlayers();
 
-        setInterval(() => updateUsersInRoom(), 500);
+        interval = setInterval(() => updateUsersInRoom(), 500);
     }
 }
 
@@ -100,6 +101,7 @@ async function startGame() {
     if (room.users.length === parseInt(room.size)) {
         let readyUsersCounter = await Net.sendPostData('/getReadyUsers', {id: id}).then()
         if (readyUsersCounter.readyUsers === parseInt(room.size)) {
+            clearInterval(interval)
             console.log('starting game...')
             let id = window.location.href.split('=')[1]
             Net.sendPostData('/startNewGame', {id: id}).then()
