@@ -1,3 +1,0 @@
-===Na sam koniec===
-- Zrobić ekran wygrał/przegrał. GameNet.js linijka 169
-- dodac statystyki graczy
