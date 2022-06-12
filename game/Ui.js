@@ -16,6 +16,9 @@ export class Ui {
         this.setAvatarImage();
     }
 
+    updatePlayerlist = (playerList) => {
+        this.playerList = playerList;
+    }
     setStepEngine(stepEngine) {
         this.stepEngine = stepEngine;
     }
@@ -209,14 +212,24 @@ export class Ui {
             if (this.game.fields[index].shops.length < 2) {
                 document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 1.5) + "$?";
                 document.getElementById("build").onclick = () => {
+                    if (this.net.playerList[this.net.player_id].cash > this.game.fields[index].price * 1.5) {
+                        this.stepEngine.build(index, 1, this.net.player_id).then();
+                        document.getElementById("build").innerText = "TAK";
+                    } else {
+                        document.getElementById("build").innerText = "Za mało kasy!";
+                    }
                     this.hideBuildMenu();
-                    this.stepEngine.build(index, 1, this.net.player_id).then();
                 }
             } else if (this.game.fields[index].shops.length === 2) {
                 document.getElementById("buildprice").innerText = "za " + (this.game.fields[index].price * 3) + "$?";
                 document.getElementById("build").onclick = () => {
+                    if (this.net.playerList[this.net.player_id].cash > this.game.fields[index].price * 3) {
+                        this.stepEngine.build(index, 2, this.net.player_id).then();
+                        document.getElementById("build").innerText = "TAK";
+                    } else {
+                        document.getElementById("build").innerText = "Za mało kasy!";
+                    }
                     this.hideBuildMenu();
-                    this.stepEngine.build(index, 2, this.net.player_id).then();
                 }
             } else {
                 document.getElementById("build").innerText = "NIE"

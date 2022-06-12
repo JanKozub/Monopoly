@@ -38,7 +38,7 @@ class GamesManager {
             prison: [],
             time_inprison: [],
             dead: [],
-            punishment: 2,
+            punishment: 3,
             onlyFree: -1
         })
     }
