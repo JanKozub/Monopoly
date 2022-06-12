@@ -6,13 +6,22 @@ function showPopup(msg, type, time) {
             blocker = true;
             let popupEl = document.getElementById('popup');
 
-            document.getElementById('popup-text').innerText = 'Wiadomość:\n' + msg;
+            if (type === 'card') {
+                document.getElementById('popup-text').innerText = msg;
+            } else {
+                document.getElementById('popup-text').innerText = 'Wiadomość:\n' + msg;
+            }
+
 
             if (type === 'success') {
                 popupEl.style.backgroundColor = 'rgba(66,255,69,0.8)'
             } else if (type === 'inform') {
                 popupEl.style.backgroundColor = 'rgba(66,120,255,0.8)'
-            } else if (type === 'error') {
+            } else if (type === 'card') {
+                popupEl.style.backgroundColor = 'rgba(66,255,69,0.8)';
+                popupEl.style.height = "150px";
+            }
+            else if (type === 'error') {
                 popupEl.style.backgroundColor = 'rgba(255, 66, 66, 0.8)'
             }
 

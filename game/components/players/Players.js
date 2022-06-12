@@ -21,7 +21,7 @@ export class Players extends THREE.Mesh {
         playerList.forEach(player => {
             if (player.position !== -1) {
                 let pionek = new Player(player.id, playerAppearance[player.skin].color, playerAppearance[player.skin].emissive, player.skin);
-                pionek.set_position(112 + playerAppearance[player.id].offset.x, playerAppearance[player.id].height, 112 + playerAppearance[player.id].offset.z);
+                pionek.set_position(112 + playerAppearance[player.skin].offset.x, playerAppearance[player.skin].height, 112 + playerAppearance[player.skin].offset.z);
                 pionek.set_scale(playerAppearance[player.skin].scale)
                 pionek.set_rotation(
                     this.deg2rad(-playerAppearance[player.skin].rotation.x),

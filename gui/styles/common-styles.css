@@ -68,12 +68,11 @@ body {
 
     66% {
         right: -350px;
-        top: -100px;
+        top: -150px;
     }
 
     100% {
         right: 15px;
-        top: -150px;
+        top: -550px;
     }
 }
-

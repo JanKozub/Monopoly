@@ -20,7 +20,7 @@ class GamesManager {
                 nick: players[k].user.nick,
                 eq: [],
                 dead: false,
-                cash: 10
+                cash: 1500
             });
         }
 
@@ -29,6 +29,7 @@ class GamesManager {
             players: temp,
             playerList: temp2,
             lastAction: "",
+            lastCard: "",
             actual_cubes: [2, 2],
             tura: 0
         })

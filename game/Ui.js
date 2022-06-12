@@ -225,6 +225,9 @@ export class Ui {
                     this.net.nexttura().then();
                 }
             }
+            document.getElementById("dontbuild").onclick = () => {
+                this.hideBuildMenu();
+            }
         }
     }
 

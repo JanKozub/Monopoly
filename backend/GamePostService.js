@@ -1,3 +1,5 @@
+const Utils = require('./Utils.js');
+
 class GamePostService {
     gameDBService;
     gamesManager;
@@ -6,7 +8,9 @@ class GamePostService {
     prison = [];
     time_inprison = [];
     dead = [];
-    punishment = 3;
+    punishment = 2;
+    onlyFree = -1;
+    win = -1;
     skinName = ["Hotdog", "RJ-45", "Kebab", "Rezystor", "Router", "Piwo"];
 
     constructor(gameDBService, gamesManager) {
@@ -49,9 +53,32 @@ class GamePostService {
 
     update(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
-        let win = [];
+        let data;
+        if (game !== null) {
+            this.ifLastStand(game); //sprawdza czy został jeden zwycięzca
+            this.ifOnlyOneFree(game); //sprawdza czy tylko jeden jest na wolności
+            data = {
+                playerList: game.playerList,
+                tura: game.tura,
+                cubes: game.actual_cubes,
+                fields: this.fields,
+                lastAction: game.lastAction,
+                lastCard: game.lastCard,
+                lastThrow: this.lastThrow,
+                onlyFree: this.lastFree,
+                win: this.win
+            }
+        } else {
+            data = { response: 'id not found' }
+        }
+        res.send(JSON.stringify(data))
+    }
+    ifLastStand = (game) => {
         if (this.dead.length == game.playerList.length - 1) {
-            let tempList = game.playerList;
+            let tempList = [];
+            game.playerList.forEach(element => {
+                tempList.push(element)
+            });
             this.dead.forEach(elementX => {
                 tempList.forEach(elementY => {
                     if (elementY.id == elementX) {
@@ -60,25 +87,24 @@ class GamePostService {
                     }
                 });
             });
-            win = tempList[0].id;
+            this.win = tempList[0].id;
         }
-        let data;
-        if (game !== null) {
-            data = {
-                playerList: game.playerList,
-                tura: game.tura,
-                cubes: game.actual_cubes,
-                fields: this.fields,
-                lastAction: game.lastAction,
-                lastThrow: this.lastThrow,
-                win: win
-            }
-        } else {
-            data = { response: 'id not found' }
-        }
-        res.send(JSON.stringify(data))
     }
-
+    ifOnlyOneFree = (game) => {
+        if (this.prison.length == game.playerList.length - 1) {
+            let tempList = []
+            game.playerList.forEach(element => {
+                tempList.push(element);
+            });
+            tempList.forEach(element => {
+                if (this.prison.includes(element.id)) {
+                    let index = tempList.indexOf(element);
+                    tempList.splice(index, 1);
+                }
+            });
+            this.onlyFree = tempList[0].id;
+        } else { this.onlyFree = -1 };
+    }
     nextTura(req, res) {
         let game = this.gamesManager.getGameById(req.session.gameId);
         this.lastThrow = req.body.player_id;
@@ -91,7 +117,7 @@ class GamePostService {
                 this.time_inprison.forEach(prisoner => {
                     if (prisoner.who === game.tura) {
                         prisoner.time++; //CO KAŻDĄ KOLEJKĘ ROŚNIE MU CZAS SPĘDZOZNY W WIĘZIENIU
-                        if (prisoner.time <= this.punishment) {
+                        if (prisoner.time < this.punishment) {
                             game.tura++;
                             if (game.tura > game.playerList.length - 1) {
                                 game.tura = 0;
@@ -108,6 +134,15 @@ class GamePostService {
             }
             if (this.prison.length == game.playerList.length) {
                 this.prison.splice(0, 1);
+                this.time_inprison.forEach(prisoner => {
+                    if (prisoner.who == this.prison[0]) {
+                        let index = this.time_inprison.indexOf(prisoner);
+                        this.time_inprison.splice(index, 1);
+                    }
+                });
+            }
+            if (this.prison.length == game.playerList.length - 1) {
+                this.lastThrow = this.prison[this.prison.length - 1];
             }
             if (game.playerList[game.tura].dead) {
                 game.tura++
@@ -162,6 +197,13 @@ class GamePostService {
                 break;
             case "card": //gracz wywołał akcję CARD
                 //losuj kartę z listy kart, zwróć treść (text), akcje (action)(take lub add) oraz wartość (value) (ile dodać/odjąć)
+                let card = this.getRandomCard();
+                game.lastCard = "Karta dla gracza: " + game.playerList[req.body.player_id].nick + " (" + this.skinName[game.playerList[req.body.player_id].skin] + ") " + card.text;
+                if (card.action === "take") {
+                    game.playerList[req.body.player_id].cash -= card.value;
+                } else if (card.action === "add") {
+                    game.playerList[req.body.player_id].cash += card.value;
+                }
                 break;
             case "add": //gracz wywołał akcję ADD
                 if (!game.playerList[req.body.player_id].dead) {
@@ -210,6 +252,16 @@ class GamePostService {
         }
 
         res.send(JSON.stringify({ id: id }))
+    }
+    getRandomCard = () => {
+        let index = this.getRandomInt(0, 19);
+        let card = Utils.getCard(index);
+        return card;
+    }
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
 

@@ -5,6 +5,7 @@ export class GameNet {
     game;
     ui;
     lastAction;
+    lastCard;
     animations;
     stepEngine;
     contentUpdate;
@@ -23,6 +24,7 @@ export class GameNet {
         this.actual_cubes = [2, 2]
         this.contentUpdate = setInterval(this.update, 200);
         this.turaSeconds = 30;
+        this.onlyFree = -1;
     }
 
     setUi(ui) {
@@ -35,13 +37,13 @@ export class GameNet {
 
     sendCubeScore = async (a, b) => { //PRZESŁANIE DO SERWERA WYLOSOWANYCH OCZEK KOSTEK
         if (this.lastThrow != this.player_id) {
+            clearInterval(this.turaTime);
             let data = JSON.stringify({
                 player_id: this.player_id,
                 cube_scores: [a, b]
             })
             await GameNet.sendFetch(data, "/cubeScore")
         }
-
     }
 
     throwCubes = async (a, b) => {
@@ -59,7 +61,8 @@ export class GameNet {
                 } else {
                     clearInterval(this.turaTime);
                     this.nexttura().then();
-                    this.ui.hideBuyMenu()
+                    this.ui.hideBuyMenu();
+                    this.ui.hideBuildMenu();
                 }
             }, 1000)
         }
@@ -88,6 +91,7 @@ export class GameNet {
         this.tura = data.tura;
         this.game.fields = data.fields;
         this.lastThrow = data.lastThrow;
+        this.onlyFree = data.onlyFree;
         this.stepEngine.update(data.fields);
     }
 
@@ -143,6 +147,12 @@ export class GameNet {
                 showPopup(data.lastAction, 'inform', 3000).then();
             }
         }
+        if (this.lastCard !== data.lastCard) {
+            this.lastCard = data.lastCard;
+            if (data.lastCard !== "") {
+                showPopup(data.lastCard, 'card', 6000).then();
+            }
+        }
     }
     checkIfLose = async () => {
         if (this.playerList[this.player_id].cash <= 0) {
@@ -154,7 +164,11 @@ export class GameNet {
         }
     }
     checkWin = (data) => {
-        console.log("Gracz " + String(data.win) + " wygrał grę!");
+        if (data.win != -1) {
+            console.log("Gracz " + String(data.win) + " wygrał grę!"); //DODAC ZAKONCZENIE GRY / PRZYPISAC STATYSTYKI
+            //DATA.WIN to ID gracza ktory wygral
+        }
+
     }
 
     nexttura = async () => {

@@ -32,11 +32,6 @@ export class Game {
         this.shadowplane = new ShadowPlane();
         this.scene.add(this.shadowplane.getPlane());
 
-        this.axesHelper = new THREE.AxesHelper(1000);
-        this.scene.add(this.axesHelper);
-
-        this.scene.add(this.light.getHelper())
-
         document.getElementById("root").append(this.renderer.domElement);
 
         this.camera.position.set(0, 220, 0)

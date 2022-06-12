@@ -86,6 +86,7 @@ export class StepEngine {
             action: "card",
             player_id: player_id
         })
+        this.gameNet.nexttura();
         await GameNet.sendFetch(data, "/action")
         //wykonaj akcję dla CARD
     }
