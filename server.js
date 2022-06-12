@@ -22,6 +22,7 @@ const postService = new PostService(new DatabaseService(), roomManager, gamesMan
 const gamePostService = new GamePostService(new GameDBService(), gamesManager);
 const getService = new GetService(roomManager, gamesManager);
 
+const port = process.env.PORT || 3000
 let app = express();
 
 app.use(express.static('resources'))
@@ -41,8 +42,8 @@ app.set('views', path.join(__dirname, '/gui/views'));
 app.engine('hbs', hbs({defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
-app.listen(3000, () => {
-    console.log("start serwera na porcie " + 3000)
+app.listen(port, () => {
+    console.log("start serwera na porcie " + port)
 })
 
 app.get('/', (req, res) => getService.defaultHandler(req, res));
