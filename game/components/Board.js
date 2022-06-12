@@ -9,8 +9,4 @@ export class Board extends THREE.Mesh {
         this.name = "gameboard";
         this.position.set(0, 0, 0);
     }
-
-    getName() {
-        return this.name;
-    }
 }

@@ -50,8 +50,4 @@ export class Light {
     getLight() {
         return this.container;
     }
-
-    getHelper() {
-        return this.helper;
-    }
 }

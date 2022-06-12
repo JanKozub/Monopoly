@@ -6,7 +6,7 @@ window.onload = () => {
 
     window.onkeydown = (k) => {
         if (k.key === 'Enter') {
-            onClick('login');
+            onClick('login').then();
         }
     }
 }

@@ -26,12 +26,6 @@ export class Cubes extends THREE.Mesh {
         this.children.push(CubeB);
     }
 
-    getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    };
-
     getChildren() {
         return this.children;
     }
