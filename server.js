@@ -18,8 +18,9 @@ const GamesManager = require("./backend/GamesManager.js");
 
 const roomManager = new RoomManager();
 const gamesManager = new GamesManager();
-const postService = new PostService(new DatabaseService(), roomManager, gamesManager);
-const gamePostService = new GamePostService(new GameDBService(), gamesManager);
+const databaseService = new DatabaseService();
+const postService = new PostService(databaseService, roomManager, gamesManager);
+const gamePostService = new GamePostService(new GameDBService(), gamesManager, databaseService);
 const getService = new GetService(roomManager, gamesManager);
 
 const port = process.env.PORT || 3000

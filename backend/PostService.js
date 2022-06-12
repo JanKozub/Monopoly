@@ -63,7 +63,9 @@ class PostService {
         }
     }
 
-    getUser(req, res) {
+    async getUser(req, res) {
+        req.session.user = await this.databaseService.getUserWithId(req.session.user.id);
+
         res.setHeader("content-type", "text/plain")
         res.send(JSON.stringify(req.session.user))
     }

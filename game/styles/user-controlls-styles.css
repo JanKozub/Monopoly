@@ -61,6 +61,7 @@
     width: 80px;
     height: 80px;
     border: 2px solid green;
+    background-color: white;
     border-radius: 15px;
     padding: 5px;
 }

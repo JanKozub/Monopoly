@@ -3,12 +3,14 @@ const Utils = require('./Utils.js');
 class GamePostService {
     gameDBService;
     gamesManager;
+    databaseService;
     fields;
     skinName = ["Hotdog", "RJ-45", "Kebab", "Rezystor", "Router", "Piwo"];
 
-    constructor(gameDBService, gamesManager) {
+    constructor(gameDBService, gamesManager, databaseService) {
         this.gameDBService = gameDBService;
         this.gamesManager = gamesManager;
+        this.databaseService = databaseService;
     }
 
     async getFields(req, res) {
@@ -273,7 +275,17 @@ class GamePostService {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    deleteGame(req, res) {
+    async deleteGame(req, res) {
+        let game = this.gamesManager.getGameById(req.body.id);
+        if (game !== null){
+            for (let i = 0; i < game.players.length; i++) {
+                await this.databaseService.updateStat(game.players[i].id, 'gamesPlayed', game.players[i].gamesPlayed + 1).then()
+            }
+            let user = await this.databaseService.getUserFromDataBase(game.playerList[game.win].nick);
+            await this.databaseService.updateStat(user.id, 'gamesWon', user.gamesWon + 1).then()
+        }
+
+
         this.gamesManager.deleteGameWithId(req.body.id);
         res.send('game deleted');
     }

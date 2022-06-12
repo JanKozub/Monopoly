@@ -28,9 +28,10 @@ window.onload = async () => {
 
 async function loadStats() {
     const obj = await Net.sendPostData('/getUser', {});
+    console.log('stats loaded')
 
     document.getElementById('welcome-msg').innerText = 'Witaj ' + obj.nick;
-    document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed;
+    document.getElementById('games-played').innerText = 'Gry zagrane: ' + obj.gamesPlayed; //done
     document.getElementById('win-proc').innerText = 'Gry wygrane(%): ' + getWinProc(parseInt(obj.gamesWon), parseInt(obj.gamesPlayed));
     document.getElementById('bought-sum').innerText = 'Liczba zakupów: ' + obj.placesBoughtSum;
     document.getElementById('games-won').innerText = 'Gry wygrane: ' + obj.gamesWon;
