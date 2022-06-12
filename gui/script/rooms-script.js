@@ -114,7 +114,8 @@ async function changeAvatar(n) {
 }
 
 function getWinProc(won, overall) {
-    if (overall > 0 && won < overall) {
+    console.log(won, overall)
+    if (overall > 0 && won <= overall) {
         return Math.floor((won / overall) * 100) + '%';
     } else {
         return '0%';
