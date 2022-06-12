@@ -1,7 +1,11 @@
 {
-  "name": "Monopoly",
+  "name": "monopoly",
   "version": "1.0.0",
-  "start": "node server.js",
+  "description": "monopoly app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
@@ -12,5 +16,15 @@
     "node": "^17.7.2",
     "require": "^0.4.9",
     "serve-favicon": "^2.5.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
 }
