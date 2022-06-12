@@ -62,7 +62,7 @@ export class Ui {
         }
         document.getElementById("skiptura").onclick = () => {
             document.getElementById("skiptura").style.display = "none";
-            this.net.nexttura();
+            this.net.nextTura();
         }
     }
 
@@ -101,11 +101,11 @@ export class Ui {
         document.getElementById("block_shops").innerText = "Sklepy: ";
         let house_count = { small: 0, big: 0 };
         this.game.fields[id].shops.forEach(element => {
-            if (element == 1) { house_count.small++ }
-            else if (element == 2) { house_count.big++ }
+            if (element === 1) { house_count.small++ }
+            else if (element === 2) { house_count.big++ }
         });
-        if (house_count.small > 0) { document.getElementById("block_shops").innerText += String(house_count.small) + "x automat" }
-        if (house_count.big > 0) { document.getElementById("block_shops").innerText += ", " + String(house_count.big) + "x budka z kebabem" }
+        if (house_count.small > 0) { document.getElementById("block_shops").innerText += house_count.small + "x automat" }
+        if (house_count.big > 0) { document.getElementById("block_shops").innerText += ", " + house_count.big + "x budka z kebabem" }
         switch (this.game.fields[id].action) {
             case "none":
                 document.getElementById("block_action").innerText = "Odwiedzający nic nie płaci ani nie otrzymuje.";
@@ -157,31 +157,31 @@ export class Ui {
         }
     }
 
-    updateThrowbutton(last, current, tura) {
-        if (last == current) {
+    updateThrowButton(last, current, tura) {
+        if (last === current) {
             document.getElementById("throw").style.display = "none";
-            if (current == tura) {
+            if (current === tura) {
                 if (!this.net.cubesInMove) {
                     document.getElementById("skiptura").style.display = "flex";
                 }
             }
         }
-        if (current != tura) {
+        if (current !== tura) {
             document.getElementById("skiptura").style.display = "none";
         }
     }
     updateEnemyList(playerList, player_id) {
         playerList.forEach(element => {
-            if (element.id != player_id) {
+            if (element.id !== player_id) {
                 document.getElementById(element.nick + "_cashbox").innerText = String(element.cash) + "$";
-                if (element.dead == true) {
+                if (element.dead === true) {
                     document.getElementById(element.skin + "-avatar").src = "./avatars/dead.jpg";
                 }
             }
         });
     }
 
-    toggleThrowbutton(tura, id) {
+    toggleThrowButton(tura, id) {
         if (tura === id) {
             document.getElementById("throw").style.display = "flex"
         } else {
@@ -202,7 +202,7 @@ export class Ui {
     }
 
     showBuildMenu = (index) => {
-        if (this.net.tura == this.net.player_id) {
+        if (this.net.tura === this.net.player_id) {
             document.getElementById("buildmenu").style.display = "flex";
             document.getElementById("buildname").innerText = this.game.fields[index].name;
             document.getElementById("build").innerText = "TAK"
@@ -222,7 +222,7 @@ export class Ui {
                 document.getElementById("build").innerText = "NIE"
                 document.getElementById("build").onclick = () => {
                     this.hideBuildMenu();
-                    this.net.nexttura().then();
+                    this.net.nextTura().then();
                 }
             }
             document.getElementById("dontbuild").onclick = () => {
@@ -292,5 +292,9 @@ export class Ui {
 
     setSliderFlag(flag) {
         this.game.flags.sliderFlag = flag;
+    }
+
+    showWinPrompt() {
+
     }
 }

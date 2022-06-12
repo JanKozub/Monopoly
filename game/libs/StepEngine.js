@@ -23,7 +23,7 @@ export class StepEngine {
 
                 document.getElementById("dontbuy").onclick = () => {  //KLIK NA NIE
                     this.ui.hideBuyMenu();
-                    this.gameNet.nexttura();
+                    this.gameNet.nextTura();
                 }
                 document.getElementById("buy").onclick = () => { //KLIK NA TAK
                     this.buy(index, player_id).then(); //zakup pola przez gracza
@@ -57,7 +57,7 @@ export class StepEngine {
             fieldIdx: fieldIdx,
             player_id: player_id
         })
-        this.gameNet.nexttura();
+        this.gameNet.nextTura();
         await GameNet.sendFetch(data, "/action")
     }
 
@@ -77,7 +77,7 @@ export class StepEngine {
             type: typ,
             player_id: player_id,
         })
-        this.gameNet.nexttura();
+        this.gameNet.nextTura();
         await GameNet.sendFetch(data, "/action")
     }
 
@@ -86,7 +86,7 @@ export class StepEngine {
             action: "card",
             player_id: player_id
         })
-        this.gameNet.nexttura();
+        this.gameNet.nextTura();
         await GameNet.sendFetch(data, "/action")
         //wykonaj akcję dla CARD
     }
@@ -105,7 +105,7 @@ export class StepEngine {
             action: "prison",
             player_id: player_id,
         })
-        this.gameNet.nexttura();
+        this.gameNet.nextTura();
         await GameNet.sendFetch(data, "/action")
         //wykonaj akcję dla PRISON
     }

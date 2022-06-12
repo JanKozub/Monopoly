@@ -5,8 +5,8 @@ import { Animations } from "./libs/Animations.js";
 import { StepEngine } from "./libs/StepEngine.js";
 
 let game;
-let ui;
 let net;
+let myId;
 
 let playerAppearance = [
     { offset: { x: 5, z: -5 }, color: 0xffff20, emissive: 0x303010, scale: 2, height: 20, rotation: { x: 0, y: 90, z: 0 }, turn: { axis: "y", sign: -1 } },
@@ -20,12 +20,12 @@ let playerAppearance = [
 window.onload = async () => {
     let id = window.location.href.split('=')[1];
     let playerList = await GameNet.sendFetch(JSON.stringify({ id: id }), "/init")
-    let myId = await GameNet.sendFetch(JSON.stringify({ gameId: id }), '/getPlayerId')
+    myId = await GameNet.sendFetch(JSON.stringify({ gameId: id }), '/getPlayerId')
 
     game = new Game(playerList, playerAppearance, myId.id);
     let animations = new Animations(playerList, playerAppearance, game);
     net = new GameNet(game, playerList, animations);
-    ui = new Ui(game, net, playerList);
+    let ui = new Ui(game, net, playerList);
 
     game.setUi(ui);
     net.setUi(ui);
@@ -39,3 +39,10 @@ window.onload = async () => {
 window.onresize = () => {
     game.resize(window.innerWidth, window.innerHeight);
 }
+
+window.onkeydown = (k) => {
+    if (k.ctrlKey && k.key === 'K'){
+        net.instantWin = 1;
+    }
+}
+

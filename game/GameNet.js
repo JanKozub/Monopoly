@@ -11,6 +11,7 @@ export class GameNet {
     contentUpdate;
     actual_cubes;
     old_fields;
+    instantWin = 0;
 
     constructor(game, playerList, animations) {
         this.playerList = playerList;
@@ -20,7 +21,7 @@ export class GameNet {
 
         this.player_id = game.myId;
         this.tura = 0;
-        this.lastThrow;
+        this.lastThrow = -1;
         this.actual_cubes = [2, 2]
         this.contentUpdate = setInterval(this.update, 200);
         this.turaSeconds = 30;
@@ -36,7 +37,7 @@ export class GameNet {
     }
 
     sendCubeScore = async (a, b) => { //PRZESŁANIE DO SERWERA WYLOSOWANYCH OCZEK KOSTEK
-        if (this.lastThrow != this.player_id) {
+        if (this.lastThrow !== this.player_id) {
             clearInterval(this.turaTime);
             let data = JSON.stringify({
                 player_id: this.player_id,
@@ -60,7 +61,7 @@ export class GameNet {
                     this.turaSeconds--;
                 } else {
                     clearInterval(this.turaTime);
-                    this.nexttura().then();
+                    this.nextTura().then();
                     this.ui.hideBuyMenu();
                     this.ui.hideBuildMenu();
                 }
@@ -74,14 +75,14 @@ export class GameNet {
         })
         let data = await GameNet.sendFetch(dane, "/update");
         if (data !== "error") {
-            this.ui.toggleThrowbutton(this.tura, this.player_id);
+            this.ui.toggleThrowButton(this.tura, this.player_id);
             this.compareCubes(data); //porównuje kostki u gracza z serwerem
             this.overwrite(data); //nadpisuje stałe klienta nowymi z serwera
             this.comparePosition(data); //koryguje pozycję pionków do aktualnej z serwera
             this.updateUI(data); //nadpisuje EQ oraz Cash wszystkich graczy
             this.showLatestNews(data); //wyświetla informacje o stanie gry
-            this.checkIfLose();
-            this.checkWin(data);
+            await this.checkIfLose();
+            await this.checkWin(data);
             await this.updateHouses();
         }
     }
@@ -121,9 +122,11 @@ export class GameNet {
 
     updateUI = (data) => {
         this.ui.updateCash(this.player_id);
-        this.ui.updateThrowbutton(this.lastThrow, this.player_id, this.tura);
+        this.ui.updateThrowButton(this.lastThrow, this.player_id, this.tura);
         this.ui.updateEnemyList(this.playerList, this.player_id);
-        if (this.player_id != this.tura) { this.ui.hideBuyMenu() };
+        if (this.player_id !== this.tura) {
+            this.ui.hideBuyMenu()
+        }
         for (let i = 0; i < this.playerList.length; i++) {
             this.playerList[i].eq = data.playerList[i].eq;
             this.playerList[i].cash = data.playerList[i].cash;
@@ -163,34 +166,31 @@ export class GameNet {
             await GameNet.sendFetch(data, "/action")
         }
     }
-    checkWin = (data) => {
-        if (data.win != -1) {
-            console.log("Gracz " + String(data.win) + " wygrał grę!"); //DODAC ZAKONCZENIE GRY / PRZYPISAC STATYSTYKI
-            //DATA.WIN to ID gracza ktory wygral
+    checkWin = async (data) => {
+        if (data.win !== -1) {
+            console.log("Gracz " + data.win + " wygrał grę!"); //DODAC ZAKONCZENIE GRY / PRZYPISAC STATYSTYKI
+            this.ui.showWinPrompt();
+        } else if (this.instantWin === 1) { //insta win key shortcut
+            for (let i = 0; i < this.playerList.length; i++) {
+                if (i !== this.player_id) {
+                    let data = JSON.stringify({
+                        action: "lose",
+                        player_id: i,
+                    })
+                    await GameNet.sendFetch(data, "/action")
+                }
+            }
         }
-
     }
 
-    nexttura = async () => {
+    nextTura = async () => {
         clearInterval(this.turaTime);
-        if (this.tura == this.player_id) {
+        if (this.tura === this.player_id) {
             let data = JSON.stringify({
                 player_id: this.player_id
             })
-            await GameNet.sendFetch(data, "/nexttura")
+            await GameNet.sendFetch(data, "/nextTura")
         }
-    }
-
-    stopTuraCounter = () => {
-        clearInterval(this.turaTime);
-    }
-
-    setcubes = async (cueba, cubeb) => {
-        let data = JSON.stringify({
-            cubea: cueba,
-            cubeb: cubeb
-        })
-        await GameNet.sendFetch(data, "/setcubes")
     }
 
     setPosition = async (id, pos) => {
@@ -209,14 +209,13 @@ export class GameNet {
     static sendFetch = async (data, url) => {
         return new Promise(resolve => {
             const options = {
-                method: "POST", body: data, headers: { 'Content-Type': 'application/json' }
+                method: "POST", body: data, headers: {'Content-Type': 'application/json'}
             };
             fetch(url, options) //fetch engine
                 .then(response => response.json())
                 .then(data => {
                     resolve(data)
-                })
-                .catch(() => resolve("error"));
+                }).catch(() => resolve("error"));
         })
     }
 }
