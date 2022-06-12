@@ -1,6 +1,7 @@
 {
   "name": "Monopoly",
   "version": "1.0.0",
+  "start": "node server.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
