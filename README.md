@@ -1,5 +1,5 @@
 # Monopoly ZSŁ
-Classic monopoly game with content based on my highschool jokes and etc.
+Classic monopoly game with content based on our highschool jokes and etc.
 
 ![image](https://user-images.githubusercontent.com/32803118/209668075-9be34c51-e166-4050-9c07-cd782dba9560.png)
 ![image](https://user-images.githubusercontent.com/32803118/209668278-2faf80b4-b6d3-44ae-ba90-d54eb37d0e9c.png)
